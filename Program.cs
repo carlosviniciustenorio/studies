@@ -1,4 +1,5 @@
-﻿using System;
+﻿using studies.Colecoes.Pilha;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,40 +14,17 @@ namespace studies
         {
             // Create the second data source.
 
-            Dictionary<int, Teacher> teachers = buildarDicionario();
+            Queue<Teacher> teachers = new Queue<Teacher>();
+            teachers.Enqueue(new Teacher { First = "Ann", Last = "Beebe", ID = 945, City = "Seattle" });
+            teachers.Enqueue(new Teacher { First = "Alex", Last = "Robinson", ID = 956, City = "Redmond" });
+            teachers.Enqueue(new Teacher { First = "Michiyo", Last = "Sato", ID = 972, City = "Tacoma" });
 
             foreach(var teacher in teachers)
             {
-                Console.WriteLine("Chave do professor:" + teacher.Key);
-                Console.WriteLine("Valor do professor:" + teacher.Value);
-                Console.WriteLine("");
+                Console.WriteLine(teacher.ID);
             }
 
             Console.ReadLine();
         }
-
-        public static Dictionary<int, Teacher> buildarDicionario()
-        {
-            var elements = new Dictionary<int, Teacher>();
-
-            Adicionar(elements, "Ann", "Beebe", 945);
-            Adicionar(elements, "Alex", "Robinson", 956);
-            Adicionar(elements, "Michiyo", "Sato", 972);
-
-            return elements;
-        }
-
-        public static void Adicionar(Dictionary<int, Teacher> teachers, string nome, string sobrenome, int id = 0)
-        {
-            Teacher teacher = new();
-
-            teacher.First = nome;
-            teacher.Last = sobrenome;
-            teacher.ID = id;
-
-            teachers.Add(key: teacher.ID, value: teacher);
-
-        }
-
     }
 }
