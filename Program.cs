@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using static studies.Serialize.Class1;
+using static studies.Iterator.Class1;
 
 namespace studies
 {
@@ -12,28 +12,41 @@ namespace studies
         static void Main()
         {
             // Create the second data source.
-            List<Teacher> teachers = new List<Teacher>()
+
+            Dictionary<int, Teacher> teachers = buildarDicionario();
+
+            foreach(var teacher in teachers)
             {
-            new Teacher { First="Ann", Last="Beebe", ID=945 },
-            new Teacher { First="Alex", Last="Robinson", ID=956 },
-            new Teacher { First="Michiyo", Last="Sato", ID=972 }
-            };
+                Console.WriteLine("Chave do professor:" + teacher.Key);
+                Console.WriteLine("Valor do professor:" + teacher.Value);
+                Console.WriteLine("");
+            }
 
-            
-            FileStream fs = new FileStream(@"C:\studies\temp/archive.bin", FileMode.Create);
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(fs, teachers);
-            fs.Close();
-
-            List<Teacher> tea = new();
-            FileStream f = new FileStream(@"C:\studies\temp/archive.bin", FileMode.Open);
-            BinaryFormatter b = new BinaryFormatter();
-            tea = (List<Teacher>)b.Deserialize(f);
-            
-            fs.Close();
-
-            Console.WriteLine(tea[0].City);
-            Console.ReadKey();
+            Console.ReadLine();
         }
+
+        public static Dictionary<int, Teacher> buildarDicionario()
+        {
+            var elements = new Dictionary<int, Teacher>();
+
+            Adicionar(elements, "Ann", "Beebe", 945);
+            Adicionar(elements, "Alex", "Robinson", 956);
+            Adicionar(elements, "Michiyo", "Sato", 972);
+
+            return elements;
+        }
+
+        public static void Adicionar(Dictionary<int, Teacher> teachers, string nome, string sobrenome, int id = 0)
+        {
+            Teacher teacher = new();
+
+            teacher.First = nome;
+            teacher.Last = sobrenome;
+            teacher.ID = id;
+
+            teachers.Add(key: teacher.ID, value: teacher);
+
+        }
+
     }
 }
