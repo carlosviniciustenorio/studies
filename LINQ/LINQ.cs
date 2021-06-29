@@ -20,5 +20,5 @@ namespace studies.LINQ
 
         //test.ForEach(p => Console.WriteLine("Plano de id:"+ p));
         //Console.ReadLine();
-}
+    }
 }
