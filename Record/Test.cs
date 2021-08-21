@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace studies.Sealad
+namespace studies.Record
 {
-    public class C
+    public record Test
     {
-        public virtual int MyProperty { get; set; }
-        public virtual void DoWork() {}
+
     }
 }

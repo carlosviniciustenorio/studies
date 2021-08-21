@@ -19,6 +19,8 @@ namespace studies.Sealad
         //Isso anula o aspecto virtual do membro para qualquer outra classe derivada.
         //Isso é realizado através da colocação da palavra-chave sealed antes da palavra-chave override na declaração de membro de classe.Por exemplo:
 
+        public sealed override int MyProperty { get => base.MyProperty; set => base.MyProperty = value; }
+
         public sealed override void DoWork() {}
     }
 }
