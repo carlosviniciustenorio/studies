@@ -1,4 +1,5 @@
 ﻿using studies.Colecoes.Pilha;
+using studies.Struct;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,17 +15,11 @@ namespace studies
         {
             // Create the second data source.
 
-            Queue<Teacher> teachers = new Queue<Teacher>();
-            teachers.Enqueue(new Teacher { First = "Ann", Last = "Beebe", ID = 945, City = "Seattle" });
-            teachers.Enqueue(new Teacher { First = "Alex", Last = "Robinson", ID = 956, City = "Redmond" });
-            teachers.Enqueue(new Teacher { First = "Michiyo", Last = "Sato", ID = 972, City = "Tacoma" });
-
-            foreach(var teacher in teachers)
-            {
-                Console.WriteLine(teacher.ID);
-            }
-
-            Console.ReadLine();
+            var a = new Point(10, 10);
+            var b = a;
+            a.x = 100;
+            System.Console.WriteLine(b.x);
+            Console.ReadLine(); 
         }
     }
 }

@@ -6,19 +6,38 @@ using System.Threading.Tasks;
 
 namespace studies.DI
 {
-    public class MyDependency2 // : IMyDependency
+    public class MyClass
     {
-        //private readonly ILogger<MyDependency2> _logger;
+        public MyClass()
+        {}
 
-        //public MyDependency2(ILogger<MyDependency2> logger)
-        //{
-        //    _logger = logger;
-        //}
+        public void Teste(int num = 0) { }
+    }
 
-        //public void WriteMessage(string message)
-        //{
-        //    _logger.LogInformation($"MyDependency2.WriteMessage Message: {message}");
-        //}
+    public class MyDependency2 : MyClass, IInterface
+    {
+        public MyDependency2()
+        {
+        }
+
+        public void WriteMessage(int num = 0)
+        {
+            Teste(num);
+        }
+    }
+
+    public interface IInterface
+    {
+        void WriteMessage(int num = 0);
+    }
+
+    public class MyDependency3
+    {
+        private readonly IInterface _dependency;
+        public MyDependency3()
+        {
+            _dependency.WriteMessage(0);
+        }
     }
 
 }
