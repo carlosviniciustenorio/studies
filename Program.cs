@@ -14,7 +14,7 @@ namespace studies
     {
         static void Main()
         {
-            var heatingDegreeDays = new HeatingDegreeDays(65, data, 10);
+            var heatingDegreeDays = new HeatingDegreeDays(65, data);
             Console.WriteLine(heatingDegreeDays);
 
             var coolingDegreeDays = new CoolingDegreeDays(65, data);
