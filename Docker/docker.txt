@@ -1,0 +1,59 @@
+Conectar na AWS
+ssh ubuntu@3.141.10.12 -i '.\Users\carlo\Downloads\pairkeydocker.pem'
+
+Linux commands
+touch dockerfile = create a docker file, can use to create others files type.
+apt update
+apt upgrade
+
+Docker
+sudo service docker start
+
+Commands:
+	docker/docker container --help = show a list of commands docker
+	docker pull imageName:tag = pull a image in original repository
+	docker images = show a list of images of your computer
+	docker run/docker container run --name nameToImage imageName = run a image especifed
+	docker ps/docker container ps = show a list of container in execution
+	docker ps -a = show a list of container execution recently
+	docker rm idContainer = delete a container stoped (Import to get memory of computer)
+	docker rm -f id or containerName = stop and delete the container especifed
+	docker rmi imageName = delete a image 
+	docker stop ContainerId = stop a container
+	docker system prune = delete all images not used, stoped containers
+	docker login = Login at docker
+	docker build . -t 998136532/dockertenorio:latest = build the image. PS: login/repository:tag
+	docker push 998136532/dockertenorio:latest = Push the image
+	docker start nameContainer = start a container stoped
+	docker inspect nameImage = inspect the container to know how type of Mounds are using.
+	
+	docker update = update a container
+	 ex: docker update suspicious_heisenberg -m 128M --cpus 0.2
+	
+	docker run --help = show a list of options command docker
+	 ex: docker run -dti ubuntu, use the operational system ubuntu in container in background
+	
+	docker exec = execute a command in container in execution
+	 ex: 
+		1- docker exec -it 388 /bin/bash
+			apt update
+			apt upgrade -y
+			apt -y install nano
+		 
+		2- docker exec -it 952 cat /etc/*release*
+	
+	docker cp = copy files/folders between a container and the local filesystem
+		ex: apt -y install zip
+			zip zipName.zip *.txt
+			docker cp zipName.txt Ubuntu-A:/project
+			
+			docker exec -it imageName bash
+			apt update
+			apt upgrade
+			apt -y install zip
+			unzip zipName.txt
+			
+Importants commands to log:
+	docker info containerName = show the info about the service.
+	docker logs containerName imageName
+	docker top containerName= show a proccess list in container
