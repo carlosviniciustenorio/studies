@@ -5,15 +5,21 @@ Linux commands
 touch dockerfile = create a docker file, can use to create others files type.
 apt update
 apt upgrade
-
-Docker
 sudo service docker start
 
-Commands:
+Docker Commands:
+	docker a = show the informations about the docker, for example the ip to connect.
+	docker inspect nameImage = inspect the container to know how type of Mounds are using.
+	
 	docker/docker container --help = show a list of commands docker
 	docker pull imageName:tag = pull a image in original repository
 	docker images = show a list of images of your computer
 	docker run/docker container run --name nameToImage imageName = run a image especifed
+		ex: docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3306:3306 mysql
+				-e = define the variables ambient
+				-d = run in background
+				-p = define the port (First port is the Host, second port is the port of Mysql = default)	
+		
 	docker ps/docker container ps = show a list of container in execution
 	docker ps -a = show a list of container execution recently
 	docker rm idContainer = delete a container stoped (Import to get memory of computer)
@@ -25,10 +31,9 @@ Commands:
 	docker build . -t 998136532/dockertenorio:latest = build the image. PS: login/repository:tag
 	docker push 998136532/dockertenorio:latest = Push the image
 	docker start nameContainer = start a container stoped
-	docker inspect nameImage = inspect the container to know how type of Mounds are using.
 	
 	docker update = update a container
-	 ex: docker update suspicious_heisenberg -m 128M --cpus 0.2
+	 ex: docker update containerName -m 128M --cpus 0.2
 	
 	docker run --help = show a list of options command docker
 	 ex: docker run -dti ubuntu, use the operational system ubuntu in container in background

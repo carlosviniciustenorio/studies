@@ -1,0 +1,19 @@
+DockerFile
+
+From = container base
+Run = whats i will execute at container
+Copy = whats i will copy
+CMD = execute bash command
+
+Ex:
+	From ubuntu
+	
+	Run apt update && apt install -y python3 && apt clean
+	
+	Copy app.py /opt/app.py
+	
+	CMD python3 /opt/app.py
+	
+PS: && = next run
+	Copy = Your data to /paste/nameData
+	CMD = execute

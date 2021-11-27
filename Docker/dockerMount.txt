@@ -1,0 +1,21 @@
+Proccess in Docker to manager the data of a container with Mount(volume)
+
+Create a volume with command: 
+	docker volume create mysql-hml 
+	PS: 1- The volume will create with a paste named _data by default
+		2- This volume are created in cd var/lib/docker/volumes
+
+Execute the image with the mount type volume.
+	docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3306:3306 --mount type=volume,src=mysql-hml,dst=/data imageName
+	PS: 
+		-e= enviroment variables
+		-p= Port
+		src= volumeName
+		dst= your desejed paste
+	
+	Next:
+		mysql -u root -p --protocol=tcp
+		-u= user
+		-p= protocol
+		
+	When has new file or data, this file will to the volume. So, when you run a new Image, you can specifed this volume with base to data.
