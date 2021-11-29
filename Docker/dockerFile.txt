@@ -1,19 +1,29 @@
-DockerFile
+# DockerFile
 
-From = container base
-Run = whats i will execute at container
-Copy = whats i will copy
-CMD = execute bash command
+# From = container base
+# Run = whats i will execute at container
+# Copy = whats i will copy
+# CMD = execute bash command
 
-Ex:
-	From ubuntu
+# Ex:
+# 	From ubuntu
 	
-	Run apt update && apt install -y python3 && apt clean
+# 	Run apt update && apt install -y python3 && apt clean
 	
-	Copy app.py /opt/app.py
+# 	Copy app.py /opt/app.py
 	
-	CMD python3 /opt/app.py
+# 	CMD python3 /opt/app.py
 	
-PS: && = next run
-	Copy = Your data to /paste/nameData
-	CMD = execute
+# PS: && = next run
+# 	Copy = Copia arquivos do diretório para diretório definido. Ex: COPY aula.txt /app/aula.txt
+# 	ADD = Copia arquivos locais e remotos para diretório. PS: Pode descompactar arquivos tar.gz . Ex= aula.tar.gz app/aula/
+# 	RUN = Executar comando no container. Ex: RUN mkdir/aula
+# 	CMD = Executar comando no container quando o container está inicializado. Ex: CMD ["ls"]
+# 	ENTRYPOINT = O mesmo que o CMD, porém quando temos o CMD declarado, ele se torna um parâmetro do ENTRYPOINT
+# 	WORKDIR = Será o diretório do Container caso seja definido.
+#   ENV = Cria uma variável de ambiente. 
+#   Ex: ENV MINHA_APLICACAO=app.jar
+#   COPY $MINHA_APLICACAO /app
+#   EXPOSE = Expõe uma porta no container ao ser inicializado.
+#   Ex: EXPOSE 8080
+#   A partir disso, a aplicação pode ser acessada por algo externo ao container pela porta especificada
