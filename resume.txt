@@ -1,0 +1,98 @@
+https://cttechonology-aws.signin.aws.amazon.com/console
+
+Núvem privada
+	O provedor pode ser Rackspace
+	
+Public cloud
+	Três provedores: Azure, Google Cloud e AWS
+	
+Hybrid Cloud
+	Misutra de privado e publico / infra particular + aws
+	
+How can users access AWS?
+	AWS Management Console (protected by password + MFA)
+	AWS Command Line Interface (CLI): protected by access keys
+	AWS Software Developer Kit (SDK) for code: protected by access keys
+	
+IAM = Gerenciamento de identidade e acesso
+	É possível criar grupos para uma organização.
+	É possível ter um usuário em mais de um grupo
+	Não é possível ter um grupo dentro de outro grupo
+	É possível ter usuário sem grupo
+		
+	Policy
+		É possível criar políticas
+		É possível inserir políticas direto no usuário
+		É possível inserir políticas no grupo de usuários e consequentemente os usuários do grupo terão essas políticas
+		É possível adicionar políticas de senha e autenticação em conjunto com (MFA) Multi-factor authentication (outros dispositivos).
+		
+	Roles
+		Funciona como permissões para serviços AWS
+		ex: Uma instância do EC2 recebe uma IAM Role e tenta acessar alguma informação/serviço da AWS,
+			essa instância usará a IAM Role como permissão. Caso esteja certo, terá acesso.
+			
+	Security Tools
+		Access reports > Credential Reports = Extrai um relatório de credenciais no formato csv.
+		Users > User > Access Advisor = Exibe todos os serviços utilizados pelo usuário e os que ele tem acesso mas não utiliza.
+			OBS: Como na AWS trabalhamos com o princípio de menor privilégio, esse relatório nos permite retirar permissões não utilizadas por um usuário.
+			
+			
+EC2 = Nuvem de computação Elástica
+	É possível criar instâncias AWS configurando memória, processamento, etc...
+		Uma das principais vantagens da nuvem, visto que se tivéssemos que fazer isso de maneira local, 
+			o tempo seria muito superior para configurar um servidor.
+	É considerado uma boa prática parar as instâncias enquanto não estiver utilizando.
+	É considerado uma boa prática encerrar as instâncias caso não tenha mais utilidade, pois na nuvem tudo é descartável
+	É possível criar backups antes de encerrar as instâncias.
+	
+	Classic ports to know
+		22 = SSH (secure shell) - log into a Linux instance
+		21 = FTP (File transfer protocol) - upload files using SSH
+		22 = SFTP (Secure File Transfer Protocol) - upload files using SSH
+		80 = HTTP - access unsecured websites
+		443 = HTTPS - access secured websites
+		3389 = RDP (Remote Desktop Protocol) - log into a Windows instance
+	
+	Grupo de Segurança (Security group) = é responsável por configurar os meios de conexões com o EC2.
+		Ex: Caso a sua instância não tenha no grupo de segurança uma regra de entrada no protocolo HTTP,
+			não será possível acessar a sua instância por um browser.
+		É possível ter uma instância do EC2 com vários grupos de segurança, o resultado é a soma de todos eles.
+		
+	Elastic Block Store
+
+		EBS Volume 
+			É um volume específico para cada instância, podendo a instância estar vinculada a mais de um volume, ele pode ser utilizado para mais de uma, porém, nessa certificação isso não é considerado
+			É possível ter um volume não vinculado a uma instância, pois ele não depende de uma instância para existir
+			É possível manter o volume após o encerramento da instância, desmarcando a flag que é responsável por essa configuração.
+			Nível gratuito: 30 GB de armazenamento EBS gratuito do tipo SSD ou SSD Magnético por mês
+			É bloqueado por zona, se a zona da sua instância for X, o volume tem que ser criando na zona X para ser utilizado
+			
+		EBS Snapshot
+			É um backup que pode ser realizado e utilizando como base para restaurar uma outra instância da mesma ou outra região.
+			É possível criar um volume a partir do Snapshot realizado, para a mesma ou outra região.
+			
+	EC2 Image Builder
+		É possível automatizar a criação de uma imagem com um sistema operacional, softwares desejados, rodar testes e criar instâncias automaticamente
+		É possível fazer todo o fluxo acima porém criar a instância de forma manual.
+		Deve-se atentar com a imagem que irá escolher pois algumas não são compatíveis com a instância t2.micro (gratuita)
+		Deve-se atentar para fazer de forma manual pois a forma automática cria uma instância paga.
+		
+	EC2 Instance Store
+		Pode processar muito mais coisas, porém é um armazenamento efêmero, onde você pode perder tudo ao parar a máquina.
+		É uma boa utilizar para cache, etc...
+		Não é uma boa utilizar para persistência de dados de longo prazo, como por ex um DB, use o EBS (Volume + Snapshot).
+		Caso a instância falhe, o hardware também falhará
+			
+	AMI = Amazon Machine Image
+		É possível criar uma AMI a partir de uma instância. Isso faz com que a instância iniciada a partir dessa AMI tenha todas as configurações já feitas
+		
+	
+	
+	EFS = Elastic File System
+		Só funciona com instâncias Linux EC2
+		É possível utilizar o armazenamento em mais de uma região e em mais de uma instância ao mesmo tempo, diferente do EBS (Elastic Block Store)
+		Ao utilizar o EFS, todas as instâncias de diferente zonas que usam o EFS, vão persistir e consumir os arquivos da mesma origem em tempo real.
+		OBS: A EFS-IA tem um desconto de 92% comparada a Padrão pois quando utilizamos EFS-IA concordamos que não buscaremos os arquivos todos os dias, apenas eventualmente
+		
+		
+	
