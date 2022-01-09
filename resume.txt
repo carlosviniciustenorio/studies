@@ -13,6 +13,22 @@ How can users access AWS?
 	AWS Management Console (protected by password + MFA)
 	AWS Command Line Interface (CLI): protected by access keys
 	AWS Software Developer Kit (SDK) for code: protected by access keys
+
+Types of Instance
+    T2.Micro 
+        T = Classe da Instância
+        2 = Geração
+        Micro = Tamanho, quanto maior, significa que a Instância terá mais RAM, CPU, etc...
+    
+    Memory Optimized = Instâncias para memória otimizada
+        R6g
+            R= RAM
+
+        Existem R, X e Z    
+
+    Storage Optimized = Instância utilizada ao acessar muitos conjuntos de dados no armazenamento local
+        I3
+        Existem D e H
 	
 IAM = Gerenciamento de identidade e acesso
 	É possível criar grupos para uma organização.
@@ -78,8 +94,8 @@ EC2 = Nuvem de computação Elástica
 		Deve-se atentar para fazer de forma manual pois a forma automática cria uma instância paga.
 		
 	EC2 Instance Store
-		Pode processar muito mais coisas, porém é um armazenamento efêmero, onde você pode perder tudo ao parar a máquina.
-		É uma boa utilizar para cache, etc...
+		Tem um melhor desempenho para processamento input/output pois é diretamente no Hardware, porém é um armazenamento efêmero, onde você pode perder tudo ao parar a máquina.
+		É uma boa utilizar para cache, dados temporários, buffer, conteúdos temporários.
 		Não é uma boa utilizar para persistência de dados de longo prazo, como por ex um DB, use o EBS (Volume + Snapshot).
 		Caso a instância falhe, o hardware também falhará
 			
@@ -94,5 +110,43 @@ EC2 = Nuvem de computação Elástica
 		Ao utilizar o EFS, todas as instâncias de diferente zonas que usam o EFS, vão persistir e consumir os arquivos da mesma origem em tempo real.
 		OBS: A EFS-IA tem um desconto de 92% comparada a Padrão pois quando utilizamos EFS-IA concordamos que não buscaremos os arquivos todos os dias, apenas eventualmente
 		
-		
-	
+	Amazon FSx
+        Sistemas para gerenciamento de arquivos, caso não queira usar o S3 por exemplo.	
+        Existem os seguintes FSx: FSx for Lustre, FSx for Windows File Server, FSx for NetApp ONTAP
+
+    Escalabilidade 
+        É a capacidade de um sistema acomodar uma carga maior, tornando o hardware mais forte ou ampliando, ou adicionando nós ampliados
+        Vertical 
+            Temos uma aplicação no t2.micro e alteramos para t2.large a fim de atender uma demanda maior
+            Há um limite de escalonamento vertical, que é o limite do Hardware
+        
+    Elasticidade
+        Horizontal
+            Ao invés de aumentar o tamaho da instância, aumentamos a quantidade de instâncias para a aplicação
+            Ao aumentar o número de instância, é considerado um escalonamento externo
+            Ao diminuir o número de instância, é considerado um escalonamento
+    
+        High Availability (Alta disponibilidade)
+            Vai de mãos dados com o dimensionamento horizontal
+            Significa que vc está executando seu app em mais de uma zona de disponibilidade na AWS
+            Ex: Call center em NY e Call Center em San Francisco
+                Caso NY tenha um desastre, a operação de San Francisco não será afetada.
+    
+    Agilidade
+        Os recursos estão a apenas um clique de distância. Ao invés de uma confugração nova demorar uma semana por ex, demora 10s.
+
+        Alta disponibilidade e Escalabilidade para EC2
+
+    Load Balancer
+        Normalmente são mapeados 3 zonas difenretes com subredes a fim de ter uma disponibilidade maior.
+        A configuração do servidor é feita pela AWS, porém é possível criar um Load Balancer, contudo, você será responsável pela configuração, manutenção, etc...
+        Recebe uma solicitação e destibui conforme necessário. Caso uma instância esteja com problema, a solicitação será enviada a outra instância.        
+        
+        Application:
+            Load Balancer somente para aplicações web, protocolo HTTP/HTTPS. = Camada 7
+        
+        Rede:
+            Load Balancer somente para rede, protocolo TCP. = Camada 4
+                Milhões de solicitações por segundo, Jogos, etc...
+
+    
