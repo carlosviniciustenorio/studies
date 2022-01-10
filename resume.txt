@@ -148,5 +148,23 @@ EC2 = Nuvem de computação Elástica
         Rede:
             Load Balancer somente para rede, protocolo TCP. = Camada 4
                 Milhões de solicitações por segundo, Jogos, etc...
-
-    
+				
+	Auto Scaling Groups
+		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
+		Simple / Step Scaling
+			Aumenta ou diminui a quantidade de instâncias de forma automática baseado na configuração de um alarme
+				ex: Alarme com uso superior a 70% da CPU, adiciona duas instâncias.
+					Alarme com uso inferior a 30% da CPU, remove uma instância.
+					
+		Target Tracking Scaling
+			Ex: Quero que a média do uso da CPU das instâncias fique em torno de 40%. O ASG fará isso automaticamente
+			
+		Scheduled Scaling
+			Escalonamento programado é quando vc sabe que em um determinado dia o número de acessos irá aumentar por um fator, e consequentemente quer que o n° de instâncias aumente
+				Ex: Quinta-feira terá um jogo importante de um campeonato e o sistema receberá muitas apostas. Sendo assim, nesse dia a partir das 17hrs o ASG criará mais 5 instâncias EC2
+		
+		Predictive Scaling
+			Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
+			
+Amazon S3
+	
