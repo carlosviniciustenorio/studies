@@ -172,5 +172,5 @@ Amazon S3
 	Alguns serviços da AWS utilizam o S3 para fazer armazenamento, como por exemplo o Snapshot do EC2, ele grava seu backup no EC3.
 	Normalmente, o S3 é utilizado para guardar arquivos
 	Qualquer tipo de arquivo no S3 é considerado um objeto
-	O S3 trabalha com buckets, podendo ter subpastas. Porém, no fim tudo é considerado um objeto no mesmo nível.
+	O S3 trabalha com buckets, podendo ter subpastas. Porém, cada arquivo é considerado um objeto, sendo ignorado qualquer tipo de subpastas.
 	
