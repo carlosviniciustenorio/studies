@@ -167,4 +167,10 @@ EC2 = Nuvem de computação Elástica
 			Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
 			
 Amazon S3
+	É Global, mas ao criar um Bucket, você deve selecionar uma AZ.
+	Pode ser utilizado para qualquer tipo de armazenamento.
+	Alguns serviços da AWS utilizam o S3 para fazer armazenamento, como por exemplo o Snapshot do EC2, ele grava seu backup no EC3.
+	Normalmente, o S3 é utilizado para guardar arquivos
+	Qualquer tipo de arquivo no S3 é considerado um objeto
+	O S3 trabalha com buckets, podendo ter subpastas. Porém, no fim tudo é considerado um objeto no mesmo nível.
 	
