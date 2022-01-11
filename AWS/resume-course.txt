@@ -102,8 +102,6 @@ EC2 = Nuvem de computação Elástica
 	AMI = Amazon Machine Image
 		É possível criar uma AMI a partir de uma instância. Isso faz com que a instância iniciada a partir dessa AMI tenha todas as configurações já feitas
 		
-	
-	
 	EFS = Elastic File System
 		Só funciona com instâncias Linux EC2
 		É possível utilizar o armazenamento em mais de uma região e em mais de uma instância ao mesmo tempo, diferente do EBS (Elastic Block Store)
@@ -174,3 +172,125 @@ Amazon S3
 	Qualquer tipo de arquivo no S3 é considerado um objeto
 	O S3 trabalha com buckets, podendo ter subpastas. Porém, cada arquivo é considerado um objeto, sendo ignorado qualquer tipo de subpastas.
 	
+	Website
+		Pode ser utilizado para sites estáticos, basta configurar o bucket.
+	
+	Server Access Logging
+		É possível configurar um bucket para receber logs de um outro bucket.
+		Isso ajuda a avaliar se estão tentando invadir uma aplicação, etc...
+		
+	Replication
+		É obrigatório ativar o versionamento de ambos os buckets que farão parte da replicação
+		É possível replicar um bucket para outro bucket, independente da AZ.
+		A replicação é feita de maneira assíncrona, e um dos motivos para existir a replicação é abaixar a latência.
+		 Ex: Se uma pessoa mora na Europa, faz mais sentido ela acessar aos arquivos de um bucket que esteja na Europa.
+		     Caso ela more na América Latina, faz mais sentido ela acessar aos arquivos da respectiva AZ.
+		
+		Deve ser configurado ou criado uma Role para o S3 a fim de realizar a replicação.
+		
+	Durability and Avaliability
+	
+		Durabilidade
+			Os objetos tem uma durabilidade de 99.99999999%, ou seja, se você tem 10mm objetos, você perderá um único objeto a cada 10 mil anos
+		
+		Disponibilidade
+			Tempo que o serviço fica disponível
+			O S3 é gratuito e deve ficar em média de 53 minutos off por ano, dependendo da class de armazenamento (Storage Class).
+		
+	Storage Classes
+	
+		É possível fazer a movimentação dos objetos entre as classes de armazenamento (storage classes)
+			OBS: A movimentação pode ser automatizada usando a configuração de ciclo de vida.
+	
+		1° S3 Standard - General Purpose
+			99.99% disponibilidade
+			Usado para dados acessados com frenquência
+			Baixa latência e alto rendimento
+			Pode sustentar até duas falhas simultâneas nas instalações (Portanto, se houver problemas, seus dados ainda estarão seguros).
+			Casos de Uso (Big data, app móveis e de jogos, distribuição constante)
+		
+		2° S3 Standard-Infrequent Access (IA)
+			99.99% disponibilidade
+			O custo é menor comparado ao Padrão do S3.
+			É utilizado quando você quer ter acesso rápido aos seus arquivos, porém não os acessa constantemente.
+			Pode sustentar até duas falhas
+			Casos de uso (Armazenamento de dados para recuperação de desastres, backups para acessar imediatamente porém não acessados com frequência.)
+		
+		3° S3 One Zone-Infrequent Access (IA)
+			Mesma regra do S3 Standard-Infrequent Access, porém é limitado apenas para uma zona.
+			Tem 99.5% de disponibilidade
+			Valor inferior em até 20% comparado ao S3 Standard-Infrequent Access
+			Casos de uso (Backup secundário, dados que possam ser recriados)
+		
+		4° S3 Intelligent Tiering
+			99.99% disponibilidade
+			Mesma latência e rendimento do S3 Standard
+			Custo otimizado visto que de forma automática os arquivos mais acessados e menos acessados serão movidos automaticamente para as categorias certas.
+			Resistentes a eventos que afetarão uma AZ inteira
+		
+		5° Amazon Glacier e Amazon Glacier Deep Archive
+			Utilizada para guardar backups para um longo tempo
+			Existem várias opções de recuperação de tempo e taxas sempre que recuperar
+		
+			Amazon Glacier (Barato)
+				Expedited (1 a 5 minutos)
+				Standard (3 a 5 horas)
+				Bulk (5 a 12 horas)
+			
+			Amazon Glacier Deep Archive
+				É a opção de armazenamento mais barata da AWS
+				Standard (12 horas)
+				Bulk (48 horas)
+				
+	S3 Object Lock & Glacier Vault Lock
+		
+		Object Lock
+			Adotado o modelo WORM (Write Once Read Many).
+			Bloqueia a versão do objeto para não ser deletado ou modificado num período especificado.
+		
+		Glacier Vault Lock
+			Adotado o modelo WORM (Write Once Read Many).
+			Cria uma política de bloqueio e essa política impede futuras edições do arquivo 
+			 OBS: A política é imutável, depois de configurada, ninguém poderá excluí-la.			 
+			Casos de uso (Quando vc tem requisitos de conformidade e retenção de dados, ou seja, não quer perder de forma alguma um objeto - Auditoria)
+	
+	Criptografia
+		
+		Sem criptografia
+			Não há criptografia em ambos os lados (cliente e servidor)
+		
+		Com criptografia no servidor
+			O usuário não envia o arquivo criptografado, porém o servidor do bucket criptografa ao receber.
+			
+		Criptografia no lado do usuário
+			A criptografa é feita tanto pelo usuário quanto pelo servidor.
+			
+			
+	AWS Snow Family
+	
+		Snowcone
+			Storage Capacity: 8 TB usable
+			Migration Size: Up to 24tb, online and offline
+			DataSync agent: Pre-Installed
+			
+		Snowball Edge Storage Optimized
+			Storage Capacity: 80 TB usable
+			Migration Size: Up to petabytes, offline
+			Storage Clustering: Up to 15 nodes
+			
+		Snowmobile
+			Storage Capacity: < 100 PB
+			Migration Size: Up to exabytes, offline
+			
+	AWS Storage Cloud Native Options
+		
+		É uma forma de utilizar o local junto com a nuvem
+		
+		Block
+			Usa o EBS e EC2 Instance Store
+			
+		File
+			Usa o Amazon EFS
+			
+		Object
+			Usa o S3 e Glacier
