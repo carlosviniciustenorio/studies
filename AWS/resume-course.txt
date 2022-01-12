@@ -302,3 +302,35 @@ Amazon S3
 			
 		Object
 			Usa o S3 e Glacier
+
+Databases & Analytics
+
+	RDS & Aurora
+
+		RDS
+			É um serviço de banco de dados relacional utilizando a linguagem SQL para consultas
+			Permite criar banco de dados na nuvem gerenciados pela AWS, sendo eles: Postgres, MySQL, MariaDB, Oracle, SQL Server e Aurora (AWS Proprietary database)
+
+			OBS: 
+				Aurora DB não é um banco de dados open source, é fornecido pela AWS, suporta os tipos (PostgreSQL e MYSQL)
+				Benefícios ao usar Aurora: 
+					É otimizado para a nuvem, tem um ganho de desempenho em 5x ao MySQL no RDS e 3x ao PostgreSQL no RDS
+					Não temos que nos preocupar com armazenamento pois eles são aumentam de forma automática em incrementos de 10gb até 64tb.
+
+				Malefícios: É 20% mais caro que o RDS, porém acaba valendo a pena por ser mais otimizado caso seu banco de dados seja MySQL ou PostgreSQL.
+			
+			Benefícios ao utilizar um RDS
+				Provisionamento automático, manutenções no sistema operacional
+				Backups contínuos podendo especificar um período para restaurar o banco
+				Painéis de Monitoramento para ver como o Banco de Dados está
+				Ler réplicas a fim de melhorar a performance
+				Multi zonas a fim de estar pronto para ter um plano de recuperação em caso de desastre
+				Configurar janelas de manutenção para atualizações
+				Capacidade de Escalabilidade (Vertical e Horizontal)
+				EBS Volume (gp2 ou io l)
+
+			Malefícios
+				Não é possível utilizar o SSH na instância
+
+			
+
