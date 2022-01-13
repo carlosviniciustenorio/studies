@@ -332,5 +332,109 @@ Databases & Analytics
 			Malefícios
 				Não é possível utilizar o SSH na instância
 
+			Modos de Implementação:
 			
+				Réplicas de Leitua
+					Caso o fluxo de leitura do banco seja grande, réplicas do BD para leituras são criadas a fim de não sobrecarregar o BD.
+					Sendo assim, as réplicas serão utilizadas para leitura e o BD para persistência.
+					Há um limite de 5 réplicas de leitura
+				
+				Multi-AZ
+					A persistência e leitura serão feitas sempre no BD
+					Será criado um Failover DB a fim de atender a demanda quando o DB falhar por algum motivo.
+					O Failover DB fica numa AZ diferente, por isso é chamado de crozz AZ.
+				
+				Multi-Region
+					São criadas réplicas de leitura para regiões diferentes do BD.
+					A persistência será feita sempre no BD
+					A leitura será feita baseada na região, o que melhora a latência visto que cada região acessará aos dados da sua região.
+					Caso uma região falhe, outras regiões estarão ativas para receber as solicitações de leitura, e a operação terá sobrevivido ao desastre.
+					Porém, tem um custo um pouco superior.
+	
+	ElastiCache
 
+		Banco de dados para cache (memória).
+		É útil quando a leitura no BD se torna um peso. Sendo assim, é interessante ter um banco de dados em memória.
+		É possível utilizar o Redis ou Memcached		
+
+	DynamoDB
+		NoSQL
+		Altamente disponível com replicação em três zonas de disponibilidade
+		Um dos principais produtos da AWS
+		Não tem servidor distribuído
+		Latência de milissegundos de um dígito
+		Integrado ao IAM
+		Baixo custo e capacidade de escalonamento automático
+
+	DynamoDB Accelerator - DAX
+		Um cache em memória totalmente gerenciado para o DynamoDB
+		Melhor desempenho em até 10 vezes
+		Totalmente seguro, escalonável e altamente disponível
+
+	DynamoDB Global Tables
+		É possível fazer uma replicação bidirecional de uma tabela global para outras AZ, então os dados que estiverem em uma AZ, estarão nas outras
+			Sendo assim, a latência é menor, visto que os usuários acessarão as tabelas globais mais próximas ou de sua AZ.
+
+	Redshift
+		Baseado no PostgreSQL mas não é utilizado para OLTP (Processamento de transações online)
+		É OLAP (Online analytical processing)
+		Não carrega dados o tempo inteiro, normalmente é de hora em hora
+		Bastante utilizado para análise de dados e fazer cálculos
+	
+	EMR
+		Se encarrega de provisionar todas as instâncias do EC2 e configurá-las para que possam ser usadas juntas a partir de uma perspectiva de big data
+		Elastic MapReduce
+		EMR não é realmente um banco de dados, é utilizado para criar Cluster Hadoop a fim de fazer big data
+		Possui escalonamento automático e está integrado a instâncias Spot
+		Casos de uso: Machine learning, web indexing, big data, em geral...
+
+	Amazon Athena
+		Utilizado para fazer análise de dados
+		Não contém servidor
+		Utiliza SQL para buscar arquivos
+		Casos de uso: Analisar dados inseridos no S3
+
+	Amazon QuickSight
+		Serviço para BI sem servior baseado em Machine Learning
+		É possível utilizar em cima de um RDS e gerar gráficos interessantes para o usuário final
+		É cobrado por tempo de sessão
+
+	DocumentDB
+		Banco de dados NoSQL da AWS, baseado no MongoDB
+		Gerenciado pela AWS, replicado em 3 regiões
+		O armazenamento aumenta automaticamente em 10gb até 64 TB.
+
+	Neptune
+		Banco de dados baseado em gráficos (semelhante a rede social)
+		Disponível em 3 regiões, podendo gerar 5 réplicas de leitura
+		Ótimo para aplicações que trabalham com dados conectados (semelhante a rede social), consultas complexas e difíceis otimizadas
+		É possível guardar bilhões de relações e consultar com latência de milissegundos.
+		Altamente disponível nas AZ.
+		Ótimo para armazenar gráficos de conhecimento, ex: Wikipedia.
+
+	Amazon QLDB (Quantum Ledger Databases)
+		Funciona como um diário
+		É ideal para cenários de transações, onde queremos ter certeza que não perdemos uma transação e que não houve nenhuma edição
+		Disponível em 3 regiões.
+		Performance 2/3 vezes melhor que frameworks blockchain, podendo utilizar SQL para consultas
+		É centralizado na AWS, diferente do Blockchain que é descentralizado
+
+	Managed Blockchain
+		Não é centralizado numa autoridade confiável.
+		É possível criar uma rede de blockchains pública ou privada escalável
+		Compatível com os frameworks Hyperledger Fabric e Ethereum
+
+	DMS (Database Migration Service)
+		Pega os dados do DB, joga uma instância EC2 rodando no DMS e cria o DB de destino
+		Não remove os dados de origem
+		É inteligente o suficiente para fazer migração homogênea ou heterogêna (Oracle x Oracle | Oracle x Aurora Oracle)
+
+	Glue
+		Utilizado para extração, transformação e carregamento de serviços ETL
+		Prepara e transforma dados para análise
+		Serviço sem servidor
+		Casos de Uso: Recebe dados do S3 e RDS, transforma os dados e carregada para o Redshift
+
+	Glue Data Catalog
+		Catalogo de datasets
+		Pode ser utilizado por Athena, Redshift, EMR...
