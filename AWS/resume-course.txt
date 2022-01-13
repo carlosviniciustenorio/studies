@@ -369,7 +369,7 @@ Databases & Analytics
 	DynamoDB Accelerator - DAX
 		Um cache em memória totalmente gerenciado para o DynamoDB
 		Melhor desempenho em até 10 vezes
-		Totalmente seguro, escalonável e altamente disponível
+		Totalmente seguro, escalável e altamente disponível
 
 	DynamoDB Global Tables
 		É possível fazer uma replicação bidirecional de uma tabela global para outras AZ, então os dados que estiverem em uma AZ, estarão nas outras
@@ -438,3 +438,64 @@ Databases & Analytics
 	Glue Data Catalog
 		Catalogo de datasets
 		Pode ser utilizado por Athena, Redshift, EMR...
+
+Other Compute Services: ECS, Lambda, Batch, Lightsail
+
+	ECS (Elastic Container Service)
+		Rodando o docker no EC2.
+
+	Fargate
+		Não tem servidor diretamente
+		Roda um container diretamente no Fargate, sem precisar configurar um servidor, como no ECS
+
+	ECR (Elastic Container Registry)
+		Local onde registramos as imagens do docker que podem ser rodadas tanto no ECS quanto no Fargate
+
+	Serveless
+		Aplicações "sem servidor".
+		Significa que você não tem que configurar ou se preocupar com o servidor.
+		Ex de aplicações Serveless: DynamoDB, S3, Fargate, Lambda
+
+	Lambda
+		Não há servidores para gerenciar (Serveless)
+		Limitado por tempo (Pequenas execuções)
+		Roda sobre demanda (Estará disponível sempre que precisarmos)
+		Escalonamento automático
+
+		Benefícios
+			Paga por requisição e tempo de computação
+				Versão livre tem 1,000,000 de requisições AWS Lambda e 400,000 GBs de tempo de computação
+			Integrado com muitos serviços da AWS
+			Dirigido a eventos, funções invocarão os eventos na AWS quando precisarem
+			Integrado com muitas linguagens de programação
+			Fácil monitoramento com AWS CloudWatch
+			Facilidade para buscar mais recursos para as funções, como por ex aumentar 10GB de RAM
+
+	Lambda Container Image
+		É possível rodar um container Docker no Lambda, contanto que tenha o Runtime API Lambda.
+			(É melhor utilizar o ECS e Fargate para isso, pois não necessita do Runtime API Lambda)
+
+	Amazon API Getway
+		É um serviço que permite criar, publicar, monitorar APIs Serveless
+		Totalmente escalável
+		Suporte a APIs RESTful e WebSocket
+		Suporte para segurança, autenticação, limitação de API, chaves de API, etc...
+
+	Batch
+		Cria instâncias EC2 automaticamente de acordo com o processamento que você precisa para o lote
+		Não tem limite de tempo para rodar (Diferente da Lambda, que tem um limite de 15 minutos para processar)
+		Tem capacidade de armazenamento EBS ou instância com espaço em disco
+		As instâncias são geradas pela AWS e configuradas por ela, não há de se preocupar com escalonamento automático por exemplo
+
+	Amazon Lightsail
+		Serviço recomendado para quem tem pouca experiência, pouca vontade de entender como a AWS funciona e pouco tempo para aprender
+		Contém alta disponibilidade porém não tem escalonamento automático
+		Ótimo preço
+		Limitado nas integrações com outros serviços AWS
+		Casos de uso
+			Aplicações simples e websites
+			Ambiente Dev / Teste
+		
+	
+
+	
