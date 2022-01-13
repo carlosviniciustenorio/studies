@@ -496,6 +496,12 @@ Other Compute Services: ECS, Lambda, Batch, Lightsail
 			Aplicações simples e websites
 			Ambiente Dev / Teste
 		
-	
+Deploying and Managing Infrastructure at Scale Section
+
+	CloudFormation
+		Será utilizado quando tivermos arquitetura em diferentes ambientes, regiões, ou até mesmo diferentes contas na AWS
+		É utilizado para configurar toda a infraestrutura por código ao invés de utilizar o painel da AWS.
+		Através dele, é possível configurar security group, load balancer, auto scaling, instâncias de banco de dados de forma automática
+		É inteligente o suficiente para saber qual ordem irá criar, e faz o vínculo de todos os serviços
 
 	
