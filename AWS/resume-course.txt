@@ -504,4 +504,15 @@ Deploying and Managing Infrastructure at Scale Section
 		Através dele, é possível configurar security group, load balancer, auto scaling, instâncias de banco de dados de forma automática
 		É inteligente o suficiente para saber qual ordem irá criar, e faz o vínculo de todos os serviços
 
+	CDK (AWS Cloud Development Kit)
+		Utilizado para quem não gosta de escrever no CloudFormation pois é YAML, no CDK, pode escrever o código em diversas linguagens de programação
+		Após escrever o código na linguagem específica, o CDK compila para YAML ou JSON.		
+
+	Elastic Beanstalk
+		Focado em aplicações web
+		É uma visão centrada no desenvolvedor
+		É voltado somente para o código, PaaS e não IaaS
+		Tem suporte para várias linguagens de programação
+		Com ele você cria tudo o que criaria com o CloudFormation (Grupo de escalonamento automático, RDS, Load Balancer, EC2, ElastiCache)
+	
 	
