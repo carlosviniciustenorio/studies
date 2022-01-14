@@ -515,4 +515,42 @@ Deploying and Managing Infrastructure at Scale Section
 		Tem suporte para várias linguagens de programação
 		Com ele você cria tudo o que criaria com o CloudFormation (Grupo de escalonamento automático, RDS, Load Balancer, EC2, ElastiCache)
 	
+	CodeDeploy
+		Responsável por atualizar a versão de uma aplicação seja on-premises ou cloud.
+		É considerado um serviço Híbrido e independente
+		É possível trabalhar com Instâncias EC2
+		É possível trabalhar com servidores on-premises, porém é necessário provisioná-los com antecedência.
+
+	CodeCommit
+		É um serviço de controle de versões baseado no Git
+		Totalmente gerenciado, escalável, automaticamente versionado, privado, seguro e integrado a AWS
 	
+	CodeBuild
+		Responsável por buildar, rodar testes e se estive tudo certo, mandar para o Deploy (CodeDeploy).
+		Benefícios
+			Serveless
+			Totalmente gerenciado
+			Pagamento pré pago (Paga somente o tempo que utilizar)
+
+	CodePipeline
+		Base para CICD (Continuos Integration e Continuos Delivery)
+		Responsável por orquestrar o pipeline (CodeCommit > CodeBuild > CodeDeploy > Elastic Beanstalk)
+		Integrado com GitHub e plugins customizados
+
+	CodeArtifact
+		Responsável por guardar dependências da aplicação e gerenciar artefatos
+		É possível utilizar ferramentas como Maven, Gradle, npm, yarn, twine, pip e NuGet.
+		Benefícios
+			Ao invés de ter que configurar toda a sua infraestrutura de dependências numa instância EC2 por exemplo, você pode utilizar o CodeArtifact.
+
+	CodeStar
+		Interface unificada para gerencionamento de software num único lugar.
+		É possível iniciar rapidamente e configurar todas as etapas de CI/CD.
+	
+	Cloud9
+		IDE para desenvolvimento em nuvem
+		Não pode ser baixado e instalado, o acesso é no browser
+		Pode ser utilizada para fazer pair programming
+
+	SSM (System Manager)
+		
