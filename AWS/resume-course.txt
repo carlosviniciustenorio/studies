@@ -553,4 +553,11 @@ Deploying and Managing Infrastructure at Scale Section
 		Pode ser utilizada para fazer pair programming
 
 	SSM (System Manager)
+		Gerenciador de sistemas para obter insights operacionais sobre o estado da sua infraestrutura e também tenha acesso a um conjunto com mais de 10 produtos
+		Cloud Hibrid
+		Multiplataforma (Windows e Linux)
+		Principais Produtos
+			Patches automáticos em todos os servidores
+			Executar um comando em toda a frota de servidores diretamente
 		
+	
