@@ -562,5 +562,77 @@ Deploying and Managing Infrastructure at Scale Section
 	OpsWorks
 		Chef and Puppet
 
-	Storage Getway
-	Direct Connect
+AWS Global Infrastructure
+
+	Route 53
+		É um DNS (Domain Name System) gerenciado
+		O browser faz uma requisição http, porém antes de chegar no servidor, o DNS chega no Route53, que retorna o IP correto para a aplicação
+			Após isso, a requisição é feita no servidor correto.
+		Políticas de Roteamento
+			
+			Política de Roteamento simples
+				Não possui verificações de saúde
+				O browser faz uma requisição e o DNS chega no Route53 e retorna o ip correto
+			
+			Política de roteamento ponderado
+				Permite distribuir o tráfego em várias instâncias EC2
+				Há verificações de saúde
+
+			Política de roteamento de Latência
+				Havendo uma aplicação global (Com no mínimo duas instâncias), o Route53 encaminhará o usuário para o servidor mais próximo a fim de diminuir a latência
+
+			Política de Roteamento de Failover
+				Havendo uma requisição, o Route53 validará a saúde da instância primária, caso não esteja ok, redirecionará a requisição para a instância de Failover.
+
+	CloudFront (CDN)
+		Contém pontos de presença a fim de guardar cache de uma instância, site estático, objetos no S3, etc...
+		Ao receber uma solicitação HTTP, caso o ponto de presença não contenha aquela informação no cache, buscará no destino.
+		 Antes da resposta voltar ao usuário, o CloudFront guardará essa informação no cache.
+
+	S3 Transfer Acceleration
+		Realiza uma transferência de objetos mais rápida (Upload e Download)
+		Ex: Um usuário faz um upload de um obj para um bucket que está na Austrália. O Ponto de presença dos EUA recebe esse arquivo e envia para a Austrália de maneira muito mais rápida.
+
+	AWS Global Accelerator
+		Realiza requisições de maneira mais rápida utilizando a rede da AWS privada
+		O usuário faz uma requisição numa AZ qualquer, que chega até o ponto de presença na rede pública, ao chegar no ponto de presença é encaminhado para o servidor pela rede da AWS privada.
+		Só é possível acessar a aplicação por meio do ip estático
+	
+	AWS Outposts
+		A Aws fornece um servidor para você deixar no seu próprio data center
+			A diferença é que você será responsável por ele em termos de segurança, etc...
+		Ele será totalmente gerenciado (Pela AWS), e você pode utilizar serviços como EC2, S3, EBS, RDS
+	
+	AWS WaveLenght
+		A finalidade do WaveLenght é fornecer latência ultrabaixa para aplicativos por meio de redes 5G.
+	
+	AWS Local Zones *Atention*
+		É possível habilitar zonas locais dependendo da Região.
+			Consequentemente, criar sub redes para a az e criar uma instância para essa az.
+			Sendo assim, o usuário dessa zona local terá uma latência muito baixa.
+
+	Global Applications Architecture
+		
+		Single Region, Single AZ
+			Pequena disponibilidade
+			Latência global alta
+			Fácil de configurar
+
+		Single Region, Multi AZ
+			Boa disponibilidade
+			Latência global alta
+			Pequena dificuldade para configurar
+
+		Multi Region, Active-Passive
+			Active = Recebe persitência e leitura
+			Passive = Instâncias que recebem somente leitura, porém em todas as regiões
+
+			Boa disponibilidade
+			Latência global alta, pois precisam persistir numa única região
+			Dificuldade para configurar
+
+		Multi Region, Active-Active
+			Active = Recebe persitência e leitura
+			Boa disponibilidade
+			Latência global baixa, pois há instâncias nas regiões mundiais
+			Alta Dificuldade para configurar
