@@ -59,8 +59,7 @@ IAM = Gerenciamento de identidade e acesso
 		Access reports > Credential Reports = Extrai um relatório de credenciais no formato csv.
 		Users > User > Access Advisor = Exibe todos os serviços utilizados pelo usuário e os que ele tem acesso mas não utiliza.
 			OBS: Como na AWS trabalhamos com o princípio de menor privilégio, esse relatório nos permite retirar permissões não utilizadas por um usuário.
-			
-			
+					
 EC2 = Nuvem de computação Elástica
 	É possível criar instâncias AWS configurando memória, processamento, etc...
 		Uma das principais vantagens da nuvem, visto que se tivéssemos que fazer isso de maneira local, 
@@ -559,5 +558,9 @@ Deploying and Managing Infrastructure at Scale Section
 		Principais Produtos
 			Patches automáticos em todos os servidores
 			Executar um comando em toda a frota de servidores diretamente
-		
 	
+	OpsWorks
+		Chef and Puppet
+
+	Storage Getway
+	Direct Connect
