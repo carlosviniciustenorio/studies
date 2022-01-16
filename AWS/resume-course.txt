@@ -636,3 +636,43 @@ AWS Global Infrastructure
 			Boa disponibilidade
 			Latência global baixa, pois há instâncias nas regiões mundiais
 			Alta Dificuldade para configurar
+
+Cloud Integrations
+
+	SQS (Simple Queue Service)
+		É um serviço de mensageria, como o RabbitMQ
+		A mensagem deve ser processada entre 4 e 14 dias e depois devem ser excluídas
+		Os consumidores recebem somente mensagens não consumidas e que não estão em execução por outros consumidores
+		É Serveless
+	
+	SNS (Serviço de Notificação Simples)
+		Pub / Sub
+		É capaz de receber uma mensagem e disparar para vários destinos
+		Ex: Recebo uma mensagem e quero enviar para algumas aplicações e para a fila no SQS, ao invés de fazer isso via código
+				Utilizo o SNS, ele recebe a mensagem e faz isso automaticamente.
+		Todos os consumidores recebem todas as mensagens
+
+	Kinesis
+		É igual a um streaming de big data em tempo real
+		Kinesis Data Streams
+			Um serviço de baixa latência para ingeri-lo em escala de centenas de milhares de fontes, e a fonte pode ser qualquer coisa que possa produzir dados
+				Ex: Caminhão, Barco, Dispositivo IOT.
+		
+		Kinesis Data
+			Carrega os Streams nos serviços da AWS (S3, Redshift, ElasticSearch)
+
+		Kinesis Data Analytics
+			Realiza análise em tempo real no stream usando a linguagem SQL.
+
+		Kinesis Video Streams
+			Monitora streams de vídeo em tempo real para análise ou aprendizado de máquina
+
+	Amazon MQ
+		Serve para migrar serviços de mensageria para nuvem sem ter que usar o SQS ou SNS, pois utilizam protocolos diferentes do que por ex RabbitMQ(AMQP)
+		Possui suporte para protocolos como AMQP, MQTT, STOMP, Openwire, WSS
+		Gerencia o Apache ActiveMQ, que possui protocol;os ativados por padrão
+		Não é serveless
+
+Cloud Monitoring
+
+	
