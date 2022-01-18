@@ -8,7 +8,7 @@ systemctl start httpd
 systemctl enable httpd
 echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
 
-Núvem privada
+Private cloud
 	O provedor pode ser Rackspace
 	
 Public cloud
@@ -862,4 +862,104 @@ Segurança e Compliance
 		Amazon Detective
 			Analisa, investiga um potencial de seguraça ou atividades suspeitas
 		
+Machine learning
+
+	Rekognition
+		Utilizado para identificar pessoas, objetos, textos, imagens e vídeos usando ML
+		Análise facial e reconhecimento facil de celebridades
+		Casos de uso
+			Moderação de conteúdo
+			Detecção de textos
+			Detecção e análise de rostos (sexo, idade, emoções)
+			Pesquisa e verificação de rosto
+			Análise de jogos de futebol
+
+	Transcribe
+		Utilizado para converter áudios em textos
+		Casos de uso:
+			Transcrever uma ligação para um cliente
+			Automatizar legendas e legendas ocultas
+			Gerar metadados para ativos de mídia para criar um arquivo totalmente pesquisável
+	
+	Polly
+		Oposto do transcribe, ele recebe uma mensagem de texto e converte em áudio
+			Isso permite a criação de aplicativos que utilizam fala, como por ex o Duolingo
+	
+	Translate
+		Traduz textos para outros idiomas
+
+	Lex + Connect
+		Lex
+			Reconhecimento automático de fala (ASR) para converter em texto
+			Contém entendimento da Linguagem natural para transformar a intenção da fala em texto
+			Ajuda a construir chatbots, call center bots
+		
+		Connect
+			Recebe chamada, cria fluxo de contato e é baseado em nuvem
+			Pode interagir com sistemas CRM ou AWS
+			80% mais barato que as soluções tradicionais para central de contato
+
+		Como funcionam 
+			Uma ligação é feita para um número configurado no Connect, que passa as informações para o Lex,
+				 que entende o que o usuário quer dizer, ex: "Agendar reunião com o Tom amanhã às 15 horas".
+				 Após isso, o Lex invoca uma função lambda que faz a integração com o CRM agendando a reunião por ex.
+	
+	Amazon Comprehend
+		NLP = Natural Language Processing
+		Serveless
+		Entende a linguagem do texto
+		Pode extrair frases-chave, lugares, pessoas, marcas ou eventos dos textos.
+		Entende o quão positivo ou negativo é o seu texto
+		Pode analisar um texto usando tokenização e classes gramaticais (Também possui áudio)
+		Pode organizar uma coleção de arquivos de texto por tópico e localizar os próprios tópicos
+
+		Casos de uso: Analisar interações de e-mails de clientes para saber se a experiência deles estão positivas ou negativas
+	
+	SageMaker
+		Totalmente gerenciado para desenvolvedores e cientistas de dados para criar modelos de aprendizado de máquina
+		Ajuda a construir todas as etapas para um aprendizado de máquina entrar em produção]
+	
+	Forecast
+		Utilizado para previsões
+		Totalmente gerenciado usando ML para entregar previsões difíceis
+			Ex: Vendas futuras
+		50% mais rápdio do que olhando os dados
+		Reduz o tempo da análise de meses para horas
+		Casos de uso:
+			Planejamento financeiro
+			Planejamento de demandas do produto
+			Planejamento de recursos
+
+	Kendra
+		Serviço para pesquisar documentos
+		É totalmente gerenciado e utiliza ML
+		É possível extrair respostas de documentos de diversas extensões
+		É alimentado também por interações e feedbacks dos usuários
+
+		Como funciona:
+			O usuário faz uma pergunta e o Kendra responde baseado na base de dados que ele tem.
+
+	Personalize
+		Serviço para criar recomendações personalizadas
+		Funciona como a Amazon faz ao te enviar notificações sobre produtos que você talvez tenha interesse, pois você já pesquisou ou compra produtos da mesma categoria
+		Ex: Sites e apps para serem instalados baseados nos que você já tem ou pesquisou
+			Envia sms
+			Envia e-mail
+		
+Account Management, Billing e Support
+
+	Organizations
+		Serviço Global
+		Gerencia múltiplas contas AWS
+		Tem uma conta master (Responsável pelos pagamentos)
+		Tem mais descontos pois os gastos são consolidados
+		Há uma API disponível para criação de contas de forma automática
+		É possível restringir os privilégios da conta usando uma Política de Controle de Serviço (SCP)
+		É possível criar contas por departamento, centros de custo, ambiente dev, test, prod
+		Multi contas ou uma conta com multi VPC
+		É possível usar padrão de Tag em todas as contas para fins de faturamento
+		Você deve habilitar o CloudTrail em todas as contas, que enviarão logs para uma conta S3 central
+		Você deve enviar todos os logs para uma conta de registro central
+		
+
 		
