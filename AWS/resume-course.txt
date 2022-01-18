@@ -675,4 +675,191 @@ Cloud Integrations
 
 Cloud Monitoring
 
+	CloudWatch
+		 
+
+	CloudWatch Metrics
+		Há a possibilidade de visualizar métricas de diversos tipos de serviços da AWS que você utiliza
+		A métrica de gastos totais com a AWS só é possível utilizar nos EUA, porém, nas outras regiões há como saber o faturamento total menos detalhado
+		É possível configurar uma métrica caso você não encontre uma para o fim desejado.
+
+	CloudWatch Alarms
+		Usado para disparar notificações para qualquer métrica
+			Ex: A métrica de EC2 passou do limite, o auto-scaling group aumenta ou diminui o número de instâncias.
+		Disparar notificação para o e-mail utilizando SNS
+			Ex: A instância EC2 passou de 90% de uso, desejo saber o motivo. o CloudWatch Alarms enviará para o SNS, que enviará o e-mail.
+
+		Status
+			OK = bom
+			Insufficient_data = Quando não há dados suficientes para descobrir se deve ser bom ou ruim
+			Alarm = ruim
+
+	CloudWatch Logs
+		É possível recolher logs de várias integrações da AWS (Elastic Beanstalk, ECS, AWS Lambda, CloudTrail, Route53)
+		Para utilizar com o EC2, é necessário instalar o Agente na máquina, e ele enviará direto para o CloudWatch Logs
+		Também é possível configurar o agente de log no servidor on premise
+
+	CloudWatch Events
+		É possível configurar Jobs como no SQL Server, onde num determinado horário/dia o job chama uma função Lambda
+		É possível configurar uma regra e enviar notificações usando SNS
+			Ex: Ao término de uma instância EC2, notifique o e-mail test@example.com
+		É possível criar trigger como no SQL, e enviar mensagens usando SQS, SNS...
 	
+	Amazon EventBridge
+		A nova evolução do CloudWatch Events
+		Barramento de evento padrão
+		Partner event bus: receber eventos de parceiros SasS, ou aplicações (Zendesk, DataDog, Segment, Auth0)
+		Pode criar um serviço buses
+
+	CloudTrail
+		Utilizado para governança na AWS
+		É possível ver todas as ações feitas por usuários em todos os serviços
+
+	X-Ray
+		É útil para analisar como aplicações em microsserviços estão funcionando, pois é difícil debugar e identificar falhas em aplicações baseadas em microsserviços
+			Sendo assim, o X-Ray mostra um gráfico das aplicações em conjunto
+	
+	CodeGuru
+		Maneira para automatizar Code reviews e recomendações de performance para aplicações
+		Contém duas funcionalidades
+			1: Code Guru Review - Fazer revisões de código automtizados com análise estática de código
+			2: Code Guru Profiler - Dar visibilidade ou recomendações sobre o desempenho do app durante o tempo de execução
+	
+	Service Health
+		Site da Amazon que exibe as disponibilidade dos serviços e as regiões
+
+	Personal Health Dashboard
+		Painel completo com informações sobre os serviços que eu estou utilizando
+		Contém logs e informa melhorias baseado nos acontecimentos de cada serviço
+	
+VPC e Networking
+
+	VPC, Subnet, Internet Gateway & NAT Gateways
+		VPC é uma nuvem virtual privada
+		Subnet 
+		Internet Gateway é utilizado para fazer a conexão de uma subnet pública com a Internet
+		NAT Gateway é utilizado para fazer a conexão de uma subnet privada com a internet a fim de realizar operações como por ex atualizar um sistema operacional
+			Deve confirurar na subnet pública e criar uma rota para o NET Getway
+
+	Grupos de segurança e lista de controle de acesso à rede
+		NACL
+			Controle de tráfego na subnet
+			É atachado no nível do subnet
+			Regras somente para IP
+
+		Security Groups
+			Está no nível de instância
+			Controla o tráfego do ENI (Interface de rede) ou EC2
+			Pode escrever regras de permissão
+			Fazem referência a IP's e grupos de segurança
+
+	VPC Flow Logs 
+		Captura informações sobre o tráfego do IP nas interfaces
+		
+	VPC Peering
+		Faz conexão entre VPC's usando a net da AWS
+
+	VPC Endpoints
+		Quando a subnet é privada e temos uma instância EC2, é possível configurar uma VPC Ednpoint Gatway para acessar serviços como S3 e DynamoDB
+	
+	Site to Site VPN
+		Conecta um on-premises VPN na AWS
+		A conexão é criptografada automaticamente
+		Utiliza internete pública
+
+	Direct Connect
+		Estável e física conexão entre on-premises e AWS
+		Conexão privada, segura e rápida
+		Rede privada
+		Demora cerca de um mês para estabelecer a conexão
+
+	Transit Getway
+		Uma maneira de conectar centas ou milhares de VPC juntos com infraestrutura local
+
+Segurança e Compliance
+
+	DDOS Protection
+
+		AWS Shield Standard
+			Protege seus servidores de ataques DDOS, esse serviço é gratuito
+				Caso você queira um que proteja seu servidor 24 horas, deve usar o AWS Shield Advanced ($3.000 por mês por organização)
+		
+		AWS WAF
+			Protege a aplicação contra ataque web exploits (Layer 7 - HTTP)
+			Filtra solicitações específicas com base em regras, este é o firewall de aplicativo web
+			É possível definir controle de acesso
+			É possível bloquear lugares usando geolocalização
+			É possível bloquear usuários que tentam fazer mais de x requisições por segundo
+
+	Data at rest vs. Data in Transit
+
+		Data at rest
+			Dados guardados em algum local físico, como por exemplo Disco rígido, numa instância RDS, S3 Glacier Deep Archive
+		
+		Data in Transit
+			Dados transferidos na rede, quando são movidos de um lugar para o outro
+				ex: transferidos do On-premises para a AWS, EC2 para o DynamoDB, etc...
+		
+		AWS KMS (Key Management Service)
+			O tipo de criptografia utilizado na AWS
+			Pode ser utilizado no EBS, S3, Redshift, RDS, EFS
+			Habilitado automaticamente no serviços: CloudTrail Logs, S3 Glacier, Storage Gateway
+
+		CloudHSM
+			Um aparelho que a AWS fornece onde você configura e define as chaves
+
+		Tipos de CMK
+			
+			Customer Managed CMK
+				Criado, gerenciado e usado pelo cliente
+				Há a possibilidade de rotação da chave através de políticas
+			
+			AWS Managed CMK
+				Criado, gerenciado e usado pela AWS
+				Utilizado nos serviços como: S3, EBS, Redshift
+
+			AWS Owned CMK
+				Coleção de CMKs dos serviços da AWS e gerenciado por múltiplas contas
+				AWS pode usar para proteger recursos na sua conta, porém, não é possível ver as chaves
+
+			CloudHSM Keys (Custom keystore)
+				Chaves geradas pelo próprio dispositivo de hardware CloudHSM
+				Todas as operações criptográficas não acontecem dentro do KMS, elas acontecem no cluster HSM da nuvem
+
+		AWS Certificate Manager (ACM)
+			Provisiona, gerencia e aplica Certificados SSL/TLS
+			Usado para providenciar HTTPS aos websites
+			Oferece suporte a certificados TLS públicos e privados
+			
+		Secrets Manager
+			Gerenciador de segredos
+			É possível utilizá-lo para criar senhas para usuários do RDS e rotacioná-las depois de 90 dias por exemplo
+			É possível utilizar para guardar segredos como por ex alguma chave que não deve ser exibida numa API
+		
+		AWS Artifact (Não é um serviço)
+			É possível baixar relatórios e acordos da conta AWS.
+
+		Amazon GuardDuty
+			Procura problemas de vulnerabilidade nas suas aplicações e pode usar o CloudWatch para executar funções lambdas ou enviar SNS
+
+		Inspector
+			Um agente que pode ser instalado nas instâncias EC2, que procurará por problemas de vulnerabilidade existentes e por fim te dará um relatório com ou não essas vulnerabilidade
+
+		Config
+			Ajuda a auditar
+			Ajuda a gravar configurações e mudanças em todo tempo
+			Possibidade de histórico da configuração de dados no S3, analisados por Athena posteriormente
+			Exibe erros de configuração de SSH por exemplo
+
+		Macie
+			Serviço de privacidade de dados e segurança totalmente gerenciado que usará o machine learning e padrões de correspondência
+				para descobrir e proteger dados confidencias na AWS.
+			Notifica sobre dados de identificação (PII)
+
+		Security Hub
+			Segurança central, que configura todas as demais seguranças da conta
+		
+		Amazon Detective
+			Analisa, investiga um potencial de seguraça ou atividades suspeitas
+		
+		
