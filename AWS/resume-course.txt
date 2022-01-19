@@ -960,6 +960,65 @@ Account Management, Billing e Support
 		É possível usar padrão de Tag em todas as contas para fins de faturamento
 		Você deve habilitar o CloudTrail em todas as contas, que enviarão logs para uma conta S3 central
 		Você deve enviar todos os logs para uma conta de registro central
-		
+		O Mestre da organização tem controle sobre as demais contas
 
+		Política controlada de Serviços (SCP)
+			Permite colocar na lista de permissões ou na lista negra ações de IAM
+				que podem ser aplicadas na unidade organizacional (OU) ou nível da conta.
+				Porém, não se aplica às contas master
+			As políticas podem ser aplicadas somente aos usuários e às funções das contas (menos as contas root). 
+
+Uma política pode ser aplicada e terá efeito a um usuário root?
+Ela não tem efeito somente quando o usuário faz parte da UO root?
+
+		Consolidated Billing (Faturamento Consolidado)
+			Ao habilitar essa configuração, duas coisas são fornecidas
+
+				1- Dá a você o uso combinado
+					Significa que você pode combinar todo o uso de todas as contas para fazer duas coisas
+						Compartilhar preço do Volume, Instâncias reservadas e planos de descontos
+				
+				2- Recebe somente uma fatura com o valor de todas as UO. O que ajuda no DP de contabilidade
 		
+		Control Tower
+			Automatizar a configuração dos ambientes com apens alguns cliques
+			Automatizar o gerenciamento contínuo de políticas usando grades de proteção
+			Detectar violação de políticas e corrigí-las 
+			Pode monitorar a conformidade por meio de um dashboard interativo
+			
+			A torre de controle está sendo executada no topo das organizações
+				Isso significa que ele configurará organizações automaticamente para você organizar contas e 
+					implementará políticas de controle de serviço
+
+		Pricing Models of the Cloud
+			Existem 4 modelos de preços na AWS
+				1- Pay as you go: Pague pelo que você usa
+				2- Save when you reserve: Reservar recursos como por ex instâncias EC2 reservadas.
+				3- Pay less by using more: Quanto mais usa, mais desconto tem
+				4- Pay less as AWS grows: Conforme a AWS cresce e pessoas utilizam ela, o custo dela diminui e consequentemente o seu desconto aumenta
+
+		Savings Plan
+			Plano de economia EC2:
+				Dará até 72% de desconto comparado ao preço sob demanda do EC2
+
+			Plano de Economia de Computação:
+				Dará até 66% de desconto comparado ao preço sob demanda
+				Opções de Computação: EC2, Fargate e Lambda
+			
+		AWS Compute Optimizer
+			Ajuda a identificar possíveis reduções de custos
+		
+		Billing e Costing Tools
+			1- Estimar o custo na nuvem
+				Pricing Calculator, antigo TCO Calculator
+				Calculadora Mensal Simples ou a Calculadora de preços
+			
+			2- Acompanhamento de custo na nuvem
+				Billing Dashboard
+				Tags de alocação de custos
+				Relatórios de Custo e Uso
+				Explorador de custos
+
+			3- Monitoramento dos planos de custo
+				
+
