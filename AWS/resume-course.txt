@@ -1021,4 +1021,52 @@ Ela não tem efeito somente quando o usuário faz parte da UO root?
 
 			3- Monitoramento dos planos de custo
 				
+		TCO Calculators/Pricing Calculator (Custo total de propriedade)
+			Fornece um relatório comparando o valor que você investiria no on-premises e quanto custaria o mesmo na Nuvem (Especialmente na AWS)
+			Foi descontinuada em junho de 2020, a partir dessa data, a calculadora é a Pricing Calculator
 
+			Pricing Calculator
+				Estima o valor que você usaria em toda a sua arquitetura
+				Ele calcula e exibe o quanto você gastaria em 12 meses e quanto seria caso você reservasse
+		
+		Tracking Costs in the Cloud (Rastreando custo na nuvem)
+			
+			Billing Dashboard
+				Exibe todos os custos do mês, a previsão do mês inteiro
+
+			AWS Free Tier Dashboard
+				Painel de nível gratuito que exibe o uso de cada nível gratuito com base no que você fez durante o mês
+
+			Cost Allocation Tags (revisar)
+				É possível criar departamentos utilizando tags, isso ajudará a ter relatório específico de cada departamento
+				Agrupa os recursos e garante que seja possível rastrear as tags de acordo com uma categoria especial
+
+			Cost and Usage Reports
+				Exibirá todos os custos de forma mais granular possível
+				Pode ser analisado por Athena, Redshift ou QuickSight
+				
+			Cost Explorer
+				Relatório de alto nível, bem detalhado onde você pode criar relatórios customizados e usar dados
+				Dá sugestões de economia, como por exemplo informar sobre o uso de instância reservada
+				(Questão de exame) Você pode prever o uso em até 12 meses com base no uso do mês anterior
+			
+			Billing Alarms e AWS Budgets
+
+				Existe o CloudWatch Alarms, para configurar um alarme quando o valor atual passa do valor definido na métrica, porém ele não é tão poderoso, embora importante.
+
+				AWS Budgets
+					Envia alarmes quando o orçamento ou a previsão do orçamento excede o orçamento
+					Podem ser criados 3 tipos de orçamentos.
+						1- Orçamento por uso
+						2- Orçamento por custo
+						3- Orçamento por reserva
+							Para instâncias reservadas, podemos rastrear a utilização deles
+							Suporta instâncias reservadas EC2, instâncias reservadas ElastiCache, RDS, Redshift
+							Suporta até 5 notificações SNS por orçamento para que possamos enviar e-mails, acionando funções e assim por diante
+							Podemos filtrar por serviço, conta vinculada, tags, opção de compra, tipo de instância, região, AZ, API Operation, etc...
+							Obtém as mesmas opções do AWS Cost Explorer
+							Os dois primeiros orçamentos serão gratuitos, após isso, pagará $0.02 por dia por orçamento.
+
+			AWS Trusted Advisor
+
+				
