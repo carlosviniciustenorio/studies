@@ -1,13 +1,3 @@
-#!/bin/bash
-# Use this for your user data (script from top to bottom)
-# install httpd (Linux 2 version)
-
-yum update -y
-yum install -y httpd
-systemctl start httpd
-systemctl enable httpd
-echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.html
-
 Private cloud
 	O provedor pode ser Rackspace
 	
@@ -917,7 +907,7 @@ Machine learning
 	
 	SageMaker
 		Totalmente gerenciado para desenvolvedores e cientistas de dados para criar modelos de aprendizado de máquina
-		Ajuda a construir todas as etapas para um aprendizado de máquina entrar em produção]
+		Ajuda a construir todas as etapas para um aprendizado de máquina entrar em produção
 	
 	Forecast
 		Utilizado para previsões
@@ -967,9 +957,6 @@ Account Management, Billing e Support
 				que podem ser aplicadas na unidade organizacional (OU) ou nível da conta.
 				Porém, não se aplica às contas master
 			As políticas podem ser aplicadas somente aos usuários e às funções das contas (menos as contas root). 
-
-Uma política pode ser aplicada e terá efeito a um usuário root?
-Ela não tem efeito somente quando o usuário faz parte da UO root?
 
 		Consolidated Billing (Faturamento Consolidado)
 			Ao habilitar essa configuração, duas coisas são fornecidas
@@ -1054,6 +1041,9 @@ Ela não tem efeito somente quando o usuário faz parte da UO root?
 
 				Existe o CloudWatch Alarms, para configurar um alarme quando o valor atual passa do valor definido na métrica, porém ele não é tão poderoso, embora importante.
 
+				Billing Alarms
+				 Só pode ser criado no us-east-1 e permitem que você rastreie o faturamento geral e por serviço
+
 				AWS Budgets
 					Envia alarmes quando o orçamento ou a previsão do orçamento excede o orçamento
 					Podem ser criados 3 tipos de orçamentos.
@@ -1067,6 +1057,157 @@ Ela não tem efeito somente quando o usuário faz parte da UO root?
 							Obtém as mesmas opções do AWS Cost Explorer
 							Os dois primeiros orçamentos serão gratuitos, após isso, pagará $0.02 por dia por orçamento.
 
+	-----------------------------------IMPORTANTE-------------------------------------------
 			AWS Trusted Advisor
+				É totalmente em alto nível
+				Executa uma série de verificações e diz se elas passaram ou não
+				Ele analisa a conta a fornece recomendações sobre cinco categorias
+					1- Cost optmization (Otimização de custos)
+					2- Performance 
+					3- Security (Segurança)
+					4- Fault tolerance (Tolerança a falhas)
+					5- Service Limits (Limites de serviço)
 
-				
+				Trusted Advisor Support Plans
+					
+					7 core cheks (Basic e Developers Support Plan)
+						S3 - Permissões de Bucket, se é público, etc...
+						Security Groups - Se há portas irrestritas
+						IAM Use (Pelo menos 1 usuário)
+						MFA on Root Account
+						EBS Public Snapshot
+						RDS Public Snapshot
+						Service Limits
+
+					Full Checks (Business e Enterprise Support Plan)
+						Verificará todas as 5 categorias
+						Habilitar os alarms do CloudWatch ao atingir os Limites
+						Obtém acesso programático usando a AWS Support API
+
+				Support Plans Pricing
+					Basic suport: Free (Suporte básico: gratuito)
+						Documentação, fórums, 24 horas x 7 dias por semana de serviço ao cliente
+						AWS Trusted Advisor = 7 recursos
+						AWS Personal Health Dashboard = Dashboard que informa sobre atualizações de serviços AWS e alerta quando seus recursos podem ser impactados
+
+					Developer
+						Básico + Acesso ao e-mail no horário comercial para o Cloud Support Associates
+						Há a possibilidade de abrir chamados de suporte no Console
+						Quantidade ilimitada e um contato principal em suas contas
+						Respostas diferentes com base na gravidade dos casos
+							Orientação geral: < 24 horas úteis
+							Sistema prejudicado: < 12 horas úteis
+
+					Business
+						Conjunto completo para o Trusted Advisor e também acesso à API
+						24/7 por telefone, e-mail e bate-papo ao Cloud
+						Casos e contatos ilimitados
+						Acesso ao gerenciamento de eventos de infraestrutura por uma taxa adicional
+						Casos severos:
+							Orientação geral: < 24 horas úteis
+							Sistema prejudicado: < 12 horas úteis
+							Sistema de produção prejudicado: < 4 horas
+							Sistema de produção fora do ar: < 1 hora
+
+					Enterprise
+						Contém todos os serviços anteriores além de um Gerente Técnico de Conta dedicado, também chamado (TAM = Technical Account Manager)
+						Receberá uma equipe de suporte considerada que fornecerá os detalhes e recomendações sobre as melhores práticas de faturamento e contas
+						Acesso ao gerenciamento de eventos de infraestrutura, análises bem-arquitetadas (Well-Architected) e de operações.
+						Casos severos:
+							Orientação geral: < 24 horas úteis
+							Sistema prejudicado: < 12 horas úteis
+							Sistema de produção prejudicado: < 4 horas
+							Sistema de produção fora do ar: < 1 hora		
+							Sistema crítico para os negócios inativo: < 15 minutos
+
+Advanced Identity
+	
+	Security Token Service (STS)
+		Habilita a criação temporária, limitada de credenciais de acesso dos seus recursos AWS.
+		É possível configurar o tempo de expiração das credenciais
+		Casos de uso:
+			Identity Federation (Federação de identidade) para gerenciar suas identidades em sistemas externos
+				e fornecer tokens STS para acessar recursos da AWS 
+			Funções de IAM, for cross/same account access (Acesso para acesso cruzado ou na mesma conta)
+			Providenciar credenciais temporárias para instâncias EC2 a fim de acessar recursos AWS.
+		
+	Cognito
+		É uma forma de fornecer identidade aos usuários de aplicativos móveis e da web
+		Há um banco de dados de usuários específicos para o Amazon Cognito, onde as aplicações farão o login apontando para esse banco de dados
+		Permite utilizar login com redes sociais como Facebook, Twitter, etc...
+	
+	Directory Services
+		É usado sempre que há um Active Directory
+
+	AWS Single Sign-ON (SSO)
+		A idéia é ter um login que possa acessar várias contas ou aplicativos de negócios de terceiros
+		Suporta SAML 2.0
+		Integrado ao Active Directory Local
+
+Other Services
+
+	WorkSpaces
+		Desktops virtuais ou gerenciar desktops virtuais como serviço
+		Como minimizar latência para espaços de trabalho?
+			Implementando workspaces próximos dos usuários.
+			Ex: Corporate Officer (California) = Workspaces em N.Virginia (us-east-1)
+				Corporate Officer (Paris) = Workspaces em London (eu-west-2)
+
+	AppStream 2.0
+		É um serviço de streaming de aplicativos desktop
+		A ideia é transmitir um aplicativo para qualquer computador sem adquirir e provisionar infraestrutura
+		O aplicativo estará acessível e entregue a partir de um navegador web
+		Há a possibilidade de configurar instância para cada aplicativo em específico.
+			Ex: Para o Photoshop, preciso de x CPU, RAM e CPU.
+
+	Sumerian
+		Usado para criar realidade virtual (VR virtual reality) ou realidade aumentada (AR augmented reality) e aplicações 3D
+
+	IoT Core
+		 Permite integrar aplicativos IoT com a nuvem
+		 Integra com muitos serviços AWS, como por exemplo: S3, Lambda, SageMaker
+		 Há a possibilidade de criar aplicativos IoT
+
+	Elastic Transcoder
+		Usado para converter arquivos de mídias armazenados no S3 em arquivos de mídia no formado exigido
+			Ex: Inpute um vídeo no S3, o Transcoding pipeline  irá converter o vídeo em vários arquivos de vídeo diferentes que serão
+				colocados em um depósito S3 de saída. Que poderá ser consumido por diversos dispositivos como Tablets, Smartphones, PCs...
+	
+	Device Farm
+		Utilizado para testar aplicações sem browsers, telefones e tablets
+		São dispositivos físicos e reais
+		Podem ser configurados como por exemplo: GPS, Idioma, Wi-Fi, Bluetooth, etc...
+
+	Backup
+		Serviço para gerenciar e automatizar centralmente os backups nos serviços AWS
+		Obtém backups sobre demanda e programados
+		Oferece suporte para recuperação pontual (PITR Point-in-time Recovery)
+		É possível definir o período de retenção, o gerenciamento de ciclos de vida, as políticas de backup, etc...
+		É possível fazer backups por regiões ou até mesmo backups entre contas com o respaldo de qualquer uma das organizações da AWS
+	
+	Disaster Recovery Strategies
+		Backup and restore = Em caso de desastre, fazemos restauração do servidor para a nuvem. (O mais barato).
+		Pilot Light = As principais funções da aplicação ficam na nuvem, por ex um banco de dados. 
+		Warm Standby = Temos uma versão da aplicação completa porém em menor tamanho, então para se recuperar de um desastre é só aumentar o tamanho da aplicação
+		Multi-Site / Hot-Site = Versão completa da aplicação em todo tempo (Custo máximo)
+
+	CloudEndure Disaster Recovery
+		Fácil de gravar seu servidor físico, virtual e baseado em nuvem na AWS
+		Protege você dos maiores banco de dados críticos (Oracle, MySQL e SQL Server), aplicações SAP, etc...
+		Replicação em nível de bloco para seus servidores
+
+	DataSync
+		Incremental
+		Move uma quantidade de dados grande do on-premises para a AWS
+		Pode sincronizar com S3(Qualquer storage classes, incluindo Glacier), EFS, Amazon FSx for Windows
+		Replica tasks programadas por hora, dias e semanas
+		Após carregar a primeira task, todas as outras serão incrementadas
+
+	Fault Injection Simulator (FIS)
+		Engenharia de caos, utilizado para saber como uma aplicação reage com problemas como por ex, CPU, Banco de dados, Memória, etc...
+		Permite descobrir bugs e gargalos de performance
+		Suporte com serviços aws: EC2, ECS, EKS, RDS
+		Como funciona? Cria um experimento baseado em algum modelo, que gerará o caos em alguns recursos AWS (EC2, ECS, EKS, RDS),
+			será monitorado pelo CloudWatch ou EventBridge e após o término do experimento veremos os resultados.
+	
+	
