@@ -766,7 +766,7 @@ VPC e Networking
 	Transit Getway
 		Uma maneira de conectar centas ou milhares de VPC juntos com infraestrutura local
 
-Segurança e Compliance
+Security e Compliance
 
 	DDOS Protection
 
@@ -1279,5 +1279,3 @@ Architecting e Ecosystem
 		Right Sizing
 			O tamanho da sua aplicação na nuvem deve começar com o mínimo, e com o passar do tempo e revisões deve aumentar ou diminuir
 			Nunca deve começar com a maior instância existente por exemplo
-		
-		
