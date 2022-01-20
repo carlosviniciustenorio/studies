@@ -1210,4 +1210,74 @@ Other Services
 		Como funciona? Cria um experimento baseado em algum modelo, que gerará o caos em alguns recursos AWS (EC2, ECS, EKS, RDS),
 			será monitorado pelo CloudWatch ou EventBridge e após o término do experimento veremos os resultados.
 	
-	
+Architecting e Ecosystem
+
+	AWS Cloud Best Partices
+
+		Well Architected Framework and General Guiding Principles (Princípios gerais de orientação)
+		
+			Não tente adivinhar a capacidade e sim automatize usando escalonamento automático
+			Teste o sistema em produção
+			Automatize para fazer a arquitetura de forma Fácil
+			Esteja pronto para evoluir a arquitetura
+				Design baseado na mudança de requisitos
+			Conduza a arquitetura baseada em dados
+			Simule aplicativos para dias de venda a fim de estressar o sistema
+		
+		Design Principles
+			Escalabilidade: vertical e horizontal
+			Recursos descartáveis: Servidores devem ser fáceis de serem descartados a qualquer momento e de fácil configuração
+			Automação: Serveless, infraestrutura como serviço, auto scaling...
+			Não Acoplado:
+				A idéia é não ter aplicações no padrão monolito e sim utilizar outros serviços para granular a aplicação
+					Ex: Mensageria com SQS, SNS, etc...
+			Serviços e não servidores: 
+				Não use somente o EC2 para ter toda a configuração nele.
+					Ex: Use serviços gerenciados, bancos de dados, serveless, etc...
+
+		5 Pilares:
+			
+			1- Operational Excellence (Excelência Operacional)
+				1° Prepare (AWS CloudFormation), Config
+				2° Operate (AWS CloudFormation), Config, AWS CloudTrail, CloudWatch, X-Ray
+				3° Evolve (AWS CloudFormation), CodeBuild, CodeCommit, CodeDeploy, CodePipeline
+
+				A capacidade de executar e monitorar sistemas para entregar valores de negócios e melhorar continuamente os processos e procedimentos de suporte
+				Infraestrutura como código (CloudFormation)
+				Fazer mudanças reversíveis e pequenas, para que, em caso de falhas, você possa reverter
+					Se você fizer grandes mudanças a cada 3 meses, isso não vai correr bem
+				Refinar os procedimentos de operações com frequência, para que a equipe se familiarize mais com as operações, refine-as, automatize e faça melhorias
+				Antecipe o fracasso				
+
+			2- Security (Segurança)
+				1° Gerenciamento de Identidade e acesso: IAM< AWS-STS, MFA Token, AWS Organizations
+				2° Controles de Detecção: AWS Config, AWS CloudTrail, AWS CloudWatch
+				3° Proteção de Infraestrutura: CloudFront, VPC, Shield, WAF, Inspector
+				4° Proteção de Dados: KSM, S3, ELB, EBS, RDS 
+				5° Resposta de Incidente: IAM, CloudFormation, CloudWatch Events, 
+
+			3- Reliability (Confiabilidade)
+				1° Fundação: IAM (Política de menor privilégio), VPC, Service Limits, Trusted Adivisor
+				2° Gerenciamento de Mudanças: ASG, CloudWatch, CloudTrail, Config
+				3° Gerenciamento de Falhas: Backups, CloudFormation, S3, S3 Glacier, Rota 53
+
+			4- Performance Efficiency (Eficiência de desempenho)
+				1° Selection (Seleção): Auto Scaling, Lambda, EBS, S3, RDS
+				2° Review (Revisão): CloudFormation, AWS News.
+				3° Monitoring (Monitoramento): CloudWatch, Lambda
+				4° Tradeofss (Compensações): RDS, ElastiCache, Snowball, CloudFront
+
+			5-Cost Optimization (Otimização de Custo)
+				1° Conscientização sobre despesas: Budgets, AWS Cost and Usage Reports, AWS Cost Explorer, Reservede Instance Reporting
+				2° Custo benefício: Spot Instance, Reserved Instance, S3 Glacier
+				3° Combinando Oferta e Demanda: AWS Auto Scaling, Lambda
+				4° Otimização ao longo do tempo: Trusted Adivisor, Cost and Usage Reports, AWS News Blog
+
+		Well-Architected Tool
+			Ferramenta que testa sua arquitetura e te dá sugestões de melhorias
+		
+		Right Sizing
+			O tamanho da sua aplicação na nuvem deve começar com o mínimo, e com o passar do tempo e revisões deve aumentar ou diminuir
+			Nunca deve começar com a maior instância existente por exemplo
+		
+		
