@@ -100,6 +100,7 @@ EC2 = Nuvem de computação Elástica
 		É possível criar uma AMI a partir de uma instância. Isso faz com que a instância iniciada a partir dessa AMI tenha todas as configurações já feitas
 		
 	EFS = Elastic File System
+		Serviço Regional
 		Só funciona com instâncias Linux EC2
 		É possível utilizar o armazenamento em mais de uma região e em mais de uma instância ao mesmo tempo, diferente do EBS (Elastic Block Store)
 		Ao utilizar o EFS, todas as instâncias de diferente zonas que usam o EFS, vão persistir e consumir os arquivos da mesma origem em tempo real.
@@ -133,7 +134,7 @@ EC2 = Nuvem de computação Elástica
         Alta disponibilidade e Escalabilidade para EC2
 
     Load Balancer
-        Normalmente são mapeados 3 zonas difenretes com subredes a fim de ter uma disponibilidade maior.
+        Normalmente são mapeados 3 zonas diferentes com subredes a fim de ter uma disponibilidade maior.
         A configuração do servidor é feita pela AWS, porém é possível criar um Load Balancer, contudo, você será responsável pela configuração, manutenção, etc...
         Recebe uma solicitação e destibui conforme necessário. Caso uma instância esteja com problema, a solicitação será enviada a outra instância.        
         
@@ -471,6 +472,7 @@ Other Compute Services: ECS, Lambda, Batch, Lightsail
 		Suporte para segurança, autenticação, limitação de API, chaves de API, etc...
 
 	Batch
+		Serviço Regional
 		Cria instâncias EC2 automaticamente de acordo com o processamento que você precisa para o lote
 		Não tem limite de tempo para rodar (Diferente da Lambda, que tem um limite de 15 minutos para processar)
 		Tem capacidade de armazenamento EBS ou instância com espaço em disco
@@ -835,7 +837,7 @@ Security e Compliance
 		Inspector
 			Um agente que pode ser instalado nas instâncias EC2, que procurará por problemas de vulnerabilidade existentes e por fim te dará um relatório com ou não essas vulnerabilidade
 
-		Config
+		-Config
 			Ajuda a auditar
 			Ajuda a gravar configurações e mudanças em todo tempo
 			Possibidade de histórico da configuração de dados no S3, analisados por Athena posteriormente
@@ -1110,6 +1112,7 @@ Account Management, Billing e Support
 							Sistema de produção fora do ar: < 1 hora
 
 					Enterprise
+						Concierge = time composto de expert em aws billing
 						Contém todos os serviços anteriores além de um Gerente Técnico de Conta dedicado, também chamado (TAM = Technical Account Manager)
 						Receberá uma equipe de suporte considerada que fornecerá os detalhes e recomendações sobre as melhores práticas de faturamento e contas
 						Acesso ao gerenciamento de eventos de infraestrutura, análises bem-arquitetadas (Well-Architected) e de operações.
