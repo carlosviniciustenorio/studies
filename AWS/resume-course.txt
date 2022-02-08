@@ -662,7 +662,7 @@ Cloud Integrations
 	Amazon MQ
 		Serve para migrar serviços de mensageria para nuvem sem ter que usar o SQS ou SNS, pois utilizam protocolos diferentes do que por ex RabbitMQ(AMQP)
 		Possui suporte para protocolos como AMQP, MQTT, STOMP, Openwire, WSS
-		Gerencia o Apache ActiveMQ, que possui protocol;os ativados por padrão
+		Gerencia o Apache ActiveMQ, que possui protocolos ativados por padrão
 		Não é serveless
 
 Cloud Monitoring
