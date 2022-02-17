@@ -1,0 +1,48 @@
+AWS Fundamentals: ELB + ASG
+
+    Elastic Load Balancer
+
+        Normalmente são mapeados 3 zonas diferentes com subredes a fim de ter uma disponibilidade maior.
+        A configuração do servidor é feita pela AWS, porém é possível criar um Load Balancer, contudo, você será responsável pela configuração, manutenção, etc...
+        Recebe uma solicitação e destibui conforme necessário. Caso uma instância esteja com problema, a solicitação será enviada a outra instância.        
+
+        Application:
+            Load Balancer somente para aplicações web, protocolo HTTP/HTTPS. = Camada 7
+            É possível distribuir o balanceamento entre várias aplicações na mesma máquina (Contâineres)
+            Tem suporte para HTTP/2 e WebSocket
+            Suporta redirecionamento, de HTTP para HTTPS por exemplo
+            É possível realizar um roteamento baseado em diferentes target groups (grupos-alvos):
+                Endpoint: example.com/users - example.com/posts
+                Hostname: one.example.com - other.example.com
+                QueryString: example.com/users?id=123&order=false
+
+            Ao utilizar um ALB, só é possível saber o IP do cliente através do X-Forwarded-For, que é inserido no cabeçalho do Load Balancer.
+                Pois o Load Balancer recebe a solicitação do cliente e consulta a sua instância usando o IP privado dela.
+        
+        Network:
+            Load Balancer somente para rede, protocolo TCP. = Camada 4
+                Milhões de solicitações por segundo, Jogos, etc...
+
+		Getway:
+			Load Balancer voltado para IP = Camada 3
+
+		Health Checks
+			Cruciais para saber se as instâncias estão aptas para receber requisições.
+			Ele testa um endpoint específico de cada instância e caso a resposta não seja 200, o Load Balancer não irá distribuir tráfego para essa instância
+				
+	Auto Scaling Groups
+		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
+		Simple / Step Scaling
+			Aumenta ou diminui a quantidade de instâncias de forma automática baseado na configuração de um alarme
+				ex: Alarme com uso superior a 70% da CPU, adiciona duas instâncias.
+					Alarme com uso inferior a 30% da CPU, remove uma instância.
+					
+		Target Tracking Scaling
+			Ex: Quero que a média do uso da CPU das instâncias fique em torno de 40%. O ASG fará isso automaticamente
+			
+		Scheduled Scaling
+			Escalonamento programado é quando vc sabe que em um determinado dia o número de acessos irá aumentar por um fator, e consequentemente quer que o n° de instâncias aumente
+				Ex: Quinta-feira terá um jogo importante de um campeonato e o sistema receberá muitas apostas. Sendo assim, nesse dia a partir das 17hrs o ASG criará mais 5 instâncias EC2
+		
+		Predictive Scaling
+			Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
