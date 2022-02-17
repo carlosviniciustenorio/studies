@@ -6,7 +6,7 @@ AWS Fundamentals: ELB + ASG
         A configuração do servidor é feita pela AWS, porém é possível criar um Load Balancer, contudo, você será responsável pela configuração, manutenção, etc...
         Recebe uma solicitação e destibui conforme necessário. Caso uma instância esteja com problema, a solicitação será enviada a outra instância.        
 
-        Application:
+        Application (ALB):
             Load Balancer somente para aplicações web, protocolo HTTP/HTTPS. = Camada 7
             É possível distribuir o balanceamento entre várias aplicações na mesma máquina (Contâineres)
             Tem suporte para HTTP/2 e WebSocket
@@ -19,11 +19,11 @@ AWS Fundamentals: ELB + ASG
             Ao utilizar um ALB, só é possível saber o IP do cliente através do X-Forwarded-For, que é inserido no cabeçalho do Load Balancer.
                 Pois o Load Balancer recebe a solicitação do cliente e consulta a sua instância usando o IP privado dela.
         
-        Network:
+        Network (NLB):
             Load Balancer somente para rede, protocolo TCP. = Camada 4
                 Milhões de solicitações por segundo, Jogos, etc...
 
-		Getway:
+		Getway (GLB):
 			Load Balancer voltado para IP = Camada 3
 
 		Health Checks
