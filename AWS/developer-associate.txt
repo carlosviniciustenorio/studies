@@ -5,9 +5,14 @@ AWS Fundamentals: ELB + ASG
         Normalmente são mapeados 3 zonas diferentes com subredes a fim de ter uma disponibilidade maior.
         A configuração do servidor é feita pela AWS, porém é possível criar um Load Balancer, contudo, você será responsável pela configuração, manutenção, etc...
         Recebe uma solicitação e destibui conforme necessário. Caso uma instância esteja com problema, a solicitação será enviada a outra instância.        
-
+    
+        Health Checks
+            Cruciais para saber se as instâncias estão aptas para receber requisições.
+            Ele testa um endpoint específico de cada instância e caso a resposta não seja 200, o Load Balancer não irá distribuir tráfego para essa instância
+    
         Application (ALB):
             Load Balancer somente para aplicações web, protocolo HTTP/HTTPS. = Camada 7
+            Latência de 400 milissegundos
             É possível distribuir o balanceamento entre várias aplicações na mesma máquina (Contâineres)
             Tem suporte para HTTP/2 e WebSocket
             Suporta redirecionamento, de HTTP para HTTPS por exemplo
@@ -20,15 +25,26 @@ AWS Fundamentals: ELB + ASG
                 Pois o Load Balancer recebe a solicitação do cliente e consulta a sua instância usando o IP privado dela.
         
         Network (NLB):
-            Load Balancer somente para rede, protocolo TCP. = Camada 4
-                Milhões de solicitações por segundo, Jogos, etc...
-
+            Load Balancer somente para rede, protocolo TCP, TLS ou UDP. = Camada 4
+            Latência de 100 milissegundos
+            Permite lidar com milhões de solicitações por segundo
+            Desempenho extremamente alto e a latência é muiuto menor que o ALB
+            Contém um IP estático por Zona de disponibilidade e suporta IP Elástico
+            Há a possibilidade de usar o NLB junto com o ALB, caso você queira aproveitar um recurso do NLB, como por exemplo ter IP estático.
+    
 		Getway (GLB):
-			Load Balancer voltado para IP = Camada 3
+			Load Balancer voltado para IP = Camada 3 (Camada de redes para pacotes IP)
+            Usa o protocolo GENEVE na porta 6081
+            Única entrada e saída para todos os tráfegos
+            Distribui o tráfego entre um conjunto de dispositivos virtuais no Target Group
+            É utilizado a fim de ter mais segurança nos tráfegos da sua aplicação
+                Ao invés do tráfego ir direto para a aplicação através de um ALB por exemplo, o tráfego vai para o GLB,
+                    onde há 3 instâncias para validar Firewalls, Prevenção de Sistemas, Dectar Intrusos, Manipulação de Cargas, etc...
+                Com isso, o GLB pode diminuir o tráfego dos usuários na sua aplicação ou aprovar, sendo aprovado, o tráfego vai para a aplicação.
 
-		Health Checks
-			Cruciais para saber se as instâncias estão aptas para receber requisições.
-			Ele testa um endpoint específico de cada instância e caso a resposta não seja 200, o Load Balancer não irá distribuir tráfego para essa instância
+            Target Groups para o GLB:
+                Pode ser criado para instâncias EC2
+                Pode ser criado com endereços de IP, porém, eles devem ser privados
 				
 	Auto Scaling Groups
 		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
