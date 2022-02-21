@@ -45,7 +45,34 @@ AWS Fundamentals: ELB + ASG
             Target Groups para o GLB:
                 Pode ser criado para instâncias EC2
                 Pode ser criado com endereços de IP, porém, eles devem ser privados
-				
+        
+        Stick Sessions (Session Affinity)
+            Compatível com CLB e ALB
+            A ideia é a seguinte: 
+                    O cliente fará uma requisição para o ALB por exemplo. 
+                    Após isso, o ALB redirecionará a requisição para uma instância EC2. Sendo assim, esse cliente será sempre redirecionado para a mesma instância.
+                    Isso a fim de manter a sessão do usuário por exemplo.
+
+            Para isso suceder, um cookie  é enviado como parte da solicitação dos clientes ao load balancer.
+            Sendo assim, há os seguintes tipos de Cookies:
+                
+            - Aplication-based Cookies:
+                
+                Pode ser um Cookie personalizado
+                    Gerado pelo target (destino) = próprio aplicativo
+                    É possível atribuir quaisquer atributos personalizados pela aplicação
+                    O nome do Cookie deve ser especificado para cada Target Group
+                    Não podem ser nomeados como "AWSALB, AWSALBAPP ou AWSALBTG". Pois já são utilizados pelo ELB
+                
+                Ou pode ser um Cookie do aplicativo
+                    Gerado pelo Load Balancer
+                    Nome do cookie por padrão será (AWSALBAPP)
+
+            - Duration-based Cookies:
+                Gerado pelo Load Balancer
+                O nome do Cookie será AWSALB para ALB, AWSELB para CLB                
+                Terá um prazo de validade baseado na duração, que é gerada pela própria resposta
+                
 	Auto Scaling Groups
 		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
 		Simple / Step Scaling
