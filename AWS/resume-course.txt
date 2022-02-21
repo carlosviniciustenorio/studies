@@ -140,6 +140,8 @@ EC2 = Nuvem de computação Elástica
 
         Application:
             Load Balancer somente para aplicações web, protocolo HTTP/HTTPS. = Camada 7
+			É possível configurar um ALB para mais de um grupo
+			É possível configurar um ALB para distribuir as cargas entre servidores on-premise e EC2 ao mesmo tempo
         
         Network:
             Load Balancer somente para rede, protocolo TCP. = Camada 4
