@@ -96,7 +96,24 @@ AWS Fundamentals: ELB + ASG
                     Não paga pela transferência de dados entre zonas caso você ative
 
         SSL/TLS
-               
+            TSL = Mais nova versão do SSL, significa "Transport Layer Security". (Atualmente são mais utilizados)      
+            SSL = "Secure Sockets Layer"
+                O certificado SSL permite que o tráfego entre o cliente e o load balancer seja criptografado durante o trânsito (in-flight encryption).
+                Os certificados tem uma data de expiração que você define e devem ser renovados regularmente para garantir que sejam autênticos
+
+                Com o Load Balancer, o usuário faz a requisição ao LB via HTPPS, uma requisição criptografada.
+                Após isso, o Load Balancer faz a requisição ao back-end via HTTP, contudo, continua sendo seguro pois passa pela VPC.
+                
+                O Load Balancer carrega um certificado X509, que é chamado de certificado de servidor SSL ou TLS.
+                É possível gerenciar os certificados usando o ACM (AWS Certificate Manager).
+                É possível carregar os próprios certificados para o ACM caso deseje
+                Ao adicionar um ouvinte HTTPS, deve ser especificado um certificado padrão
+                    OBS: Você pode oferecer uma lista de certificados opcionais para oferecer suporte a vários domínios
+                         Os clientes podem usar algo chamado SNI (Server Name Indication) para especificar o Hostname
+                É possível habilitar uma policy security para suportar versões mais antigas de SSL e TLS.
+
+
+                           
                 
 	Auto Scaling Groups
 		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
