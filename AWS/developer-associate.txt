@@ -72,6 +72,31 @@ AWS Fundamentals: ELB + ASG
                 Gerado pelo Load Balancer
                 O nome do Cookie será AWSALB para ALB, AWSELB para CLB                
                 Terá um prazo de validade baseado na duração, que é gerada pela própria resposta
+        
+        Cross-Zone Load Balancing
+
+            Divide as requisições para o total de instâncias independente da zona de disponibilidade.
+            Ex: Há um load balancer configurado para duas zonas de disponibilidade
+                A zona X contém 2 instâncias EC2 e a zona Z contém 8 instâncias.
+                Com o Cross-Zone, ainda que o cliente envie 50% do tráfego por AZ, o Load Balancer dividirá para as 10 instâncias independente da AZ.
+                Caso o Cross-Zone não seja habilitado ou seja desabilitado, o tráfego será enviado pras instâncias das respectivas AZ.
+            
+            Cross-Zone no Load Balancer:
+            
+                ALB
+                    Está sempre ativado, não é possível desativar.
+                    Não paga pela transferência de dados entre zonas
+
+                NLB
+                    Desabilitado por padrão. Porém, caso você habilite não irá pagar nada por isso.
+                    Paga pela transferência de dados entre zonas caso você ative
+                
+                CLB
+                    Desabilitado por padrão. Porém, caso você habilite não irá pagar nada por isso.
+                    Não paga pela transferência de dados entre zonas caso você ative
+
+        SSL/TLS
+               
                 
 	Auto Scaling Groups
 		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
