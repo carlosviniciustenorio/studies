@@ -1,0 +1,14 @@
+
+Serviços:
+
+    Azure Cloud Shell
+        Serviço para abrir um o PowerShell na Azure
+        OBS: Também há a opção de abrir um bash
+
+    VM
+        No Azure, uma VM é efetivamente um servidor, sendo Windows ou Linux
+        Premium SSD é o armazenamento padrão para a criação de uma VM
+            4Test: Caso eu queria aumentar o número de operações em menos tempo, eu devo aumentar o tamanho do disco
+
+        Bastion
+            É um serviço que permite conectar à uma máquina sem uma porta RDP aberta.    
