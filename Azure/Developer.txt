@@ -5,10 +5,28 @@ Serviços:
         Serviço para abrir um o PowerShell na Azure
         OBS: Também há a opção de abrir um bash
 
-    VM
+    VM (IaaS)
         No Azure, uma VM é efetivamente um servidor, sendo Windows ou Linux
+        Tamanho Default: DS1
+        
         Premium SSD é o armazenamento padrão para a criação de uma VM
             4Test: Caso eu queria aumentar o número de operações em menos tempo, eu devo aumentar o tamanho do disco
 
         Bastion
             É um serviço que permite conectar à uma máquina sem uma porta RDP aberta.    
+
+        ARM (Azure Resource Manager)
+            Modelo subjacente de como os recursos são gerenciados no Azure
+            É a API que o Portal do Azure consome para manipular os serviços
+            Fornece a possibilidade de criar os recursos através de código (JSON)
+            Há a possibilidade de salvar Modelos da VM
+
+    Azure App Service (PaaS)
+        Não é serveless embora não tenhamos que mexer na configuração do servidor
+        Tamanho Default: S1
+        Há a possibilidade de implantar aplicativos com várias tecnologias diferentes
+        Há a possibilidade de integrar com Github, Visual Studio (É possível construir um WebApp pelo VS, também é possível enviar e publicar), etc...
+        Há a possibilidade do Web App ser uma implantação de código ou aplicativo Web em contâiner
+
+        No tamanho Basic(B1 - B3), há o escalonamento, porém manual. Já do padrão(P1V2) em diante, há o escalonamento automático
+        
