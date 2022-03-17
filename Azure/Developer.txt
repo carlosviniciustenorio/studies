@@ -22,11 +22,18 @@ Serviços:
             Há a possibilidade de salvar Modelos da VM
 
     Azure App Service (PaaS)
-        Não é serveless embora não tenhamos que mexer na configuração do servidor
-        Tamanho Default: S1
-        Há a possibilidade de implantar aplicativos com várias tecnologias diferentes
-        Há a possibilidade de integrar com Github, Visual Studio (É possível construir um WebApp pelo VS, também é possível enviar e publicar), etc...
-        Há a possibilidade do Web App ser uma implantação de código ou aplicativo Web em contâiner
-
-        No tamanho Basic(B1 - B3), há o escalonamento, porém manual. Já do padrão(P1V2) em diante, há o escalonamento automático
         
+        WebApp
+            Não é serveless embora não tenhamos que mexer na configuração do servidor
+            Tamanho Default: S1
+            Há a possibilidade de implantar aplicativos com várias tecnologias diferentes
+            Há a possibilidade de integrar com Github, Visual Studio (É possível construir um WebApp pelo VS, também é possível enviar e publicar), etc...
+            Há a possibilidade do Web App ser uma implantação de código ou aplicativo Web em contâiner
+
+            No tamanho Basic(B1 - B3), há o escalonamento, porém manual. Já do padrão(P1V2) em diante, há o escalonamento automático
+        
+        WebJobs
+            Serviço para executar código específico para um WebApp em background.
+                Ex: A cada 5 minutos
+                    // //  1 hora
+                    1 vez por dia
