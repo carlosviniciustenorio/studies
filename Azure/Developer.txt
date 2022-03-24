@@ -29,11 +29,28 @@ Serviços:
             Há a possibilidade de implantar aplicativos com várias tecnologias diferentes
             Há a possibilidade de integrar com Github, Visual Studio (É possível construir um WebApp pelo VS, também é possível enviar e publicar), etc...
             Há a possibilidade do Web App ser uma implantação de código ou aplicativo Web em contâiner
+            
+            Helps
+                get-command *AzWebApp* (Retorna todos os commandos de um WebApp, útil para o exame quando não souber um comando específico)
+                az webapp up --location eastus --name newapp --html (Comando para criar um WebApp no Bash sem precisar criar passo a passo seja pelo terminal, bash ou Azure)
 
             No tamanho Basic(B1 - B3), há o escalonamento, porém manual. Já do padrão(P1V2) em diante, há o escalonamento automático
         
-        WebJobs
-            Serviço para executar código específico para um WebApp em background.
-                Ex: A cada 5 minutos
-                    // //  1 hora
-                    1 vez por dia
+            WebJobs
+                Serviço para executar uma aplicação específica para um WebApp em background.
+                    Ex: Serviço de Mensageria que roda a cada 5 minutos
+                    OBS: É vinculado a um WebApp
+
+            Deployment Slots
+                É possível criar slots de uma aplicação dentro de um WebApp.
+                    Ex: Slot de Produção, contendo 100% do tráfego
+                        Slot de teste, contendo 0% do tráfego
+                
+                É possível trocar o código de um slot com o outro
+                    Ex: Após publicar as alterações numa aplicação no slot de Staging(teste), e ser validado pelo cliente
+                        Não é necessário reimplementar o código no ambiente de produção, basta usar o Swap e transferir as alterações entre os slots
+                        Sendo assim, o slot de staging ficará com o código de produção, e o slot de produção ficará com o código de staging.
+
+            Diagnostic Logs
+                É possível habilitar logs para o WebApp, Servidor, Erros na aplicação como por ex Exceções, tracking de requisições com falhas
+        
