@@ -54,3 +54,18 @@ Serviços:
             Diagnostic Logs
                 É possível habilitar logs para o WebApp, Servidor, Erros na aplicação como por ex Exceções, tracking de requisições com falhas
         
+    
+    Containers
+        
+        Kubernets Service 
+            Não é tão fácil utilizar mas se você tiver dinheiro, treinamento e pessoas vale a pena
+        
+        WebApp 
+            É possível criar um WebApp baseado num container Docker
+        
+        Container Instances
+            Maneira mais rápida e simples de executar um contâiner no Azure.
+            Desvantagem: Não há escalonamento nos contâineres
+
+        ACR (Azure Container Registry)
+            Funciona como um Docker Hub, porém é um pouco melhor se levarmos em consideração a documentação, marcação, etc...
