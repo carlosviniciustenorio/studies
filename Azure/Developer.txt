@@ -69,3 +69,7 @@ Serviços:
 
         ACR (Azure Container Registry)
             Funciona como um Docker Hub, porém é um pouco melhor se levarmos em consideração a documentação, marcação, etc...
+    
+    Function App
+
+        
