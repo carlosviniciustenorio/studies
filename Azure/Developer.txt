@@ -72,4 +72,7 @@ Serviços:
     
     Function App
 
+        É o serviço para construir funções serveless, como as Lambdas da AWS.
+        É possível construir funções em diversas linguagens e em diversos editores de texto, até mesmo na plataforma do Azure
+        É possível construir funções de triggers, etc...
         
