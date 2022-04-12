@@ -76,3 +76,11 @@ Serviços:
         É possível construir funções em diversas linguagens e em diversos editores de texto, até mesmo na plataforma do Azure
         É possível construir funções de triggers, etc...
         
+        Triggers and Binding
+
+            É possível adicionar uma trigger em diversos cenários, entre eles:
+                - Ao receber uma mensagem numa fila
+                - Ao receber uma requisição HTTP
+                - Ao configurar um temporizador
+            
+            
