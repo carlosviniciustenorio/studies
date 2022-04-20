@@ -94,10 +94,56 @@ Serviços:
         Azure Functions
             Serveless
             Simples
-            Stateless (Tem uma finalidade específica e é de curto prazo)
+            Stateless
+                Uma aplicação ou processo stateless são recursos isolados. 
+                Nenhuma referência ou informação sobre transações antigas são armazenadas, 
+                e cada uma delas é feita do zero.
+                 As aplicações stateless fornecem uma função ou serviço e usam a rede de entrega de conteúdo (CDN), 
+                 a web ou servidores de impressão para processar essas solicitações a curto prazo. 
             Executada através de um gatilho, seja ele um tempo pré-definido, http request, blob event, ou mensagem na fila
             Melhor design para trabalhar de forma assíncrona com outros códigos (integrando com API's)
             Tempo limite de 30 minutos
         
         Durable Functions
-            Stateful = 
+            Stateful
+                As aplicações e os processos stateful são aqueles que podem ser usados mais
+                 de uma vez, como e-mails e serviços bancários online. 
+                 Eles são executados com base no contexto das transações anteriores. 
+                 Dependendo do que aconteceu nelas, isso pode afetar as transações atuais. 
+                 Por isso, as aplicações stateful usam os mesmos servidores sempre que processam uma solicitação do usuário. 
+            
+            Could be long-running 
+                Suporta longa duração
+            Or a multi-step process 
+                Pode chamar uma série de tarefas e sempre lembrará dos valores de variáveis que está lidando
+            Can "suspend" while waiting for a long-running API to return - checkpoints. 
+                Pode ser suspensa até o retorno de uma task por exemplo
+            Supports complex design patterns
+            Functions can call other functions - chaining
+            Made up of a cliente, orchestrator and activities
+
+            Client - The original triggered function
+            Orchestrator - The traffic cop 
+                Ordena as tasks da function
+            Activity - basic unit of work of a function (Se você precisa criar um arquivo, chamar uma API, realizar alguma tarefa).
+
+
+            Patterns:
+                Function Chaining Pattern (Encadeamento de funções) - Stateful (Durable Function)
+                    Uma função que executa uma tarefa e em seguida chama outra função para dar continuidade a mesma tarefa.            
+
+                Fan out / Fan in Pattern
+                    Uma função chama algumas instâncias de uma outra função na sequência, ao terminar as instâncias, são enviados para uma outra função na sequência.
+                
+                Asynchronous API Pattern
+                    Você pode chamar uma API e esperar o resultado para ser retornado
+                
+                Monitor Pattern
+                    Funciona como a função original, onde tem gatilhos.
+                    A diferença é que tem a função esperando que algo aconteça, porém sem saber o tempo que vai levar.
+                    Ao terminar, continua o seu trabalho ou faz outras coisas, sem disparar gatilhos de tempo por exemplo, onde não saberá se será compatível
+                
+                Human Interaction Pattern
+                    Quando há etapas humanas, sendo uma delas a aprovação. Após a interação humana, segue as demais funções
+
+                
