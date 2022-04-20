@@ -83,4 +83,21 @@ Serviços:
                 - Ao receber uma requisição HTTP
                 - Ao configurar um temporizador
             
-            
+        Testing Functions
+            É possível testar as Function App no Azure
+        
+        Function App Settings
+            Criar slots de Function App (dev, homolog, produção), integrado com plataformas como por ex Github, Azure Repos, BitBucket, Local Git
+            Expor o HTTP Trigger Functions para a Web através do API Management
+            Configurar CORS
+        
+        Azure Functions
+            Serveless
+            Simples
+            Stateless (Tem uma finalidade específica e é de curto prazo)
+            Executada através de um gatilho, seja ele um tempo pré-definido, http request, blob event, ou mensagem na fila
+            Melhor design para trabalhar de forma assíncrona com outros códigos (integrando com API's)
+            Tempo limite de 30 minutos
+        
+        Durable Functions
+            Stateful = 
