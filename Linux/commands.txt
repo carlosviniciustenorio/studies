@@ -1,0 +1,5 @@
+curl "endpoint" = faz um get num endpoint da web
+touch dockerfile = create a docker file, can use to create others files type.
+apt update
+apt upgrade
+sudo service docker start

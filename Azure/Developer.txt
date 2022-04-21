@@ -105,6 +105,9 @@ Serviços:
             Tempo limite de 30 minutos
         
         Durable Functions
+            Para criar funções duráveis, é necessário configurar em Development Tools > App Service Editor
+            É possível configurar uma function pelo CloudShell rodando localmente antes de publicar, seja ela Durável ou não.
+            
             Stateful
                 As aplicações e os processos stateful são aqueles que podem ser usados mais
                  de uma vez, como e-mails e serviços bancários online. 
@@ -146,4 +149,4 @@ Serviços:
                 Human Interaction Pattern
                     Quando há etapas humanas, sendo uma delas a aprovação. Após a interação humana, segue as demais funções
 
-                
+            

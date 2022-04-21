@@ -1,12 +1,6 @@
 Conectar na AWS
 ssh ubuntu@3.141.10.12 -i '.\Users\carlo\Downloads\pairkeydocker.pem'
 
-Linux commands
-touch dockerfile = create a docker file, can use to create others files type.
-apt update
-apt upgrade
-sudo service docker start
-
 Docker Commands:
 	docker a = show the informations about the docker, for example the ip to connect.
 	docker inspect nameImage = inspect the container to know how type of Mounds are using.
