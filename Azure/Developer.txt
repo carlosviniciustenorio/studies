@@ -107,6 +107,9 @@ Serviços:
         Durable Functions
             Para criar funções duráveis, é necessário configurar em Development Tools > App Service Editor
             É possível configurar uma function pelo CloudShell rodando localmente antes de publicar, seja ela Durável ou não.
+            Para publicar a função: 
+                func azure functionapp publish "name of the function"
+                "azure", é o contexto em que a função pertence. Para ver as opções, basta digitar func
             
             Stateful
                 As aplicações e os processos stateful são aqueles que podem ser usados mais
