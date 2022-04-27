@@ -152,4 +152,11 @@ Serviços:
                 Human Interaction Pattern
                     Quando há etapas humanas, sendo uma delas a aprovação. Após a interação humana, segue as demais funções
 
-            
+
+         Custom Handlers
+            Permite fornecer um programa de forma eficaz que lida com o código, e isso nos permite lidar com ambas (FunctionApp com Node e .NET por exemplo)
+            Permite lidar com as linguagens que não são atualmente suportadas (PHP, Ruby, Etc...)
+            É um pouco mais complexo para configurar uma função, deve ser criada no vs code por exemplo e depois configurar o host.json para apontar para o executável
+                Exemplo: https://docs.microsoft.com/pt-br/azure/azure-functions/create-first-function-vs-code-other?tabs=go%2Cwindows
+
+                    
