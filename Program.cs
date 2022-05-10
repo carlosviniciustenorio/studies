@@ -1,6 +1,7 @@
 ﻿using studies.Colecoes.Pilha;
 using studies.Record;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,20 +15,14 @@ namespace studies
     {
         static void Main()
         {
-            LinkedList<string> lk = new();
-            LinkedListNode<string> node;
-            lk.AddFirst("primeiro");
-            lk.AddLast("ultimo");
-            node = lk.FindLast("ultimo");
-            lk.AddBefore(node, "penultimo");
-            node = lk.FindLast("primeiro");
-            lk.AddAfter(node, "antipenultimo");
+            Hashtable hashtable = new Hashtable();
+            hashtable.Add("key", "value");
+            hashtable.Add(1, 2);
 
-            foreach (var item in lk)
+            foreach (DictionaryEntry item in hashtable)
             {
-                Console.WriteLine("posicao: " + item);
+                Console.WriteLine("Chave: {0}, Valor:{1}", item.Key, item.Value);
             }
-            
             Console.ReadLine();
         }
     }
