@@ -14,14 +14,21 @@ namespace studies
     {
         static void Main()
         {
-            var produto = new
+            LinkedList<string> lk = new();
+            LinkedListNode<string> node;
+            lk.AddFirst("primeiro");
+            lk.AddLast("ultimo");
+            node = lk.FindLast("ultimo");
+            lk.AddBefore(node, "penultimo");
+            node = lk.FindLast("primeiro");
+            lk.AddAfter(node, "antipenultimo");
+
+            foreach (var item in lk)
             {
-                id = 1,
-                nome = "Monitor LED 32 polegadas",
-                preco = 1500
-            };
-            Console.WriteLine("id: {0} {1} - preço: {2:n2}", produto.id, produto.nome, produto.preco);
-            Console.ReadKey();
+                Console.WriteLine("posicao: " + item);
+            }
+            
+            Console.ReadLine();
         }
     }
 }
