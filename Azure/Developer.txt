@@ -120,18 +120,20 @@ Serviços:
             
             Could be long-running 
                 Suporta longa duração
+            
             Or a multi-step process 
                 Pode chamar uma série de tarefas e sempre lembrará dos valores de variáveis que está lidando
+            
             Can "suspend" while waiting for a long-running API to return - checkpoints. 
                 Pode ser suspensa até o retorno de uma task por exemplo
+            
             Supports complex design patterns
             Functions can call other functions - chaining
+            
             Made up of a cliente, orchestrator and activities
-
-            Client - The original triggered function
-            Orchestrator - The traffic cop 
-                Ordena as tasks da function
-            Activity - basic unit of work of a function (Se você precisa criar um arquivo, chamar uma API, realizar alguma tarefa).
+                Client - The original triggered function
+                Orchestrator - The traffic cop (Ordena as tasks da function)
+                Activity - basic unit of work of a function (Se você precisa criar um arquivo, chamar uma API, realizar alguma tarefa).
 
 
             Patterns:
@@ -159,4 +161,12 @@ Serviços:
             É um pouco mais complexo para configurar uma função, deve ser criada no vs code por exemplo e depois configurar o host.json para apontar para o executável
                 Exemplo: https://docs.microsoft.com/pt-br/azure/azure-functions/create-first-function-vs-code-other?tabs=go%2Cwindows
 
-                    
+    Azure Storage Accounts
+
+        Understanding Storage Accounts
+            
+            Blob Storage
+                O armazenamento não gerenciado ou um armazenamento de blobs é basicamente uma opção 
+                de contâiner para você armazenar arquivos.
+
+            
