@@ -169,4 +169,99 @@ Serviços:
                 O armazenamento não gerenciado ou um armazenamento de blobs é basicamente uma opção 
                 de contâiner para você armazenar arquivos.
 
-            
+                Standard
+                    O valor é cobrado pelo armazenamento e pelo número de solicitações por mês
+                    Ponto positivo: Permite que armazene os arquivos em backups em todo o mundo
+
+                Premium
+                    O custo é quase 10x mais para armazená-lo comparado ao Standard. 
+                        Contudo, vale mais a pena se os arquivos forem acessados milhares de vezes por segundo
+                    O tempo de latência é menor
+                    Ponto negativo: A capacidade de duplicar os arquivos globalmente é reduzida
+
+                Redundancy
+                    LRS (Locally-redundant storage) e ZRS (Zone-redundant storage)
+                        Mantém 3 cópias dos arquivos
+                        ZRS = Mantém as cópias em cada data center em uma região
+
+                    GRS (Geo-redundant storage)
+                        Mantém 6 cópias 
+                            3 delas numa região local 
+                            3 em outra região
+
+                    GZRS(Geo-zone-redundant storage)
+                        Mantém 6 cópias
+                            3 delas armazenadas na zona de forma redundante localmente
+                            3 em outra região mas não de forma tão redundante                    
+
+                    Ao marcar a flag "Make read access to data avaliable in the event of regional unavailability"
+                        É disponibilizado uma URL para fazer somente leitura dos arquivos.
+                        Sendo assim, você pode usar para ler aquivos do local globalmente redundante.
+                        Contudo, para ler e persistir, deverá usar a outra URL.
+
+                Access Tier
+                    Hot: Dados acessados frequentemente no dia a dia 
+                    Cool: Acesso infrequente aos dados e cenários de backups 
+                    Archive: 90% mais barata entre a camada Hot e Cool. Leva várias horas para acessar aos arquivos.
+
+            Storage Account Settings
+
+                Require secure transfer for REST API operations:
+                    Transferência de arquivos por HTTPs, faz sentido manter ativado.
+                
+                Enable blob public access:
+                    Significa que você pode designar contâineres ou arquivos individuais como não exigindo segurança para acessar.
+                    Faz sentido manter ativado se você usar para arquivos públicos, como downloads semelhantes para cursos ou para um site público
+
+                Enable storage account key access:
+                    Ao criar, o Azure fornece duas chaves públicas que você pode usar para acessar a conta.
+                        e você precisa monitorar e manter essas chaves porque elas são basicamente direitos de administrador completos sobre conteúdo da conta.
+
+                Default to Azure Active Directory authorization in the Azure portal:
+                    Autorização pelo portal do Azure.
+
+                Data Lake Storage Gen2 (Armazenamento de vazamento de dados)
+                    Normalmente utilizado na análise de big data
+                    Se você precisar de um petabytes ou exabytes de dados para serem armazenados, essa é a opção.
+                    Altera o sistema de arquivos e, portanto, usa um namespace hierárquico com pastas completas verdadeiras e com listas de controle de acesso em nível de arquivo
+                    
+                Blob Storage
+                    Se você precisar de acesso FTP ou NFS v3, deverá usar o Data Lake Storage Gen2.
+                
+                Azure Files
+                    Enable large files shares
+                        É possível ter até 100 terabytes em formato de armazenamento de arquivos
+                    
+            Storage Account Networking and Data Protection
+                
+                Network access
+                    
+                    Public access from all networks
+                        Acesso público, seja de on-promises, internet, etc...
+                        Não Significa que o acesso é inseguro. Significa apenas que há uma porta trancada, e se vocÊ tiver a chave, poderá acessar o conteúdo da conta de armazenamento.
+                    
+                    Public access from selected virtual networks and IP address
+                        Restringir o acesso à sua conta de armazenamento a determinadas redes no Azure.
+                        O que isso faz é desabilitar o acesso público da internet
+                    
+                    Private access
+                        Desabilita todo o acesso e usa o endpoint privado
+                        Conexão ponto a ponto muito explícita, em vez de abri-la para uma rede virtual inteira, uma sub-rede da qual você também deve ter controle.
+                        Opção ideal para acesso específico de um aplicativo ou conta de armazenamento
+
+                Network Routing
+
+                    Microsoft network routing
+                        Não é gratuito
+                        Utiliza a rede privada da Microsoft na maior parte do tempo ao trafegar dados
+                        Ex: Um usuário que está loalizado nos EUA está consumindo dados de um datacenter que está no Japão,
+                            esses dados será transportado pela rede da Microsoft até chegar lá, minimizando a quantidade de tempo gasto na rede pública
+
+                    Internet routing
+                        Utiliza a rede pública para trafegar os dados
+                        Maior latência comparada ao tráfego na rede privada da Microsoft
+                        Ex: O usuário se conecta a rede do Japão e em seguida acessa a conta de armazenamento da Microsoft de lá.
+
+                Data Protection
+
+                    3:52 min
