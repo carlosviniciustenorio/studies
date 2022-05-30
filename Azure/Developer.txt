@@ -264,4 +264,33 @@ Serviços:
 
                 Data Protection
 
-                    3:52 min
+                    Recovery 
+                    
+                        Enable soft delete for blobs/containers/file shares
+                            Significa quando você exclui um arquivo/container/arquivo compartilhado mas ele não é realmente excluído e depois dos dias configurados no campo, será realmente excluído.
+                            Evita exclusões acidentais ou até mesmo maliciosas
+                        
+                        Point-in-time restore for containers
+                            É possível fazer uma restauração pontual. ("Voltar no tempo")
+                            Ex: Você tem a conta de armazenamento atualizada e deseja voltar para a conta de armazenamento de 24 horas atrás
+
+                    Tracking
+
+                        Versioning for blobs
+                            Versiona o arquivo, mesmo que seja atualizado, nunca será realmente substituído, como os arquivos do S3 na amazon.
+                            Pontos positivos 
+                                Caso alguma alteração do arquivo não tenha sido com sucesso, é só voltar para a versão anterior.
+                                Caso tenha excluído algum arquivo de forma acidental
+                            Pontos negativos
+                                Usa o espaço de armazenamento adicional para manter os arquivos versionados
+
+                        Change Feed
+                            Uma forma de receber notificações.
+                            Basicamente um fluxo de alterações no seu blob
+                            Caso queira rastrear, enviar notificações, ver o que houve, que data, que horas, etc...
+                             
+                    Access Control
+
+                        Immutability
+                            Impossibilita qualquer exclusão ou alteração dos arquivos inseridos
+                            Casos de uso: Manter backups imutáveis.
