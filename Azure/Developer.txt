@@ -294,3 +294,6 @@ Serviços:
                         Immutability
                             Impossibilita qualquer exclusão ou alteração dos arquivos inseridos
                             Casos de uso: Manter backups imutáveis.
+
+                Storage Account Encryption
+                    
