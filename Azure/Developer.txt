@@ -297,3 +297,37 @@ Serviços:
 
                 Storage Account Encryption
                     
+                    Encryption
+                        Os arquivos do Azure são sempre criptografados. Caso alguém consiga um disco físico da Microsoft, será impossível de recuperar os dados sem a criptografia.
+                        Contudo, você deve escolher quem irá gerenciar essa criptografia, se é você ou a Microsoft.
+
+                        Microsoft-Managed Keys (MMK)
+                            A Microsoft irá gerenciar as chaves para criptografia
+
+                        Customer-Managed Keys (CMK)
+                            Terá que ter uma conta de cofre de chaves e configurá-la para ter um usuário que possa ter as permissões corretas, etc...
+                        
+                        Enable support for Customer-Managed Keys
+                            Há as opções de gerenciar chaves somente de blobs e arquivos ou todos os tipos de serviços (blobs, files, tables and queues)
+
+                        Enable Infrastructure Encryption
+                            A criptografia de infraestrutura é, na verdade, uma segunda camada de criptografia entre o serviço da Azure e o disco físico.
+                            Ao habilitar, você terá um segundo conjunto de chaves manipulando na camada de infraestrutura além do conjunto que manipula os serviços
+
+                    Tags
+                        Os mesmos metadados antigos que você pode adicionar a uma conta específica.
+                        ex: É possível utilizar a tag Create By e selecionar um valor para todos os recursos
+                    
+                Upload Files to a Storage Account
+                    
+                    É possível fazer upload diretamente pelo site do Azure
+                    Existe o Storage Browser e Storage Explorer para navegar nos arquivos, containers, filas e tabelas.
+                    O ideal é fazer upload via SDK e não via portal. Contudo, há a interface para isso.
+                
+                Access Keys and SAS Tokens
+
+                    É possível atualizar e compartilhar access keys. 
+                        Contudo, o método mais seguro é definir SAS, onde será compartilhado 3 opções para consumir o arquivo. (1° Blob SAS Token / 2° Blob SAS URL / 3° Blob Service SAS URL)
+                        Essas configurações terão permissões totalmente configuradas, como por exemplo: Data de expiração, Leitura, Escrita, IP, Etc...
+
+                    
