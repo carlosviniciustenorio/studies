@@ -53,7 +53,6 @@ Serviços:
 
             Diagnostic Logs
                 É possível habilitar logs para o WebApp, Servidor, Erros na aplicação como por ex Exceções, tracking de requisições com falhas
-        
     
     Containers
         
@@ -378,4 +377,3 @@ Serviços:
                         
                         É possível configurar e aplicar em todos os arquivos blobs ou específicos baseado em filtros
                         É possível selecionar o tipo de blob e também o subtipo.
-                        

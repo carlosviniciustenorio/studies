@@ -1,4 +1,5 @@
-﻿using studies.Colecoes.Pilha;
+﻿using Azure.Storage.Blobs.Specialized;
+using studies.Colecoes.Pilha;
 using studies.Record;
 using System;
 using System.Collections;
@@ -15,15 +16,11 @@ namespace studies
     {
         static void Main()
         {
-            Hashtable hashtable = new Hashtable();
-            hashtable.Add("key", "value");
-            hashtable.Add(1, 2);
+            var connectionString = "";
+            var source = new BlockBlobClient(connectionString, "container1", "study.txt");
+            var destination = new BlockBlobClient(connectionString, "container2", "study-copy.txt");
 
-            foreach (DictionaryEntry item in hashtable)
-            {
-                Console.WriteLine("Chave: {0}, Valor:{1}", item.Key, item.Value);
-            }
-            Console.ReadLine();
+            destination.StartCopyFromUri(source.Uri);
         }
     }
 }
