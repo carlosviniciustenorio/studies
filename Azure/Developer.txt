@@ -327,7 +327,55 @@ Serviços:
                 Access Keys and SAS Tokens
 
                     É possível atualizar e compartilhar access keys. 
-                        Contudo, o método mais seguro é definir SAS, onde será compartilhado 3 opções para consumir o arquivo. (1° Blob SAS Token / 2° Blob SAS URL / 3° Blob Service SAS URL)
+                        Contudo, o método mais seguro é definir SAS, onde será compartilhado 3 opções para consumir o arquivo. 
+                            (1° Blob SAS Token / 2° Blob SAS URL / 3° Blob Service SAS URL)
                         Essas configurações terão permissões totalmente configuradas, como por exemplo: Data de expiração, Leitura, Escrita, IP, Etc...
 
+                AzCopy V10
+
+                    Utilizado para fazer cópias arquivos no Azure
+                    Funciona entre contas de armazenamento blobs, pois a URL é totalmente específica ou até mesmo entre assinaturas
+                    Pode funcionar com as credenciais do Azure Active Directory para armazenamento de blobs.
+                    Pode funcionar com SAS Token
+                    Vantagens:
+                        Os arquivos são copiados diretamente na nuvem, ao invés de baixarmos e depois fazermos upload para outro contâiner por exemplo.
+                    Ex:
+                        Shell para copiar arquivo blob de um contâiner para o outro
+                        azcopy copy 'https://<source-storage-account-name>.blob.core.windows.net/<container-name>/<blob-path><SAS-token>' 'https://<destination-storage-account-name>.blob.core.windows.net/<container-name>/<blob-path>'
+
+                StartCopyFromUri Method
+                    Forma de copiar os arquivos usando o AzCopy pelo Visual Studio com .NET.
+                    Para configurar um arquivo blob, é declarado uma variável que recebe o retorno da instância BlockBlobCliente.
+                    Após isso, basta chamar o arquivo que quer receber a cópia com o método StartCopyFromUri passando o arquivo blob de origem como parâmetro.
+
+                SetMetadata Method
+                    Forma de buscar as propriedades de um arquivo blob pelo Visual Studio
+                    Basta utilizar o método GetProperties na referência do objeto que contém o retorno da instância de um BlockBlobCliente.
+
+
+                Storage Account Backup, Replication and Lifecycle
+
+                    Backups (Data management > Data Protection)
+                        É possível configurar e definir a frequência e quando fazer backups
+                        Backup vault: Backup
+                        Backup policy: Quantos dias os arquivos do backup serão mantidos 
                     
+                    Object Replication
+                        A Microsoft Azure cuida de manter três cópias de seus arquivos localmente e retonrará o armazenamento
+                            em seis cópias de seus arquivos em armazenamento global ou georedundante.
+                            Contudo, você pode configurar sua própria replicação com base em suas próprias regras
+                         
+                         Se você quiser ter uma conta de armazenamento de backup, talvez até me outra assinatura ou em outro lugar,
+                            você pode configurar essa cópia da fonte de destino e quais arquivos estão sendo copiados
+
+                        É possível criar as próprias configurações e regras de replicação
+
+                    
+                    Lifecycle
+                        É a configuração para mover arquivos de camada hot para camada cold. 
+                            Como na AWS onde você configura quantos dias um arquivo pode não ser acessado dentro de uma camada.
+                            Caso ultrapasse a data x, o arquivo é movido para outra camada logicamente mais barata.
+                        
+                        É possível configurar e aplicar em todos os arquivos blobs ou específicos baseado em filtros
+                        É possível selecionar o tipo de blob e também o subtipo.
+                        
