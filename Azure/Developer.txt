@@ -364,7 +364,7 @@ Serviços:
                             em seis cópias de seus arquivos em armazenamento global ou georedundante.
                             Contudo, você pode configurar sua própria replicação com base em suas próprias regras
                          
-                         Se você quiser ter uma conta de armazenamento de backup, talvez até me outra assinatura ou em outro lugar,
+                         Se você quiser ter uma conta de armazenamento de backup, talvez até em outra assinatura ou em outro lugar,
                             você pode configurar essa cópia da fonte de destino e quais arquivos estão sendo copiados
 
                         É possível criar as próprias configurações e regras de replicação
@@ -464,4 +464,3 @@ Serviços:
                         Recomendado para uso de dados que contém muitos relacionamentos.
                         Ex: Pessoas, lugares, profissões, etc...
                 
-    
