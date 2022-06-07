@@ -377,3 +377,90 @@ Serviços:
                         
                         É possível configurar e aplicar em todos os arquivos blobs ou específicos baseado em filtros
                         É possível selecionar o tipo de blob e também o subtipo.
+
+    CosmosDB
+    
+        Introduction to CosmosDB
+            Embora suporte tabelas e colunas, é ideal para persirtir dados que não tem o padrão sql.
+            Uma vez que definido o tipo de dados, não será possível editar. 
+                Ou seja, caso seja definido que o Azure CosmosDB x é um DB API for MongoDB, não poderá ser alterado para Cassandra.
+            
+            Tipos:
+                - Core (SQL) - Recommended
+                    É um banco de dados semelhante ao SQL e era chamado anteriormente de Document DB.
+                    São documentos em JSON armazenados no Cosmos DB e pode ser utilizado uma sintaxe SQL para consultá-los. 
+                    O nome da conta é regional, então deve ser único.
+                    
+                    Global Distribution
+                        Geo-Redundancy
+                            Cria uma instância igual na mesma região, porém em outra zona.
+                            O custo será duplicado
+                            ex: Crio um banco de dados para a região Oeste dos EUA.
+                                Ao habilitar, será criado um banco de dados no leste dos EUA.
+                        
+                        Multi-region Writes
+                            Dá a capacidade de gravar no banco criado os dados de todos os outros bancos de dados geograficamente distrubuídos.
+                            O custo será duplicado
+
+                    Global Replication Options
+                        É possível replicar o banco de dados na opção Replicate data globally na aba Settings com apenas um clique na localização desejada no mapa
+                        Para cada banco de dados há chaves para leitura e escrita e somente leitura
+
+                    Partion Key
+                        ...
+                    
+                    Escalonamento automático
+                        É possível aumentar ou diminuir o processamento da máquina de acordo com o uso dela
+
+                    Default Consistency
+
+                        STRONG
+                            É basicamente garantido que quando uma região gravar um dado, todas as outras também gravarão de forma consistente.
+                            Contudo, pode haver um dalay.
+
+                        BUNDED STALENESS                            
+                            Os dados serão consistentes, porém, não serão persistidos ao mesmo tempo
+                            É possível definir um tempo mínimo e máximo para a persistência nos bancos
+                        
+                        SESSION
+                            A consistência será de acordo com a sessão do usuário 
+                            Os usuários que estivem na mesma sessão, terão acesso aos dados ao mesmo tempo. 
+                                Porém, os que estiverem em outra sessão, não.
+                        
+                            O mesmo client, aplicativo, poderia acessar os dados em três regiões diferentes e teriam os mesmos resultados
+                            Contudo, um client diferente pode obter um pouco de um resultado anterior
+
+                        CONSISTENT PREFIX
+                            Tudo será exibido na ordem correta. Porém, há uma defasagem definida entre a hora em que é escrito nas regiões.
+                            Contudo, é garantido que os dados serão escritos na forma correta.
+                        
+                        EVENTUAL
+                            Não há garantia que os dados estão sendo persistidos na ordem correta
+                            Ex: Retweetsm, curtidas e comentários que não são segmentados.
+                            
+                    Change Feed Notifications
+
+                        É possível criar Azure Functions para notificar sempre que houver uma alteração nos arquivos.
+                            Há o gatilho "Azure Cosmos DB Trigger" na Azure Function.
+
+                        Leases:
+                            Garante que a função é a única que poderá alterar algo relacionado ao arquivo informado.
+                                                                        
+
+                - Cosmos DB API for MongoDB
+                    Banco de dados totalmente gerenciado para app's que consomem bancos MongoDB.
+                        Recomendado para migração de um banco local MongoDB para a Azure.
+                
+                - Cassandra
+                    Banco de dados totalmente gerenciado para app's que conomem bancos Apache Cassandra.
+                        Recomendado para migração de um banco local Apache Cassandra para a Azure.
+
+                - Azure tables
+                    Banco de dados totalmente gerenciado para app's escritos para armazenamento em Azure Table
+                        Recomendado para migrar banco de dados relacionais
+                
+                Gremlin (Graph)
+                    Banco de dados que lida com nós e arestas, relações entre as coisas.
+                        Recomendado para uso de dados que contém muitos relacionamentos.
+                        Ex: Pessoas, lugares, profissões, etc...
+                
