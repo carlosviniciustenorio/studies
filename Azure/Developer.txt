@@ -464,3 +464,37 @@ Serviços:
                         Recomendado para uso de dados que contém muitos relacionamentos.
                         Ex: Pessoas, lugares, profissões, etc...
                 
+    Azure Authentication
+
+        Azure AD(Active Directory)
+            Serviço central que lida com identidade e autenticação na nuvem
+            É diferente de Windows Active Directory, que gerencia todos os usuários, grupos e dispositivos no ambiente corporativo.
+            É possível criar uma conta para um usuário a fim de que ele sempre se autentique por ela e também criar através de redes sociais por exemplo.
+
+        Azure AD Connect
+            Utilziado para sincronizar um servidor AD local com o Azure AD.
+
+        Azure AD Tenant
+            Os usuários devem pertencer ao menos em um diretório, sendo assim, podem pertencer a mais de um.
+            É importante criar um Tenant para o usuário master com permissões que utilizará a fim de que você não se distraia 
+                e faça alguma ação que não gostaria.
+            
+            Tipos de Tenant:
+                1- Azure Active Directory - Padrão
+                2- Azure Active Directory (B2C) - Business to Consumer / Onde você se autentica através de aplicativos de mídia social
+
+        Microsoft Identity Platform
+
+            App Registrations
+                É utilizado para registrar aplicativos ou até mesmo web api para autenticar usuários através do Azure AD.
+                Suporta: OAuth 2.0, OpenID Connect, Graph API, Federation, WS-Federation e SAML-P.
+
+        Microsoft Graph API
+
+            Expõe APIs REST e bibliotecas para acessar dados nos serviços na nuvem da Microsoft
+                Ex: 
+                    Microsoft 365 core services - Calendar, Excel, OneDrive, SharePoint, Teams, etc...
+                    Enterprise Mobility + Security services - Azure Active Directory, Identity Manager, etc...
+                    Windows services - Devices, Notifications, etc...
+                    Dynamic 365 Business Central
+            
