@@ -497,4 +497,87 @@ Serviços:
                     Enterprise Mobility + Security services - Azure Active Directory, Identity Manager, etc...
                     Windows services - Devices, Notifications, etc...
                     Dynamic 365 Business Central
+    
+    Secure Data
+
+        Secure App Configuration
+
+            App Configuration
+                Há a possibilidade de cadastrar secrets e connection strings nas configurações de um web app por exemplo.
+                A fim de não ser possível ser visualizado dentro de um código fonte por exemplo.
+                Elas são criptografadas em repouso e transmitidas de maneira segura entre o Azure e o aplicativo
+                Tornam-se variáveis de ambiente para acesso ao aplicativo em tempo de execução.
+                É possível definir uma configuração de aplicação para um slot específico na criação de uma configuração de aplicação.
+
+                Exemplos consideráveis: 
+                Para adicionar um valor aninhado, basta usar a sintaxe: 
+                    Database:Development
+
+
+            Azure Key Vault (Recomendado - Mais seguro)
+                Maneira oficial da Microsoft manter secrets, keys e certificates
+                É uma conta de armazenamento para chaves
+                Um nível a mais de dificuldade, consequentemente um a mais de segurança.
+                    Isso pois para acessar as secrets, seria necessário que o aplicativo se autenticasse para poder se autenticar para obter acesso ao cofre de chaves.
+
+        Data Encryption and Storage Accounts
+
+            Storage Accounts
+                Na opção Encryption no menu, descobrimos que as contas de armazenamento são criptografadas por padrão.
+                Utiliza a SSE(Storage Service Encryption)
+                Não é possível desabilitar a criptografia por default.
+                    Contudo, há a opção de você gerenciar suas chaves e não deixar isso ao controle da Microsoft, que utiliza o Azure Key Vault.
+
+                Incryption in Transit (Criptografia no trânsito)
+                    É utilizado para expor os dados de forma cripitografada através dos protocolos HTTPs ou SSL.
+                    Caso não seja habilitado na criação ou no menu na opção "Configuration", os dados serão expostos descriptografados.
+
+                    OBS: O Storage Account não suporta HTTPs para nomes de domínio personalizados.
+            
+        Data Encryption and SQL Databases
+
+            Data Encryption at Database Server Configuration                
+                Ao acessar o nível do servidor do banco de dados, há a opção no menu chamada TDE (Transparent data encryption)
+                A inserção dos dados é criptografada por default pela Microsoft, assim como a leitura é descriptografada.
+                Há a possibilidade de usar as próprias chaves
+
+            Data Encryption at Database Configuration
+                Na opção "Transparent data encryption", no menu do Database, é possível desativar a criptografia para o banco de dados.
+                Não há a opção de criptografar o banco de dados mestre.
+
+        Azure Key Vault
+
+            O principal objetivo do Key Vault é armazenar o que chamamos de keys, secrets e certificates;
+                Keys:
+                    Chave privada ou pública, que você pode criar para qualquer tipo de assinatura ou chave.
+                    Normalmente usadas para criptografia de disco ou SQL Server
+                    
+                Secrets:
+                    Segredos que o aplicativo precisa armazenar mas você não deseja codificar esses segredos no código
+                    É possível definir uma data de ativação e expiração ao criar um segredo
+
+                Certificates:
+                    Usados para assinatura como SSL e HTTPs.
+            
+            Access Policies
+                Concede acesso aos segredos a pessoas específicas, como por exemplo uma aplicação que você sabe que acessará.
+                    Sendo assim, você pode gerar política de acesso para a aplicação, etc...
+
+            Princing Tier
+                Standard
+                    Geo availability
+                    Pricing Estimated: $0.04/MONTH
+
+                Premium
+                    Geo availability
+                    HSM backed keys
+                        Ao invés de ter a segurança de chaves geradas por uma CPU de computador, haverá um elemento de hardware gerando a aleatoriedade dessas chaves
+                    Pricing Estimated: $1.32/MONTH
+
+            Virtual Network Access
+                Dá a possibilidade de restringirmos as permissões para todas as redes ou redes selecionadas.
+            
+    Caching and Content Delivery Networks
+
+        Redis Caching
             
