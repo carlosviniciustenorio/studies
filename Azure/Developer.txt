@@ -580,4 +580,81 @@ Serviços:
     Caching and Content Delivery Networks
 
         Redis Caching
+            Como todo banco para cache, o Redis é utilizado a fim de uma aplicação não precisar consumir o BD para saber informações reutilizáveis.
+            Ao invés de fazer uma conexão e consultar dados no Banco de Dados de uma aplicação, essa informação é gravada e consultada no Redis.
+            É utilizado para o back-end
+
+            Pricing:
+                Premium
+                    Cluster específico para o Redis
+                    Persistência de dados num disco de quatro camadas (Não é recomendado, pois o Redis é um BD para cache)
+                    Virtual Network
+                    99.9% de disponbilidade
+
+                Standard:
+                    A infraestrutura é compartilhada
+                    SSL
+                    Não contém limite de conexões
+                
+                Basic:
+                    Conexões limitadas
+                    infraestrutura compartilhada
+                    SSL
+        
+        CDN Profile
+            Cache de front-end. Significa "Rede de entrega de conteúdo".
+            É um serviço global
+            A Microsoft tem um CDN, e basicamente fica na frente do seu site e pegará qualquer um dos arquivos estáticos.
+                Ele pode pegar arquivos e armazená-los em outros servidores além do seu servidor web.
+                Ex: áudios, vídeos, imagens, CSS, JavaScript e até mesmo o HTML. Qualquer coisa que não mude de página, de chamada em chamada.
+            É possível armazenar mais próximo do usuário final, o que consequentemente reduz a carga no servidor web.
             
+            Pricing
+                Existem três empresas que fornecem os serviços de CDN no Azure.
+                O preço entre elas é o mesmo. $0.104 por gigabyte, até dez terabytes.
+
+                Microsoft
+                    Standard:
+                        Domínios
+                        Capacidade de limpar o conteúdo
+                        Comprimir o conteúdo
+                        Filtrar com base na geografia
+
+                Verizon:
+                    Standard:
+                        Capacidade de limpar e pré carregar o conteúdo.
+                            Ou seja, antes dos usuários solicitarem as informações, o CDN já deixa disponível.
+                        Entregar dinamicamente o conteúdo ao invés de manipular apenas arquivos estáticos
+
+                    Premium: 
+                        $0.202 por gigabyte, até dez terabytes.
+                        Análises e relatórios
+                        Regras de dispositivos móveis
+                            Ex: Utilizar uma imagem otimizada no app ao invés da imagem que é carregada na web
+                
+                Akamai:
+                    Standard:
+                        Não suporta pré-carregar o conteúdo
+                        Não suporta domínios personalizados
+                        Contém otimização de mídia
+
+            Endpoint
+                Representa a URL que o aplicativo vai usar para acessar esses arquivos
+                    OBS: É necessário modificar o app para usar o endpoint CDN
+                         É possível utilizar o CDN com servidores locais dentro da AWS
+                
+                Se alguém fizer uma solicitação à URL para um arquivo que não é armazenado em cache, ele irá para o servidor uma vez,
+                    solicitará o arquivo, retornará e em seguida armazená-lo localmente.
+                
+                Maneiras para atualizar arquivos que estão gravados em cache:
+                
+                    1- Purgar seu CDN sempre que você tiver um novo aplicativo sendo implantadao como parte de suas etapas de implantação.
+                        Pode ser feito através de API REST ou apenas fazer login manualmente no Azure e purgar.
+                    
+                    2- Colocar uma versão no nome do arquivo.
+                            Portanto, se você tiver um arquivo JSV1.js e fizer uma alteração nisso, alterando para v2, v3, etc...
+                        Ou, se você alterar o nome do arquivo, então não precisa limpar o cache.
+
+    Monitoring and Logging
+
+        
