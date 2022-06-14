@@ -657,4 +657,15 @@ Serviços:
 
     Monitoring and Logging
 
+        Azure Monitor
+            O local central que levará seus arquivos de log, seus alertas e suas métricas
+            É possível criar consultas, gráficos sobre eles.
+            Painel central de todo o seu hardware, infraestrutura e todos os tipos de serviços
+            Para utilizar, os logs desejados devem ser habilitados nos serviços na opção Diagnostic settings
+                OBS: Function Apps também dão suporte ao Application Insights
+                     Para os logs funcionarem em alguns serviços, deve selecionar um Log Analytics Workspace.
+                        Ex: Virtual Machine
+
+    Consuming Azure Services
+
         
