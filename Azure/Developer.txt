@@ -709,4 +709,44 @@ Serviços:
 
     Application Messaging
 
-        
+        Storage Account
+            Quando temos uma Storage Account V2 General Pourpose, podemos criar quartro tipos de dados (Containers, File Shares, Tables e Queue)
+            Sendo assim, Queue é uma maneira de armazenar pequenos pedaços de dados para outro aplicativo ler.
+                Uma aplicação pode usar o armazenamento para enviar dados enquanto outra aplicação consome os dados do armazenamento, onde o primeiro dado a entrar será o primeiro a sair.            
+            As mensagens no Queue do Storage Account são curtas, podendo ser de até 64kb.
+            
+            OBS: Para acessar a URL do serviço da fila, deve abrir o menu Properties do Storage Account
+
+        Service Bus
+
+            Um serviço da Azure de fila mais performático comparado ao Queue do Storage Account
+            Disponbilidade de 99.9%
+             OBS: Quando a disponbilidade for inferior a 99.9%, você ganha desconto de 10%.
+                    Quando inferior a 99%, o desconto é de 25%.
+            Pricing
+                Basic
+                    $0.05 por milhão de menssagem
+                    Capacidade compartilhada
+                    Tamanho máximo da mensagem: 256kb
+                    Filas
+                    Preços variáveis
+
+                Standard
+                    $10.00 por 12.5 milhões de menssagem
+                    Capacidade compartilhada
+                    Tamanho máximo da mensagem: 256kb
+                    Filas
+                    Tópicos (Modelo de assinatura que os leitores podem inscrever-se em um tópico, Um pra Um, um cliente escreveu a mensagem e somente um cliente pode ler e processar)
+                    Messaging operation
+                    Preços variáveis
+
+                Premium
+                    $668.00
+                    Capacidade dedicada
+                    Tamanho máximo da mensagem: 1024kb
+                    Filas
+                    Tópicos
+                    Messaging operation
+                    Preço Fixo
+                    Suporte para redundância de zona
+                    Recomendado para Workloads
