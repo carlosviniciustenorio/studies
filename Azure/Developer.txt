@@ -668,4 +668,43 @@ Serviços:
 
     Consuming Azure Services
 
-        
+        API Management
+
+            É um portal de desenvolvedor que basicamente se conecta às suas APIs back-end fornecendo uma interface para fazer requisições.
+            É possível adicionar políticas na requisição e também na resposta da API.
+            É possível criar:
+                Documentações de API
+                Colocar limites e cotas na API (Ex: Só podem chamar a API mil vezes por dia - Isso evita ter o serviço derrubado por um ataque DDOS)
+                Ver quem está fazendo uso excessivo de relatórios através da API
+            
+            Pricing
+
+                Developer:
+                    Não contém SLA
+                Basic
+                Standard
+                Premium
+                Consumption:
+                    Serveless, você paga pelo que utiliza.
+                    Contém 1M de requisições gratuitas por mês
+
+        Configure API Management
+
+            É integrado com vários tipos de solução. (Blank API, OpenAPI, WADL, WSDL, Logic App, API App, Function App)
+            É possível configurar políticas para requisições que acessarão a API e até mesmo para o retorno após a API retornar algum dado.
+            É possível configurar vários parceiros para acessar a API e dar a eles permissões diferentes.
+
+        Event Grid and Event Hub
+
+            Eventos são basicamente gatilhos para gerar algum processo.
+
+            Event Grid
+                É basicamente um conector entre os serviços do Azure que cria eventos e coisas que estão disponíveis para trabalhar e ouvir eventos.
+                Ex: https://docs.microsoft.com/pt-br/azure/event-grid/overview
+
+            Event Hub
+                Utilizado quando os eventos acontecem fora do Azure.
+                Basicamente poderemos conectar fontes externas capazes de enviar eventos para o Azure.
+                    Ex: dispositivos IoT, onde você precisa receber milhões de eventos e uma API não seria mais performática. É melhor contar com um serviço na nuvem.
+
+    Application Messaging
