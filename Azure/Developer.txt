@@ -708,3 +708,5 @@ Serviços:
                     Ex: dispositivos IoT, onde você precisa receber milhões de eventos e uma API não seria mais performática. É melhor contar com um serviço na nuvem.
 
     Application Messaging
+
+        
