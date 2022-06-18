@@ -48,7 +48,7 @@ Serviços:
                 
                 É possível trocar o código de um slot com o outro
                     Ex: Após publicar as alterações numa aplicação no slot de Staging(teste), e ser validado pelo cliente
-                        Não é necessário reimplementar o código no ambiente de produção, basta usar o Swap e transferir as alterações entre os slots
+                        Não é necessário replicar o código no ambiente de produção, basta usar o Swap e transferir as alterações entre os slots
                         Sendo assim, o slot de staging ficará com o código de produção, e o slot de produção ficará com o código de staging.
 
             Diagnostic Logs
