@@ -1,0 +1,110 @@
+Comando para criar um novo WebApp no PowerShell?
+    New-AzWebApp
+    Ex: Powershell tem um comando, hífen, AZ, e o nome de serviço como seu formato padrão.
+
+Você gostaria de depurar o aplicativo como você pode fazer em seu local usando ferramentas de depuração do Visual Studio.
+    O que você precisa fazer para poder depurar remotamente um aplicativo em execução em um VM do Azure?
+        Baixar e instalar Visual Studio Remote Tools na Azure VM.
+        Ex: Visual Studio Remote Tools existe para este fim.
+
+O que o App Service Environment (ASE) prover que o App Service Plan não prover?
+    Um ambiente totalmente isolado e dedicado.
+
+Azure Monitor pode ler qualquer dado usando qual método?
+    Data Collector API
+    Ex: A API de coletor de dados foi projetada para você criar suas próprias entradas de dados no Azure Monitor
+
+O problema com o dimensionamento de uma máquina virtual é que ela começa com a imagem básica do Windows Server 2016,
+ e você precisará encontrar uma maneira de implantar seu código na máquina antes que ela seja útil. 
+ Qual é a maneira recomendada de implantar seu código de site em um novo VM que seria usado em dimensionamento automático?
+    A Extensão VM de script personalizado para executar um script  PowerShell para fazer sua implantação e configuração.
+    Ex: Script personalizado é a melhor resposta.
+        Você poderia possivelmente criar uma imagem VM personalizada, 
+        mas cada alteração no código exigiria a criação de uma nova imagem personalizada.
+        Essa não é a maneira recomendada de fazer isso.
+
+
+Qual classe .NET Framework contém o EventHubClient para trabalhar com eventos do Event Hub?
+    Microsoft.ServiceBus.Messaging
+    Ex: Microsoft.ServiceBus.Messaging contém o cliente para se comunicar com o barramento de serviço
+
+Qual das seguintes não é uma maneira de você implantar seu código no Azure App Service?
+    Faça upload do código diretamente no site do Portal Azure.
+    Ex: Você não pode implantar um novo ou atualizado código de serviço de aplicativos carregando para o Portal.
+
+Qual é o principal benefício do uso do (Privileged Identity Management) Gestão de Identidade Privilegiada com o Azure AD?
+    Monitoramento e proteção de contas de superusuários, fornecendo um nível mais alto de supervisão para essas contas mais poderosas.
+    Ex: O PIM protegerá suas contas de AD do Azure monitorando-as para atividades incomuns.
+
+Verdadeiro ou falso: você pode criar uma Função Azure para ser executada sempre que um novo e-mail entrar
+ no Outlook usando sua própria integração nativa do Gatilho com e-mail?
+    Falso
+    Ex: Você não pode obter uma função Azure para ativar um e-mail recebido.
+
+Quais três dos seguintes dados do Azure SQL Database Auto-Tune podem sintonizar automaticamente em seu nome?
+    Adicionar novos índices, forçar o último bom plano de execução a ser usado e remover índices não utilizados
+    Ex: Auto-tune não é apenas um aplicativo de modulação de voz para cantores. 
+        Ele também adicionará e removerá índices do SQL Database, bem como forçará o último bom plano de execução. Se você habilitar isso.
+
+Que recurso de segurança opcional você pode habilitar para o Banco de Dados SQL do Azure ou o SQL Server que garantirá que os dados permaneçam criptografados
+     enquanto estão em repouso, durante a movimentação entre cliente e servidor e enquanto os dados estão em uso?
+     Always Encrypted
+     Ex: O recurso Always Encrypted, que requer uma biblioteca especial de clientes,
+         garantirá que os dados sejam criptografados no site do cliente e nunca descriptografados dentro do Azure.
+
+Qual serviço de monitoramento do Azure permite que você defina alertas para ser notificado quando incidentes de serviço e manutenção planejada estão acontecendo dentro do Azure em regiões que podem afetá-lo?
+    Azure Service Health
+    O Azure Service Health vai monitorar a saúde de toda a plataforma do Azure e permitir que você crie alertas se algo estiver acontecendo que possa afetá-lo.
+
+Quais dois métodos você pode usar para restringir o acesso público à Internet a um aplicativo de função?
+    IP Access restriction
+    Ex: Se você quiser restringir um aplicativo de função de ser acessado pela Internet, então não use um gatilho HTTP. 
+        Se você precisar de um gatilho HTTP, você pode restringir quem o chama por endereço IP.
+
+--TODO--
+    Qual é o nível mínimo do App Service Plan que permite que você habilite o dimensionamento automático para seus aplicativos web?
+    Standard
+    Ex: Você pode fazer escala no plano padrão.
+--------
+
+Qual é a capacidade máxima de armazenamento de um contêiner Cosmos DB?
+    Ilimitado
+    Cosmos DB pode armazenar uma quantidade ilimitada de dados. Não há um limite específico.
+
+Qual registro de DNS é necessário para vincular um nome de domínio personalizado 
+a um Serviço de Aplicativo Azure para que os usuários possam acessar o serviço do aplicativo usando o nome de domínio personalizado? 
+    CNAME record
+    A record
+    Ex: You can connect a domain name to a Web application using an A record or a CNAME record.
+
+Que serviço opcional você pode habilitar, por uma taxa, proteger o Banco de Dados DO Azure SQL contra comportamento incomum do cliente e 
+tentativas potencialmente prejudiciais de acessar ou explorar bancos de dados?
+    Advanced threat Protection (Proteção avançada contra ameaças)
+    Ex: A ATP (Advanced Threat Protection) detectá tentativas de hackear seu banco de dados SQL.
+
+Qual é o número máximo de aplicativos que você pode instalar em uma única conta gratuita do App Service?
+    10 Apps
+
+Qual das seguintes linguagens de programação não é suportada pela Web Jobs?
+    Rubi
+    Ex: Web Jobs não suporta scripts Ruby.
+
+Você implementou Redis como um serviço de cache e está indo muito bem. 
+Você está executando em um plano premium, e usando os 53 GB de cache de memória superior.
+Você gostaria de aumentar o limite de memória para 106 GB, mas o Redis não suporta isso. 
+Como você pode obter mais memória ao usar Azure Redis?
+    Implemente o recurso Redis Cluster, e adicione um segundo fragmento para dobrar a memória disponível.
+    Ex: O Redis Cluster suporta até 10 fragmentos para criar 530 GB de memória.
+
+Se você está preocupado que seus Aplicativos Lógicos estejam sendo executados em um ambiente de vários inquilinos, 
+e queira que seu Aplicativo Lógico tenha seu próprio hardware e rede, qual Serviço Azure você precisaria adicionar?
+    Integration Service Environment (ISE)
+    Ex: Os aplicativos lógicos podem ser colocados em seu próprio hardware, sem outros clientes, usando ambientes de serviço de integração (ISE).
+
+Qual é o tamanho máximo do arquivo de um block bubble?
+    190,7 TB
+    Ex: O tamanho máximo do arquivo é de 190,7 TB
+
+Qual é o número máximo de máquinas virtuais que um conjunto de escala de máquina virtual pode suportar?
+    1000
+    Ex: 1000! 1000 Máquinas Virtuais em uma escala definida.

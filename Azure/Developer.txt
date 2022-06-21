@@ -351,7 +351,6 @@ Serviços:
                     Forma de buscar as propriedades de um arquivo blob pelo Visual Studio
                     Basta utilizar o método GetProperties na referência do objeto que contém o retorno da instância de um BlockBlobCliente.
 
-
                 Storage Account Backup, Replication and Lifecycle
 
                     Backups (Data management > Data Protection)
