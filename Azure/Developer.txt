@@ -665,6 +665,9 @@ Serviços:
                      Para os logs funcionarem em alguns serviços, deve selecionar um Log Analytics Workspace.
                         Ex: Virtual Machine
 
+            Data Collector API 
+                Foi projetado para você criar suas próprias entradas de dados no Azure Monitor
+
     Consuming Azure Services
 
         API Management
