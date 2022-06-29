@@ -91,6 +91,9 @@ Serviços:
             Configurar CORS
         
         Azure Functions
+
+            É possível configurar uma function pelo CloudShell rodando localmente antes de publicar, seja ela Durável ou não.
+
             Serveless
             Simples
             Stateless
@@ -105,7 +108,6 @@ Serviços:
         
         Durable Functions
             Para criar funções duráveis, é necessário configurar em Development Tools > App Service Editor
-            É possível configurar uma function pelo CloudShell rodando localmente antes de publicar, seja ela Durável ou não.
             Para publicar a função: 
                 func azure functionapp publish "name of the function"
                 "azure", é o contexto em que a função pertence. Para ver as opções, basta digitar func
