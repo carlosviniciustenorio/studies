@@ -710,6 +710,9 @@ Serviços:
                 Utilizado quando os eventos acontecem fora do Azure.
                 Basicamente poderemos conectar fontes externas capazes de enviar eventos para o Azure.
                     Ex: dispositivos IoT, onde você precisa receber milhões de eventos e uma API não seria mais performática. É melhor contar com um serviço na nuvem.
+                
+                OBS: Quando você envia logs e métricas para hubs de eventos, 
+                     você pode transmitir dados para sistemas externos, como SIEMs de terceiros e outras soluções log analytics.
 
     Application Messaging
 
