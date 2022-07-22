@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace studies.DI
 {
+    // Objetos transitórios são sempre diferentes; uma nova instância é fornecida para todo controlador e todo serviço.
+    //services.AddTransient<IEmailSender, AuthMessageSender>();
+    
+    // Objetos com escopo definido são os mesmos em uma solicitação, mas diferentes entre solicitações diferentes.
+    // services.AddScoped<IEmailSender, AuthMessageSender>();
+
+    // Objetos Singleton são os mesmos para todos os objetos e solicitações.
+
     public class MyClass
     {
         public MyClass()
