@@ -13,6 +13,7 @@ namespace studies.DI
     // services.AddScoped<IEmailSender, AuthMessageSender>();
 
     // Objetos Singleton são os mesmos para todos os objetos e solicitações.
+    // services.AddSingleton<IOperationSingleton, Operation>();
 
     public class MyClass
     {
