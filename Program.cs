@@ -16,11 +16,19 @@ namespace studies
     {
         static void Main()
         {
-            var connectionString = "";
-            var source = new BlockBlobClient(connectionString, "container1", "study.txt");
-            var destination = new BlockBlobClient(connectionString, "container2", "study-copy.txt");
-
-            destination.StartCopyFromUri(source.Uri);
+            decimal cambio = 123.308M;
+            decimal absoluto = -19.69M;
+            decimal absoluto2 = 19.69M;
+            
+            Console.WriteLine("Decimais com métodos da classe Math C#");
+            Console.WriteLine("Valor do decimal: 123.308");
+            Console.WriteLine("Truncate:" + Math.Truncate(cambio));
+            Console.WriteLine("Abs:" + Math.Abs(cambio));
+            Console.WriteLine("Valor absoluto: -19.69M");
+            Console.WriteLine("Abs:" + Math.Abs(absoluto));
+            Console.WriteLine("Valor absoluto2: 19.69M");
+            Console.WriteLine("Abs:" + Math.Abs(absoluto2));
+            Console.ReadLine();
         }
     }
 }
