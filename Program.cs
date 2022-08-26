@@ -19,6 +19,7 @@ namespace studies
             decimal cambio = 123.308M;
             decimal absoluto = -19.69M;
             decimal absoluto2 = 19.69M;
+            var max = Math.Max(cambio, (absoluto2 / 2));
             
             Console.WriteLine("Decimais com métodos da classe Math C#");
             Console.WriteLine("Valor do decimal: 123.308");
@@ -28,6 +29,7 @@ namespace studies
             Console.WriteLine("Abs:" + Math.Abs(absoluto));
             Console.WriteLine("Valor absoluto2: 19.69M");
             Console.WriteLine("Abs:" + Math.Abs(absoluto2));
+            Console.WriteLine(max);
             Console.ReadLine();
         }
     }
