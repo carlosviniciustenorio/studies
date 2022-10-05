@@ -23,6 +23,7 @@ namespace studies
         {
             try	
             {
+                client.Timeout = TimeSpan.FromSeconds(5);
                 HttpResponseMessage response = await client.GetAsync("http://www.contoso.com/");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
