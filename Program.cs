@@ -21,6 +21,7 @@ namespace studies
         static readonly HttpClient client = new HttpClient();
         static async Task Main()
         {
+
             try	
             {
                 client.Timeout = TimeSpan.FromSeconds(5);

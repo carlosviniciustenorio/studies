@@ -12,12 +12,16 @@ namespace studies.HTTP
     // Esse esgotamento resultará em SocketException erros.
     
     
-    // static readonly HttpClient client = new HttpClient();
-    
-    //     static async Task Main()
+    // static async Task Main()
     //     {
+    //         A HttpClientHandler classe e as classes derivadas dela permitem que os desenvolvedores configurem uma variedade de opções que vão desde proxies até autenticação.
+    //         HttpClientHandler handler = new HttpClientHandler() { UseDefaultCredentials = true};
+        
+    //         HttpClient client = new HttpClient(handler);
+            
     //         try	
     //         {
+    //             client.Timeout = TimeSpan.FromSeconds(5);
     //             HttpResponseMessage response = await client.GetAsync("http://www.contoso.com/");
     //             response.EnsureSuccessStatusCode();
     //             string responseBody = await response.Content.ReadAsStringAsync();
