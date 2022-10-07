@@ -32,6 +32,8 @@ public class WeatherForecastController : ControllerBase
 
         var equals = typeClient.Equals(gitHubClient);
 
+        context.Request.Headers.Add("Content-Type", "application/json");
+
         var branchs = await _gitHubService.GetAspNetCoreDocsBranchesAsync();
         return Ok(branchs);
     }

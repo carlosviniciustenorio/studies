@@ -1,5 +1,6 @@
 using HttpWebProxy.Services;
 using Microsoft.Net.Http.Headers;
+using System.Net.Mime;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +20,12 @@ builder.Services.AddHttpClient<GitHubService>(httpClient => {
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
+
+app.MapGet("/", (HttpResponse response) =>
+{
+    response.Headers.CacheControl = "no-cache";
+    response.Headers["x-custom-header"] = "Custom value";
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
