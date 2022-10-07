@@ -10,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient<GitHubService>();
+// builder.Services.AddHttpClient();
 
 var app = builder.Build();
 
