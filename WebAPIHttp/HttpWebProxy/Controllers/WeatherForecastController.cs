@@ -26,6 +26,7 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public async Task<IActionResult> Get()
     {
+        var context = HttpContext;
         var typeClient = _client.GetType();
         var gitHubClient = _gitHubService.GetType();
 
