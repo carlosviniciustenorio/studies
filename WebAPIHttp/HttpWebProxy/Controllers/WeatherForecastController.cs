@@ -1,3 +1,4 @@
+using HttpWebProxy.Models;
 using HttpWebProxy.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +35,16 @@ public class WeatherForecastController : ControllerBase
 
         context.Request.Headers.Add("Content-Type", "application/json");
 
+        var branchs = await _gitHubService.GetAspNetCoreDocsBranchesAsync();
+        var branchToPost = branchs.FirstOrDefault();
+        var response = await _gitHubService.PostAspNetCoreBranchAsync(branchToPost);
+
+        return Ok(response);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Post([FromBody] GitHubBranch obj)
+    {
         var branchs = await _gitHubService.GetAspNetCoreDocsBranchesAsync();
         return Ok(branchs);
     }

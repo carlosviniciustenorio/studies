@@ -15,6 +15,7 @@ builder.Services.AddHttpClient<GitHubService>(httpClient => {
     httpClient.BaseAddress = new Uri("https://api.github.com/");
     httpClient.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/vnd.github.v3+json");
     httpClient.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "HttpRequestsSample");
+    httpClient.Timeout = TimeSpan.FromSeconds(15);
 });
 
 builder.Services.AddHttpClient();
