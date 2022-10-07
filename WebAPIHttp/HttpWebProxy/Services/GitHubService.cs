@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HttpWebProxy.Models;
 using Microsoft.Net.Http.Headers;
 
 namespace HttpWebProxy.Services
@@ -10,17 +11,7 @@ namespace HttpWebProxy.Services
     {
         private readonly HttpClient _httpClient;
 
-        public GitHubService(HttpClient httpClient)
-        {
-            _httpClient = httpClient;
-
-            _httpClient.BaseAddress = new Uri("https://api.github.com/");
-
-            // using Microsoft.Net.Http.Headers;
-            // The GitHub API requires two headers.
-            _httpClient.DefaultRequestHeaders.Add(HeaderNames.Accept, "application/vnd.github.v3+json");
-            _httpClient.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "HttpRequestsSample");
-        }
+        public GitHubService(HttpClient httpClient) => (_httpClient) = (httpClient);
 
         public async Task<IEnumerable<GitHubBranch>?> GetAspNetCoreDocsBranchesAsync() =>
             await _httpClient.GetFromJsonAsync<IEnumerable<GitHubBranch>>(
