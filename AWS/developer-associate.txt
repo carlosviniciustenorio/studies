@@ -246,3 +246,186 @@ AWS Fundamentals: ELB + ASG
             Predictive Scaling
                 Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
 
+AWS Fundamentals: RDS + Aurora + ElastiCache
+
+    RDS
+        Serviço para criar bancos de dados relacionais na AWS os quais serão gerenciados pela AWS.
+        Databases: Postgres, MySQL, MariaDB, Oracle, SQL Server, Aurora (AWS Proprietary database) 
+
+			Benefícios ao utilizar um RDS
+				Provisionamento automático, manutenções no sistema operacional
+				Backups contínuos podendo especificar um período para restaurar o banco
+				Painéis de Monitoramento para ver como o Banco de Dados está
+				Ler réplicas a fim de melhorar a performance
+				Multi zonas a fim de estar pronto para ter um plano de recuperação em caso de desastre
+				Configurar janelas de manutenção para atualizações
+				Capacidade de Escalabilidade (Vertical e Horizontal)
+				EBS Volume (gp2 ou io l)
+                Podem ter 5 réplicas
+
+			Malefícios
+				Não é possível utilizar o SSH na instância
+
+            Réplicas de Leitua
+                Caso o fluxo de leitura do banco seja grande, réplicas do BD para leituras são criadas a fim de não sobrecarregar o BD.
+                Sendo assim, as réplicas serão utilizadas para leitura e o BD para persistência.
+                Há um limite de 5 réplicas de leitura
+            
+            Multi-AZ
+                A persistência e leitura serão feitas sempre no BD Master, porém as réplicas serão atualizadas a fim de estartem prontas para o uso caso a Master falhe
+                Será criado um Failover DB a fim de atender a demanda quando o DB falhar por algum motivo, 
+                    Os databases contém o mesmo DNS.
+                O Failover DB fica numa AZ diferente, por isso é chamado de crozz AZ.
+            
+            Multi-Region
+                São criadas réplicas de leitura para regiões diferentes do BD.
+                A persistência será feita sempre no BD
+                A leitura será feita baseada na região, o que melhora a latência visto que cada região acessará aos dados da sua região.
+                Caso uma região falhe, outras regiões estarão ativas para receber as solicitações de leitura, e a operação terá sobrevivido ao desastre.
+                Porém, tem um custo um pouco superior.
+
+            Network Cost
+                Replicas na mesma região não tem custo
+                Replicas em regiões distintas tem custo
+
+            From Single-AZ to Multi-AZ
+                Não é preciso parar o database para mudar de Single-AZ para Multi-AZ.
+        
+    AuroraDB 
+            Aurora DB não é um banco de dados open source, é fornecido pela AWS, suporta os tipos (PostgreSQL e MYSQL)
+            Benefícios: 
+                É otimizado para a nuvem, tem um ganho de desempenho em 5x ao MySQL no RDS e 3x ao PostgreSQL no RDS
+                O armazenamento aumenta de forma automática em incrementos de 10gb até 128tb.
+                Pode ter até 15 réplicas
+                A disponibilidade é maior pois é nativo da nuvem
+                Armazena 6 cópias de dados sempre que qualquer coisa é escrita em 3 AZ.
+                    Somente 4 cópias são necessárias para escrita
+                    Somente 3 cópias são necessárias para leitura
+                    Se tiver algum dado corrompido, ele faz um Self Healing com replicação peer-to-peer
+                    Contém centenas de volumes (Não é possível administrar)
+                    Também contém 1 instância Master para persistência
+                        Caso a instância Master falhe, demorará menos de 30s em média para efetuar um failover.
+
+            Malefícios: 
+                É 20% mais caro que o RDS, porém acaba valendo a pena por ser mais otimizado caso seu banco de dados seja MySQL ou PostgreSQL.
+
+            Features:
+                Automatic fail-over
+                Backup and Recovery
+                Isolation and Security
+                Industry and Compliance
+                Push-button scaling
+                Automated Patchjing with Zero Downtime
+                Advanced Monitoring
+                Routine Maintenance
+                Backtrack: restore data at any point of time without using backups
+
+            Aurora DB Cluster
+                É possível configurar o escalonamento automático
+                O Master é acessado por um DNS, e em caso de falha, não terá efeito pois ocorrerá o failover
+                Disponibiliza Reader Endpoints
+                    Ajuda ao load balancer de conexão e se conecta automaticamente a todas as réplicas lidas
+                    O load balacing acontece em nível de conexão e não de declaração
+            
+            RDS e Aurora Security
+                At-rest Encryption
+                    Master e replicas criptografando utilizando AWS KMS
+                    Se você não encriptou um banco de dados Master, não poderá encriptar as réplicas
+                    Para encriptar um banco de dados existente, deverá encriptar o volume e restaurar o BD
+
+                In-flight Encryption
+                    Para cada banco de dados, o Aurora está pronto para ter criptografia em vôo por padrão.
+                    Por isso, os clientes devem utilizar os certificados TLS da AWS.
+                
+                IAM Autentication
+                    IAM Roles para conectar no banco de dados
+
+                Security Groups
+                    Controlar acessos a rede do seu RDS/AuroraDB
+                
+                No SSH Avaliable
+                    Como é um serviço gerenciado pela AWS, não tem acesso SSH, em exceção ao serviço personalizado RDS da AWS.
+
+                Audit Logs
+                    Pode ser habilitado e enviar logs para o CloudWatch Logs para Auditoria   
+
+    ElastiCache
+        Da mesma forma que o RDS tem banco de dados relacionais gerenciados, o ElastiCache vai ajudá-lo a obter
+            Redis ou Memcached, que são tecnologias de cache.
+        São altamente performáticos e com baixa latência
+        Ajuda a reduzir a leitura intensiva no banco de dados
+        Ajuda a tornar a aplicação Stateless (Sem estado)
+        Totalmente gerenciado pela AWS.
+
+        Redis
+            Permite fazer várias AZ com failover automático
+            As réplicas de leitura são usadas para dimensionar as leituras e também tem alta disponibilidade
+            Há durabilidade de dados graças à persistência
+            Contém recursos de backup e restauração
+
+        Redis Cluster: 
+            Mode Disabled
+                Contém um nó primário podendo ter até 5 réplicas
+                Replicação assíncrona
+                O primeiro nó é usado para leitura e escrita
+                Os demais nós são usadaos somente para leitura
+                Todos os nós contém os mesmos dados
+                Um nó de leitura pode tornar-se principal caso o nó principal falhe
+                Multi-AZ, habilitado por default para failover
+                Dimensiona o desempenho de leitura
+
+            Mode Enabled
+                Os dados são particionados e compartilhados (Ajuda a escalar persistência)
+                Cada partição pode conter até 5 réplicas
+                Multi-AZ
+                Mais de 500 nós por Cluster
+                    - 500 compartilhados com um único master
+                    - 250 compartilhados com um master e 1 replica
+                    - 83 compartilhados com um master e 5 réplicas
+        
+        Memcached
+            Usa multi nós para particionar dados (Fragmentação).
+            Não há alta disponibilidade (Replicação)
+            Não é um cache persistente
+            Não há backup
+            A restauração é multi-encadeada, portanto, contém várias instâncias trabalhando juntas no cache com alguma fragmentação
+
+    Elasticache Strategies
+        
+        Lazy Loading / Cache-Aside / Lazy Population
+            Faz uma requisição ao ElastiCache, caso não tenha o dado em cache, fará uma requisição ao RDS e depois persistirá em cache
+            
+            Pros:
+                Somente dados solicitados serão persistidos no banco em Cache
+                Se o cache for limpo ou ter uma falha no nó, não será fatal. Apenas aumentará a latência
+
+            Contra:
+                Se houver falta de cache, haverá 3 chamadas de rede sendo feitas da apicação ao ElastiCache
+                Os dados podem tornar-se obsoletos, caso os dados no RDS sejam atualizados, não será no Elasticache
+                
+        Write Through
+            Adiciona ou atualiza o cache quando o RDS é atualizados
+            Persiste no Database através do ElastiCache
+
+            Pros:
+                Os dados nunca serão obsoletos
+                Para persistir precisará somente de 2 chamadas
+
+            Contra:
+                Falta de dados até que o RDS seja atualizado ou adicionado
+                Haverá muitos dados em cache. Contudo, pode ser que nunca sejam lidos
+        
+        Cache Evictions and Time-to-live (TTL)
+            
+            Tem um tamanho limitado. Portanto, pode haver algo chamado de Cache Eviction (Despejo de cache).
+
+            Cache Evictions (Pode ocorrer por 3 formas)
+                Se Você deleta um item explicito no cache
+                Se a memória do cache estiver cheia
+                Definirmos um tempo de vida útil do item ou TTL (Time-to-live)
+
+            TTL
+                Muito útil para qualquer tipo de dados (Tabela de classificação, comentários, fluxos de atividades, etc)
+                Dependendo da aplicação pode variar de alguns segundos
+                É muito curto, até horas ou dias.
+
