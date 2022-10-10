@@ -138,7 +138,7 @@ AWS Fundamentals: ELB + ASG
             Contém um IP estático por Zona de disponibilidade e suporta IP Elástico
             Há a possibilidade de usar o NLB junto com o ALB, caso você queira aproveitar um recurso do NLB, como por exemplo ter IP estático.
     
-		Getway (GLB):
+		Gateway (GLB):
 			Load Balancer voltado para IP = Camada 3 (Camada de redes para pacotes IP)
             Usa o protocolo GENEVE na porta 6081
             Única entrada e saída para todos os tráfegos
@@ -214,23 +214,35 @@ AWS Fundamentals: ELB + ASG
                 É possível gerenciar os certificados usando o ACM (AWS Certificate Manager).
                 É possível carregar os próprios certificados para o ACM caso deseje
                 Ao adicionar um ouvinte HTTPS, deve ser especificado um certificado padrão
-                    OBS: Você pode oferecer uma lista de certificados opcionais para oferecer suporte a vários domínios
-                         Os clientes podem usar algo chamado SNI (Server Name Indication) para especificar o Hostname
                 É possível habilitar uma policy security para suportar versões mais antigas de SSL e TLS.
                 
+            SNI
+                Você pode oferecer uma lista de certificados opcionais para oferecer suporte a vários domínios para os ALB e NLB
+                SNI (Server Name Indication) para especificar o Hostname baseado no certificado SSL/TLS.
+
+        Connection Draining (CLB) / Deregistration Delay (ALB/NLB)
+            A idéia por trás desse conceito é que isso dará algum tempo para que as instâncias concluam a solicitação em andamento
+                Os usuários tem uma conexão com um tempo para conclui-las, após o tempo determinado, as conexões são fechadas
+            Entre 1 e 3600 segundos
+                Por padrão, é difinido 300s, contudo, você pode desativá-lo passando zero.
+             
 	Auto Scaling Groups
-		Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
-		Simple / Step Scaling
-			Aumenta ou diminui a quantidade de instâncias de forma automática baseado na configuração de um alarme
-				ex: Alarme com uso superior a 70% da CPU, adiciona duas instâncias.
-					Alarme com uso inferior a 30% da CPU, remove uma instância.
-					
-		Target Tracking Scaling
-			Ex: Quero que a média do uso da CPU das instâncias fique em torno de 40%. O ASG fará isso automaticamente
-			
-		Scheduled Scaling
-			Escalonamento programado é quando vc sabe que em um determinado dia o número de acessos irá aumentar por um fator, e consequentemente quer que o n° de instâncias aumente
-				Ex: Quinta-feira terá um jogo importante de um campeonato e o sistema receberá muitas apostas. Sendo assim, nesse dia a partir das 17hrs o ASG criará mais 5 instâncias EC2
 		
-		Predictive Scaling
-			Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
+        Configura automaticamente o load balancer e inicia as instâncias pré-configuradas
+		
+        Dynamic Scaling Policies
+            Simple / Step Scaling
+                Aumenta ou diminui a quantidade de instâncias de forma automática baseado na configuração de um alarme
+                    ex: Trigger de Alarme do CloudWatch com uso superior a 70% da CPU, adiciona duas instâncias.
+                        Trigger de Alarme do CloudWatch com uso inferior a 30% da CPU, remove uma instância.
+                        
+            Target Tracking Scaling
+                Ex: Quero que a média do uso da CPU das instâncias fique em torno de 40%. O ASG fará isso automaticamente
+                
+            Scheduled Scaling
+                Escalonamento programado é quando vc sabe que em um determinado dia o número de acessos irá aumentar por um fator, e consequentemente quer que o n° de instâncias aumente
+                    Ex: Quinta-feira terá um jogo importante de um campeonato e o sistema receberá muitas apostas. Sendo assim, nesse dia a partir das 17hrs o ASG criará mais 5 instâncias EC2
+            
+            Predictive Scaling
+                Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
+
