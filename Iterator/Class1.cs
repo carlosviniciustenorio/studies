@@ -6,16 +6,39 @@ using System.Threading.Tasks;
 
 namespace studies.Iterator
 {
+    public class Teacher
+    {
+        public int Id { get; set; }
+        public string First { get; set; }
+        public string Last { get; set; }
+        public string City { get; set; }
+
+        public Teacher() {}
+
+        public IEnumerable<Teacher> CreateTeachers()
+        {
+            for(var c = 0; c < 100; c++){
+                yield return new Teacher { First="Ann", Last="Beebe", Id=c};
+                Console.WriteLine($"Teacher criado com id {c}");
+            }
+        }
+
+    }
     public class Class1
     {
-        public class Teacher
-        {
-            public string First { get; set; }
-            public string Last { get; set; }
-            public int ID { get; set; }
-            public string City { get; set; }
+        // public class Teacher
+        // {
+        //     public int Id { get; set; }
+        //     public string First { get; set; }
+        //     public string Last { get; set; }
+        //     public string City { get; set; }
 
-        }
+        //     public Teacher()
+        //     {
+                
+        //     }
+
+        // }
 
         // Create the second data source.
         //List<Teacher> teachers = new List<Teacher>()
