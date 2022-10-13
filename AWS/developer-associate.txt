@@ -429,3 +429,71 @@ AWS Fundamentals: RDS + Aurora + ElastiCache
                 Dependendo da aplicação pode variar de alguns segundos
                 É muito curto, até horas ou dias.
 
+Route 53
+
+    É o único serviço da AWS com disponibilidade de 100%
+    
+    É um DNS (Domain Name System) gerenciado
+		O browser faz uma requisição http, porém antes de chegar no servidor, o DNS chega no Route53, que retorna o IP correto para a aplicação
+			Após isso, a requisição é feita no servidor correto.
+
+        Um DNS contém algumas terminologias
+            Registro de Domínio: AWS, GoDaddy, etc...
+            DNS Records: A, AAAA, CNAME, NS, ...
+            Zone File: Contém DNS Records
+            Nomes de Servidores: Resolvem as consultas DNS (Authoritative or Non-Authoritative)
+            Top level: .com, .com.br, .net
+            Second Level Domain (SLD): amazon.com, google.com
+
+    Record Types
+        A - mapeia um hostname pra IPv4
+        AAAA - mapeia um hostname pra IPv6
+        CNAME - mapeia um hostname em outro hostname
+            O hostname pode ser um A ou AAAA.
+            Não é possível criar um CNAME record pro topo do nó de um DNS namespace. (Zone Apex)
+                Ex: Não é possível criar pra example.com, mas é possível criar para www.example.com
+        NS - Name Servers para a Hosted Zone
+
+    TTL (Time to Live)
+        
+        Hight TTL - e.g., 24hr
+            Less traffic on Route53
+            Possibly outdated records
+
+        Low TTL - e.g., 60sec
+            More traffic on Route 53 ($$)
+            Records are outdated for less time
+            Easy to change records
+
+    Alias
+        Trabalha com domínios root e não root.
+        É possível registrar um domínio dentro de outro domínio independente se é root ou não
+        Contém Health Check nativo
+        Gratuito
+
+        Record Targets
+            ELB
+            CloudFront
+            API Gateway
+            Elastic Beanstalk
+            S3 websites
+            VPC Interface Endpoints
+            Global Accelerator
+            Route 53 Record
+        
+    Políticas de Roteamento
+        
+        Política de Roteamento simples
+            Não possui verificações de saúde
+            O browser faz uma requisição e o DNS chega no Route53 e retorna o ip correto
+        
+        Política de roteamento ponderado
+            Permite distribuir o tráfego em várias instâncias EC2
+            Há verificações de saúde
+
+        Política de roteamento de Latência
+            Havendo uma aplicação global (Com no mínimo duas instâncias), o Route53 encaminhará o usuário para o servidor mais próximo a fim de diminuir a latência
+
+        Política de Roteamento de Failover
+            Havendo uma requisição, o Route53 validará a saúde da instância primária, caso não esteja ok, redirecionará a requisição para a instância de Failover.
+
