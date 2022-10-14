@@ -481,15 +481,17 @@ Route 53
             Global Accelerator
             Route 53 Record
         
-    Políticas de Roteamento
+    Routing Policy
         
         Política de Roteamento simples
-            Não possui verificações de saúde
+            Não possui health checks
             O browser faz uma requisição e o DNS chega no Route53 e retorna o ip correto
+            Caso tenha múltiplos valores no mesmo record, todos serão retornados mas um será escolhido aleatoriamente.
+            Quando Alias é habilitado, só é possível ter um record
         
         Política de roteamento ponderado
-            Permite distribuir o tráfego em várias instâncias EC2
-            Há verificações de saúde
+            Permite distribuir o tráfego em várias instâncias EC2 com base em % do peso
+            Só pode conter records com o mesmo nome e tipo
 
         Política de roteamento de Latência
             Havendo uma aplicação global (Com no mínimo duas instâncias), o Route53 encaminhará o usuário para o servidor mais próximo a fim de diminuir a latência
@@ -497,3 +499,22 @@ Route 53
         Política de Roteamento de Failover
             Havendo uma requisição, o Route53 validará a saúde da instância primária, caso não esteja ok, redirecionará a requisição para a instância de Failover.
 
+        Política de roteamentoto de geolocalização
+            Diferente de roteamento de Latência
+            O roteamento é baseado na localização do usuário
+            Deve ser criado um registro padrão para caso não haja match no local
+        
+        Política de roteamentoto de geoproximidade
+            É realmente útil quando necessário transportar usuário de uma região para outra, aumentando o viés
+            Há a possibilidade de definir qual região o usuário irá acessar
+
+        Multi-Value
+            Utilizado para rotear o tráfego para vários recursos e rotas, consequentemente retorna vários valores e recursos
+            Contém apenas 8 registros de health-checks para cada registro
+            Não substitui um ELB
+            
+
+        Traffic FLow
+            Permite criar um flow de tráfego de DNS com alta complexidade
+
+        
