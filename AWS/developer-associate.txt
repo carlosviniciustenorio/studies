@@ -512,9 +512,10 @@ Route 53
             Utilizado para rotear o tráfego para vários recursos e rotas, consequentemente retorna vários valores e recursos
             Contém apenas 8 registros de health-checks para cada registro
             Não substitui um ELB
-            
+
 
         Traffic FLow
             Permite criar um flow de tráfego de DNS com alta complexidade
 
-        
+VPC Fundamentals
+    
