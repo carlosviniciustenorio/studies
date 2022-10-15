@@ -519,3 +519,96 @@ Route 53
 
 VPC Fundamentals
     
+    VPC (Virtual Private Cloud)
+        Rede privada para construir seus recursos
+            (É um recurso Regional)
+    
+    Subnets
+        Sub redes que permitem particionar a rede dentro da VPC 
+            (São definidas na Zona de Disponibilidade)
+        
+        Public Subnet
+            É uma subnet pública acessível pela internet
+
+        Private Subenet
+            É uma subnet que não pode ser acessada pela internet
+    
+    Internet Gateway & NAT Gateway
+
+        Internet Gateway
+            Ajuda a instância VPC se conectar com a internet
+            subnets públicas contém uma rota para o Internet Gateway
+
+        NAT Gateways
+            Ajuda a instância VPC se conectar com a internet se mantendo privada
+            São provisionados e dimensionados pela AWS, o que nos isenta de qualquer configuração
+            Para utilizar, basta implementá-lo numa subnet pública e criar uma rota na subnet privada para o NAT.
+    
+    NACL, SG, VPC Flow Logs
+
+        Network ACL & Security Groups
+
+            Network ACL
+                É um firewall que controla o tráfego da e para a subnet.
+                São atachados no nível da subnet
+                As regras incluem somente números de IP
+
+            Security Group
+                Funciona como um Firewall que controla da e para um ENI / EC2 instância
+                Só permite rules
+                Rules incluem endereço de IP e também outros security groups.
+
+        VPC Flow Logs
+
+            Captura informações sobre tráfego de IP nas interfaces.
+                VPC Flow Logs
+                Subnet Flow Logs
+                Elastic Network Interface Flow Logs
+
+            Ajuda a monitorar e solucionar problemas de conectividades
+                Subnets pra internet
+                Subnetes pra subnets
+                Internet pra subnets
+
+            Capture informações dos serviços AWS pela interface como:
+                Elastic Load Balancer
+                ElastiCache
+                RDS
+                Aurora
+                Etc...
+    
+    VPC Peering, Endpoints, VPN, DX
+        
+        VPC Peering
+            Conecta duas VPC privadas usando AWS Network
+                OBS: Consegue conectar de duas contas diferentes, ou duas regiões diferentes.
+            Os endereços de IP's precisam ser diferentes para que não se sobreponham
+            A conexão não é transitiva. Portanto, deve ser estabelecida por cada VPC.
+    
+        VPC Endpoints
+            Funciona para comunicar as instâncias EC2 que tem VPC privada com outros serviços AWS de forma segura.
+                OBS: Traz como benefício uma latência menor.
+            
+            VPC Endpoints Gateway 
+                Possibilita a comunicação de uma subnet privada com serviços AWS.
+                    Para utilizar, basta configurar para os serviços desejados
+
+            VPC Endpoint Interface
+                É utilizado dentro de subnet privada para comunicar com serviços como por ex, CloudWatch.
+
+        Site to Site VPN & Direct Connect                
+
+            O objetivo é conectar algo on-premises VPN para a AWS.
+
+            Site to Site VPN
+                Conecta on-premises na VPC VPN na AWS.
+                A conexão é criptografada automaticamente
+                Passa pela internete pública
+
+            Direct Connect
+                Estabelece uma conexão entre o servidor on-premises e a AWS diretamente
+                A conexão é privada, segura e rápida
+                Passa pela internet privada
+                Demora cerca de um mês para ser estabelecida
+
+        
