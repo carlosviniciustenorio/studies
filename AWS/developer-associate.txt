@@ -768,4 +768,67 @@ AWS CLI, SDK, IAM Roles & Policies
                 Caso algum recurso não tenha permissão, será informado. Caso contrário, ignorado.
                 Ex: aws ec2 run-instances --dry-run --image-id ami-12091312 --instance-type t2.micro
 
+        AWS CLI STS Decode Errors
+            Quando ocorre uma requisição e falha, podemos identificar uma mensagem de erro
+                A mensagem pode ser decodificada usando o STS command line
+                    Ex: aws sts decode-authorization-message --encoded-message ENCRYPTMESSAGE
+            Para isso, é necessário habilitar a policy de STS no IAM.
+
+        AWS EC2 Instance Metadata
+            Faz com que a instância EC2 aprenda sobre si sem usar uma IAM Role pra isso.
+            Metadata = Info sobre a instância EC2
+            Userdata = launch script of the EC2 instance
+             
+            Ex: curl http://169.254.169.254/latest/meta-data/
+                Retornarão diversas informações sobre a instância EC2.
+                AMI-ID
+                Hostname
+                PROFILE
+                etc...
+
+        AWS CLI Profiles
+            Configura diferentes contas no CLI ao utilizar o --profile.
+
+        AWS CLI com MFA
+            Para utilizar CLI com MFA, é necessário utilizar o STS GetSession Token.
+            Ex: aws sts get-session-token --serial-number arn-of-the-mfa-device --token-code code-from-token --duration-seconds 3600
+
+        AWS SDK (Software Development Kit)
+            Utilizado para programar e integrar com serviços da AWS
+            A região default é us-east-1.
+
+        AWS Limits (Quotas)
+
+            API Rate Limits
+                Quantidade de vezes que você pode chamar uma API da AWS em uma linha.
+                Ao receber erro de intermitência, implemente Exponential Backoff.
+                Ao ultrapassar o limite de forma consistente, deve ser solicitado o aumento do limite de aceleração da API.
+
+            Service Quotas (Service Limits)
+                Cotas de serviço, que são quantos recursos podemos executar de algo.
+                    Ex: Instâncias On-Demand Standard rodando: 1152 vCPU                
+                        Você pode solicitar um serviço para incrementar limite abrindo um ticket
+                        Você pode solicitar um serviço para incrementar cota através do Service Quotas API
+
+            Expoential Backoff (Any AWS Service)
+                Usamos quando obtemos um ThrottlingExcepction.
+                    Ou seja, quando os erros começam com 5xx.
+                Quando os erros são 4xx, não deve ser implementado o Backoff, pois significa que algo foi enviado errado pelos clientes
+                O Backoff dobra o tempo para solicitação.
+                    Ex: Primeira requisição, 1s. Segunda requisição, 2s. Terceira requisição, 4s. etc...
+                
+        AWS CLI Credntials Provider Chain
+
+            Ordenação de prioridades do AWS CLI
+                Linha de comando, opções: --region --output, and --profile
+                Variáveis de ambiente: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY e AWS_SESSION_TOKEN
+                Arquivos de credenciais CLI: AWS CONFIGURE credentials
+                Arquivos de configuração CLI: AWS CONFIGURE config
+                Credenciais de Container: ECS Tasks
+                Credenciais de perfil de Instância: EC2
             
+        AWS Signature v4 Signing
+
+            Serviço para assinar as requisições feitas à AWS com as credenciais.
+
+    
