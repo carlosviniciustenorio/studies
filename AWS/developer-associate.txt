@@ -580,13 +580,13 @@ VPC Fundamentals
     VPC Peering, Endpoints, VPN, DX
         
         VPC Peering
-            Conecta duas VPC privadas usando AWS Network
+            Conecta duas VPC usando AWS Network
                 OBS: Consegue conectar de duas contas diferentes, ou duas regiões diferentes.
             Os endereços de IP's precisam ser diferentes para que não se sobreponham
             A conexão não é transitiva. Portanto, deve ser estabelecida por cada VPC.
     
         VPC Endpoints
-            Funciona para comunicar as instâncias EC2 que tem VPC privada com outros serviços AWS de forma segura.
+            Funciona para comunicar as instâncias EC2 que tem VPC com outros serviços AWS de forma segura.
                 OBS: Traz como benefício uma latência menor.
             
             VPC Endpoints Gateway 
@@ -611,4 +611,161 @@ VPC Fundamentals
                 Passa pela internet privada
                 Demora cerca de um mês para ser estabelecida
 
+Amazon S3
+
+    É Global, mas ao criar um Bucket, você deve selecionar uma AZ.
+    Pode ser utilizado para qualquer tipo de armazenamento.
+    Alguns serviços da AWS utilizam o S3 para fazer armazenamento, como por exemplo o Snapshot do EC2, ele grava seu backup no EC3.
+    Normalmente, o S3 é utilizado para guardar arquivos
+    Qualquer tipo de arquivo no S3 é considerado um objeto
+    O S3 trabalha com buckets, podendo ter subpastas. Porém, cada arquivo é considerado um objeto, sendo ignorado qualquer tipo de subpastas.
+    
+    Website
+        Pode ser utilizado para sites estáticos, basta configurar o bucket.
+    
+    Server Access Logging
+        É possível configurar um bucket para receber logs de um outro bucket.
+        Isso ajuda a avaliar se estão tentando invadir uma aplicação, etc...
         
+    Replication
+        É obrigatório ativar o versionamento de ambos os buckets que farão parte da replicação
+        É possível replicar um bucket para outro bucket, independente da AZ.
+        A replicação é feita de maneira assíncrona, e um dos motivos para existir a replicação é abaixar a latência.
+        Ex: Se uma pessoa mora na Europa, faz mais sentido ela acessar aos arquivos de um bucket que esteja na Europa.
+            Caso ela more na América Latina, faz mais sentido ela acessar aos arquivos da respectiva AZ.
+        
+        Deve ser configurado ou criado uma Role para o S3 a fim de realizar a replicação.
+        
+    Durability and Avaliability
+    
+        Durabilidade
+            Os objetos tem uma durabilidade de 99.99999999%, ou seja, se você tem 10mm objetos, você perderá um único objeto a cada 10 mil anos
+        
+        Disponibilidade
+            Tempo que o serviço fica disponível
+            O S3 é gratuito e deve ficar em média de 53 minutos off por ano, dependendo da class de armazenamento (Storage Class).
+        
+    Storage Classes
+    
+        É possível fazer a movimentação dos objetos entre as classes de armazenamento (storage classes)
+            OBS: A movimentação pode ser automatizada usando a configuração de ciclo de vida.
+    
+        1° S3 Standard - General Purpose
+            99.99% disponibilidade
+            Usado para dados acessados com frenquência
+            Baixa latência e alto rendimento
+            Pode sustentar até duas falhas simultâneas nas instalações (Portanto, se houver problemas, seus dados ainda estarão seguros).
+            Casos de Uso (Big data, app móveis e de jogos, distribuição constante)
+        
+        2° S3 Standard-Infrequent Access (IA)
+            99.99% disponibilidade
+            O custo é menor comparado ao Padrão do S3.
+            É utilizado quando você quer ter acesso rápido aos seus arquivos, porém não os acessa constantemente.
+            Pode sustentar até duas falhas
+            Casos de uso (Armazenamento de dados para recuperação de desastres, backups para acessar imediatamente porém não acessados com frequência.)
+        
+        3° S3 One Zone-Infrequent Access (IA)
+            Mesma regra do S3 Standard-Infrequent Access, porém é limitado apenas para uma zona.
+            Tem 99.5% de disponibilidade
+            Valor inferior em até 20% comparado ao S3 Standard-Infrequent Access
+            Casos de uso (Backup secundário, dados que possam ser recriados)
+        
+        4° S3 Intelligent Tiering
+            99.99% disponibilidade
+            Mesma latência e rendimento do S3 Standard
+            Custo otimizado visto que de forma automática os arquivos mais acessados e menos acessados serão movidos automaticamente para as categorias certas.
+            Resistentes a eventos que afetarão uma AZ inteira
+        
+        5° Amazon Glacier e Amazon Glacier Deep Archive
+            Utilizada para guardar backups para um longo tempo
+            Existem várias opções de recuperação de tempo e taxas sempre que recuperar
+        
+            Amazon Glacier (Barato)
+                Expedited (1 a 5 minutos)
+                Standard (3 a 5 horas)
+                Bulk (5 a 12 horas)
+            
+            Amazon Glacier Deep Archive
+                É a opção de armazenamento mais barata da AWS
+                Standard (12 horas)
+                Bulk (48 horas)
+                
+    S3 Object Lock & Glacier Vault Lock
+        
+        Object Lock
+            Adotado o modelo WORM (Write Once Read Many).
+            Bloqueia a versão do objeto para não ser deletado ou modificado num período especificado.
+        
+        Glacier Vault Lock
+            Adotado o modelo WORM (Write Once Read Many).
+            Cria uma política de bloqueio e essa política impede futuras edições do arquivo 
+            OBS: A política é imutável, depois de configurada, ninguém poderá excluí-la.			 
+            Casos de uso (Quando vc tem requisitos de conformidade e retenção de dados, ou seja, não quer perder de forma alguma um objeto - Auditoria)
+    
+    Criptografia
+        
+        Sem criptografia
+            Não há criptografia em ambos os lados (cliente e servidor)
+        
+        Com criptografia no servidor
+            O usuário não envia o arquivo criptografado, porém o servidor do bucket criptografa ao receber.
+            
+        Criptografia no lado do usuário
+            A criptografa é feita tanto pelo usuário quanto pelo servidor.
+            
+    AWS Snow Family
+    
+        Snowcone
+            Storage Capacity: 8 TB usable
+            Migration Size: Up to 24tb, online and offline
+            DataSync agent: Pre-Installed
+            
+        Snowball Edge Storage Optimized
+            Storage Capacity: 80 TB usable
+            Migration Size: Up to petabytes, offline
+            Storage Clustering: Up to 15 nodes
+            
+        Snowmobile
+            Storage Capacity: < 100 PB
+            Migration Size: Up to exabytes, offline
+            
+    AWS Storage Cloud Native Options
+        
+        É uma forma de utilizar o local junto com a nuvem
+        
+        Block
+            Usa o EBS e EC2 Instance Store
+            
+        File
+            Usa o Amazon EFS
+            
+        Object
+            Usa o S3 e Glacier
+
+AWS CLI, SDK, IAM Roles & Policies
+
+    IAM Roles e Policies
+
+        IAM Role
+    		Funciona como permissões para serviços AWS
+            ex: Uma instância do EC2 recebe uma IAM Role e tenta acessar alguma informação/serviço da AWS,
+                essa instância usará a IAM Role como permissão. Caso esteja certo, terá acesso.
+
+        IAM Policies
+            É possível criar políticas
+            É possível inserir políticas direto no usuário
+            É possível inserir políticas no grupo de usuários e consequentemente os usuários do grupo terão essas políticas
+            É possível adicionar políticas de senha e autenticação em conjunto com (MFA) Multi-factor authentication (outros dispositivos).
+
+        AWS Policy Generator
+            Recurso da AWS que coopera na criação de policies, você especifica as configurações e ele retorna o JSON.
+
+        AWS Policy Simulator
+            Recurso da AWS que possibilita realizar testes de policies
+
+        AWS CLI Dry Runs
+            Alguns serviços da AWS contém o comando --dry-run no CLI, ele realiza chamadas de API para testar policies.
+                Caso algum recurso não tenha permissão, será informado. Caso contrário, ignorado.
+                Ex: aws ec2 run-instances --dry-run --image-id ami-12091312 --instance-type t2.micro
+
+            
