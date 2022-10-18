@@ -21,15 +21,30 @@ namespace studies
     {
         static void Main()
         {
-            var teachers = new Teacher().CreateTeachers();
-            
-            foreach (var item in teachers)
-            {
-                if(item.Id > 4)
-                    break;
+        // Create the second data source.
+        List<Teacher> teachers = new List<Teacher>()
+        {
+        new Teacher { First="Ann", Last="Beebe", Id=945 },
+        new Teacher { First="Alex", Last="Robinson", Id=956 },
+        new Teacher { First="Michiyo", Last="Sato", Id=972 }
+        };
 
-                Console.WriteLine($"Teacher id {item.Id}");
-            }
+        foreach (var teacher in BuscarPorId(teachers))
+        {
+           Console.WriteLine("Retornou o professor de ID:" + teacher);
+        }
+
+        Console.ReadLine();
+        }
+        
+        public static System.Collections.IEnumerable BuscarPorId(List<Teacher> teachers)
+        {
+           foreach (var teacher in teachers)
+           {
+               Console.WriteLine("Buscando por ID:" + teacher.Id);
+               yield return teacher.Id;
+               Console.WriteLine($"Teacher ID:{teacher.Id} retornado");
+           }
         }
     }
 }
