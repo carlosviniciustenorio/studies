@@ -11,12 +11,12 @@ namespace studies.Delegates
         // {
         //     Mensagem1(1);
         //     Mensagem2(2);
-        //     Mensagem3(3);
         // }
 
         // static void Mensagem1(int n1){
-        //     string MinhaMensagem(int n1) => $"Mensagem {n1}";
-
+        //     // string MinhaMensagem(int n1) => $"Mensagem {n1}";
+        //     Func<int, string> MinhaMensagem = delegate (int n1) {return $"Mensagem {n1}";};
+            
         //     var mensagemCompleta = ObterMensagem(MinhaMensagem, 1);
         //     Console.WriteLine(mensagemCompleta);
         // }
@@ -27,17 +27,10 @@ namespace studies.Delegates
         //     var mensagemCompleta = ObterMensagem(MinhaMensagem, 2);
         //     Console.WriteLine(mensagemCompleta);
         // }
-
-        // static void Mensagem3(int n3){
-        //     string MinhaMensagem(int n3) => $"Mensagem {n3}";
-
-        //     var mensagemCompleta = ObterMensagem(MinhaMensagem, n3);
-        //     Console.WriteLine(mensagemCompleta);
-        // }
         
-        // public delegate string ObterMensagemEspecifica(int n1);
+        // public delegate string ObterMensagemEspecifica(Func<int, string> mensagemEspecifica);
 
-        // static string ObterMensagem(ObterMensagemEspecifica mensagemEspecifica, int n1)
+        // static string ObterMensagem(Func<int, string> mensagemEspecifica, int n1)
         // {
         //       string mensagem = string.Empty;
         //       mensagem += "Inicio da mensagem\r\n\r\n";
