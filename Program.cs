@@ -3,6 +3,7 @@ using studies.Colecoes.Pilha;
 using studies.Genericos;
 using studies.Iterator;
 using studies.Record;
+using studies.Switch;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,30 +22,11 @@ namespace studies
     {
         static void Main()
         {
-        // Create the second data source.
-        List<Teacher> teachers = new List<Teacher>()
-        {
-        new Teacher { First="Ann", Last="Beebe", Id=945 },
-        new Teacher { First="Alex", Last="Robinson", Id=956 },
-        new Teacher { First="Michiyo", Last="Sato", Id=972 }
-        };
-
-        foreach (var teacher in BuscarPorId(teachers))
-        {
-           Console.WriteLine("Retornou o professor de ID:" + teacher);
-        }
-
-        Console.ReadLine();
-        }
-        
-        public static System.Collections.IEnumerable BuscarPorId(List<Teacher> teachers)
-        {
-           foreach (var teacher in teachers)
-           {
-               Console.WriteLine("Buscando por ID:" + teacher.Id);
-               yield return teacher.Id;
-               Console.WriteLine($"Teacher ID:{teacher.Id} retornado");
-           }
+            Console.WriteLine(EnumExpression.ToOrientation(Direction.Up));;
+            Console.WriteLine(EnumExpression.ToOrientation(Direction.Left));
+            Console.WriteLine(EnumExpression.ToOrientation(Direction.Down));
+            Console.WriteLine(EnumExpression.ToOrientation(Direction.Right));
+            Console.ReadLine();
         }
     }
 }
