@@ -831,4 +831,70 @@ AWS CLI, SDK, IAM Roles & Policies
 
             Serviço para assinar as requisições feitas à AWS com as credenciais.
 
-    
+Advanced Amazon S3
+
+    Lifecycle Rules
+
+        Transition Actions
+            Configura objetos para serem transacionados entre classes de armazenamento
+            Ex: Move objetos para a classe Standard IA após 60 dias de criado
+                Move para classe Glacier para arquivamento após 6 meses
+
+        Expiration Actions
+            Configura objetos para serem deletados depois de um tempo determinado
+            Ex: Acessa log de arquivos para deletar arquivos com mais de 365 dias
+            Pode ser usado para deletar versões antigas de arquivos (Se o versinamento estiver habilitado)
+            Pode ser usado para deletar Multi-Parts incompletas
+        
+        Rules podem ser criadas para um certo prefixo
+            Ex: s3://mybucket/mp3/*
+        
+        Rules pode ser criado para um objeto com tag
+            Ex: Department:Finance
+
+    S3 Event Notifications
+        Serviço que possibilita invocar alguns serviços da Amazon, como por Ex: SNS, SQS e Lambda.
+
+    S3 Event Notifications with Amazon EventBridge
+        Envia todos os eventos para o Amazon EventBridge e lá pode ser enviado para diversos serviços da AWS
+        Filtro avançado com regras em JSON (metadata, object size,, name...)
+        Múltiplos destinos - Step Functions, Kinesis Streams, Firehose...
+        EventBridge Capabilities - Archive, Replay Events Reliable delivery
+
+    S3 Performance
+        
+        Baseline Performance
+            A latência em média das requisições no Amazon S3 é de 100-200ms
+            Uma aplicação pode efetuar 3500 PUT/COPY/POST/DELETE e 5000 GET/HEAD por segundo por prefixo no bucket
+                Obs: Não há limite de prefixos no bucket
+
+            Exemplo:
+                bucket/folder1/sub1/file => /folder1/sub1/ - 3500 / 5000
+                bucket/folder1/sub2/file => /folder1/sub2/ - 3500 / 5000
+        
+
+        Multi-Part Upload
+            Recomendado para arquivos com mais de 100MB e deve ser usado para arquivos com mais de 5GB.
+            Paralela os uploads e ajuda a acelerar as transferências para maximizar a largura de banda
+            O arquivo é dividido em partes e após ser feito o upload, o S3 juntará todos num único arquivo
+
+        S3 Transfer Acceleration
+            Um arquivo é enviado para um Edge Location usando a internet pública, e em seguida é enviado para o bucket específico usando a internet privada da AWS.
+            Compatível com Multi-Part upload
+
+        S3 Byte-Range Fetches
+            GETs em paralelo para buscar específicos bytes ranges
+            Ao invés de baixar um arquivo inteiro na AWS, o arquivo é baixado por N partes.
+            Melhor resiliência em casos de falha
+            Pode ser usado para downloads mais rápidos
+            Pode ser usado para buscar somente partes de um arquivo, por ex o head de um arquivo
+            
+        S3 Select & Glacier Select
+            Só funciona com arquivos que estão na Classe de Armazenamento Glacier
+            A Amazon afirma que é 400% mais rápido e 80% mais barato usar o S3 Select.
+            Você consegue buscar dados específicos usando linguagem SQL
+            Pode filtrar por linhas e colunas
+            Reduz a transferência na rede e o custo de CPU do cliente
+
+Amazon S3 Security
+
