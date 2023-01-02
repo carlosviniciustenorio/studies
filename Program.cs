@@ -1,5 +1,9 @@
 ﻿using studies.Switch;
 using System;
+using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace studies
 {
@@ -7,36 +11,16 @@ namespace studies
     {
         static void Main()
         {
-            Mensagem1(1);
-            Mensagem2(2);
-        }
+            FileStream fs = new FileStream("C://projetos//studies//StreamFile.txt", FileMode.Open);
+            var stringRead = "New text to file using .net c#";
+            fs.Write(System.Text.Encoding.UTF8.GetBytes(stringRead));
+            fs.Close();
 
-        static void Mensagem1(int n1){
-            // string MinhaMensagem(int n1) => $"Mensagem {n1}";
-            Func<int, string> MinhaMensagem = delegate (int n1) {return $"Mensagem {n1}";};
-            
-            var mensagemCompleta = ObterMensagem(MinhaMensagem, 1);
-            Console.WriteLine(mensagemCompleta);
-        }
-        
-        static void Mensagem2(int n2){
-            string MinhaMensagem(int n2) => $"Mensagem {n2}";
-
-            var mensagemCompleta = ObterMensagem(MinhaMensagem, 2);
-            Console.WriteLine(mensagemCompleta);
-        }
-        
-        public delegate string ObterMensagemEspecifica(Func<int, string> mensagemEspecifica);
-
-        static string ObterMensagem(Func<int, string> mensagemEspecifica, int n1)
-        {
-              string mensagem = string.Empty;
-              mensagem += "Inicio da mensagem\r\n\r\n";
-              mensagem += mensagemEspecifica(n1);
-              mensagem += "\r\n\r\n";
-              mensagem += "----------------------------\r\n";
-
-              return mensagem;
+            StreamReader sr = new StreamReader("C://projetos//studies//StreamFile.txt");
+            Task<string> text = sr.ReadToEndAsync();
+            sr.Close();
+            Console.WriteLine(text);
+            Console.ReadLine();
         }
     }
 }
