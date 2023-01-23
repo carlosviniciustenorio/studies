@@ -1,26 +1,66 @@
-﻿using studies.Switch;
-using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Linq;
+﻿using System;
 
 namespace studies
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            FileStream fs = new FileStream("C://projetos//studies//StreamFile.txt", FileMode.Open);
-            var stringRead = "New text to file using .net c#";
-            fs.Write(System.Text.Encoding.UTF8.GetBytes(stringRead));
-            fs.Close();
+            Counter c = new Counter(new Random().Next(10));
+            c.ThresholdReached += c_ThresholdReached;
 
-            StreamReader sr = new StreamReader("C://projetos//studies//StreamFile.txt");
-            Task<string> text = sr.ReadToEndAsync();
-            sr.Close();
-            Console.WriteLine(text);
-            Console.ReadLine();
+            Console.WriteLine("press 'a' key to increase total");
+            while (Console.ReadKey(true).KeyChar == 'a')
+            {
+                Console.WriteLine("adding one");
+                c.Add(1);
+            }
         }
+
+        static void c_ThresholdReached(object sender, ThresholdReachedEventArgs e)
+        {
+            Console.WriteLine("The threshold of {0} was reached at {1}.", e.Threshold,  e.TimeReached);
+            Environment.Exit(0);
+        }
+    }
+
+    class Counter
+    {
+        private int threshold;
+        private int total;
+
+        public Counter(int passedThreshold)
+        {
+            threshold = passedThreshold;
+        }
+
+        public void Add(int x)
+        {
+            total += x;
+            if (total >= threshold)
+            {
+                ThresholdReachedEventArgs args = new ThresholdReachedEventArgs();
+                args.Threshold = threshold;
+                args.TimeReached = DateTime.Now;
+                OnThresholdReached(args);
+            }
+        }
+
+        protected virtual void OnThresholdReached(ThresholdReachedEventArgs e)
+        {
+            EventHandler<ThresholdReachedEventArgs> handler = ThresholdReached;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public event EventHandler<ThresholdReachedEventArgs> ThresholdReached;
+    }
+
+    public class ThresholdReachedEventArgs : EventArgs
+    {
+        public int Threshold { get; set; }
+        public DateTime TimeReached { get; set; }
     }
 }
