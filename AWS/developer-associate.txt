@@ -898,3 +898,126 @@ Advanced Amazon S3
 
 Amazon S3 Security
 
+CloudFront
+
+ECS, ECR & Fargate
+
+    Auto Scaling
+        Incrementa ou retira automaticamente o número de tasks
+
+        Amazon ECS Auto Scaling uses AWS Application Auto Scaling
+            ECS Service Average CPU Utilization
+            ECS Service Average Memory Utilization - Scale on RAM
+            ALB Request Count Per Target - metric coming from ALB
+
+        Target Tracking - Baseado no valor de uma métrica específica do CloudWatch
+        Step Scaling - Baseado no valor de um CloudWatch Alarme
+        Scheduled Scaling - Baseado numa data específica
+
+        ECS Service Auto Scaling (task level) != EC2 Auto Scaling (EC2 instance level)
+
+    EC2 Auto Scaling
+        Auto Scaling Group Scaling
+            Scale your ASG based on CPU Utilization
+            Add EC2 Instances over time
+
+        ECS Cluster Capacity Provider
+            Usado para provisionar e escalar a infraestrutura das task de forma automática
+
+    Rolling Updates
+        É a forma como o ECS desliga as tasks para criar novas
+        Você pode definir uma porcentagem mínima e máxima de tasks.
+                Ex: Min 50%, Max 100%
+                    Caso tenha uma alteração, serão retiradas de forma gradativa para ter tasks rodando enquanto novas são provisionadas.
+                    4 tasks rodando (V1)
+                    Assim que eu implanto a V2, duas tasks V1 são finalizadas, outras duas V2 são iniciadas
+                    Ao garantir que a task V2 está ok, as outras duas V1 são finalizadas e outras duas V2 serão iniciadas.
+                    Garantindo dessa forma a atualizção da versão de todas as tasks.
+
+                    OBS: Se o mínimo fosse 100% e o máximo 150%, duas novas intâncias seriam inicializadas, completando o total de 6, pois 2 equivale a 50% de 4.
+                        Porém, depois as tasks voltariam para 100% e retirariam as duas versões V1
+    
+    ECS Tasks Definitions
+        São metadados em JSON para o ECS conseguir rodar um container docker
+        Ao criar uma Task Definition e vincular ela a uma ECS Task Role, todos os serviços criados baseados na Task Definition terão a role vinculada
+        O container tem informações cruciais, como por exemplo:
+            Nome da imagem
+            Porta do container e host
+            Memoória e CPU requerida
+            Variáveis de ambiente
+            Informações de rede
+            IAM Role
+            Configuração de Log (Ex CloudWatch)
+
+    ECS Environment Variables
+        Environment Variable
+            Hardcoded - e.g., URL
+            SSM Parameter Store - Variáveis como por ex (API Keys, shared configs)
+            Secrets Manager - variáveis como por ex (DB Password)
+
+        Environment Files (Bulk)
+            Amazon S3
+     
+     ECS Data Volumes
+        Compartilha dados entre múltiplos containêres na mesma Task Definition
+        Funciona com EC2 e Fargate(Com dados efêmeros - duração de vida baseado no contâiner)
+
+    ECS Tasks Placement
+        Ao ser inicializado uma task do tipo EC2, ECS deve determinar onde coloca-lo, com restrições (constraints) de CPU, memória e porta disponível.
+        - A mesma coisa ocorre quando um serviço precisa escalar, ECS precisa determinar qual task encerrar.
+        - Para auxiliar nesse processo, você pode definir um "task placement strategy" ou "task placement constraints". Dessa forma irá guiar onde o container será lançado ou removido.
+        - Observação: apenas para ECS com EC2, e não Fargate.
+
+        Processo de Task Placement
+            Quando um ECS precisa executar tasks, ele utiliza o seguinte processo para selecionar as instâncias do container:
+            1. Identificar as instâncias que satisfazem os requisitos de CPU, memória e porta no Task definition.
+            2. Identificar as instâncias que satisfazem o task placement constraints (restrições).
+            3. Identificar as instâncias que satisfazem o task placement strategies.
+
+        Tipos de estratégias de Task Placement
+
+            1. Binpack
+                - Coloca tasks baseada na menor quantidade disponível de CPU ou memória, contanto que possua disponível a CPU ou memória necessária para executar a task.
+                - Minimiza o número de instâncias em uso (cost savings).
+
+                Ex: "placementStrategy":[{
+                    "field":"memory",
+                    "type":"binpack"
+                }]
+
+            2.  Random
+            - Coloca a task aleatoriamente em instâncias EC2.
+            
+            3. Spread
+            - Coloca a task de forma uniforme baseado no valor especificado.
+                Exemplo:  zona e disponibilidade, para alta disponibilidade.
+
+        Task Placement Constraints (restrições)
+
+            distinctInstance: coloca cada task em uma instância de container diferente.
+
+            memberOf: coloca tasks em instâncias que satisfazem uma expressão, utilizando Cluster Query Language.
+
+        EKS (mazon Elastic Kubernertes Service)
+            Forma de gerenciar cluster kubernertes na AWS
+            É similar ao ECS, porém é open-source e consequentemente multi-cloud
+            Casos de uso: Quando você está migrando um projeto on promises ou de outro provedor de nuvem para a AWS. Ou quer desenvolver descentralizando dos serviços limitados ao provedor da nuvem.
+
+            Node Types
+                Managed Node Groups:
+                    Criado e gerenciado (Instâncias EC2) pela aws pra você
+                    São partes do ASG gerenciado pelo EKS
+                    Suporta On-Demand e instâncias Spots
+
+                Self-Managed Nodes
+                    Você precisa criar os nós e registrá-los a um cluster EKS
+                    Pode ser utilizado a AMI - Amazon EKS Optimized AMI para otimizar o processo
+                    Suporta On-Demand e instâncias Spots
+                
+            Data Volumes
+                Precisa especificar a StorageClass no cluster EKS
+                Suporte para:
+                    Amazon EBS
+                    Amazon EFS (Works with Fargate)
+                    Amazon FSx for Lustre
+                    Amazon FSx for NetApp ONTAP
