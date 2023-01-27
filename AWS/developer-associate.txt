@@ -898,8 +898,45 @@ Advanced Amazon S3
 
 Amazon S3 Security
 
-CloudFront
+CloudFront (CDN)
+    Contém pontos de presença a fim de guardar cache de uma instância, site estático, objetos no S3, etc...
+    Ao receber uma solicitação HTTP, caso o ponto de presença não contenha aquela informação no cache, buscará no destino.
+        Antes da resposta voltar ao usuário, o CloudFront guardará essa informação no cache.
+    Contém proteção a ataques DDoS, pois é global
+    Baseado em:
+        Headers
+        Session Cookies
+        Query String Parameters
+    Pode aumentar ou diminuir o tempo de cache (Min- 0 sec. Max- 1 year)
+    Pode invalidar parte do cache usando CreateInvalidation API
+    Pode ser usado diretamente a uma instância EC2(instância pública) ou a um ALB que acessa ao EC2(privado).
+    Usa criptografia assimétrica (É criptografado no Edge Location, descriptografado na aplicação)
+    É possível definir uma Allow list ou Block list de países que podem acessar ou não
+    É possível ter grupos de origens (Isso faz com que caso a Primary Origin falhe, a request seja direcionada para a origin B)
+    É possível redirecionar requisições baseadas no endpoint
+        Ex: ....api/... (Será enviado para o ALB)
+            ..../... (Será enviado para o S3 ou parará no cache)
 
+    CloudFront Signerd URL x S3 Pre-Signed URL
+
+        CloudFront Signerd URL:
+            A conta contém chave e valor, somente o root pode gerenciá-la
+            Pode ser filtrado por Ip, path, data, expiração
+            Contém cache
+        
+        S3 Pre-Signed URL: 
+            Emite a requisição por uma pessoa pré-assinada na URL
+            Ciclo de vida limitado
+            Usa chave IAM
+
+    Key Groups
+        Nova maneira de criar chaves públicas e privadas para acessar endpoints
+
+    Prices:
+        1- Price Class All: all regions - best performance
+        2- Price Class 200: most regions, but excludes the most expensive regions
+        3- Price Class 100: only the least expensive regions
+    
 ECS, ECR & Fargate
 
     Auto Scaling
