@@ -898,6 +898,9 @@ Advanced Amazon S3
 
 Amazon S3 Security
 
+    S3 Encrypton
+        
+
 CloudFront (CDN)
     Contém pontos de presença a fim de guardar cache de uma instância, site estático, objetos no S3, etc...
     Ao receber uma solicitação HTTP, caso o ponto de presença não contenha aquela informação no cache, buscará no destino.
