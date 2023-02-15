@@ -900,7 +900,72 @@ Amazon S3 Security
 
     S3 Encrypton
         
+    S3 CORS(Cross-Origin Resource Sharing)
+        Anotation: It's a Cross-Origin from API for example, when we allow verbs HTTP for example: GET, PUT, DELETE...
+        
+        Origin = scheme(protocol) + host(domain) + port
+            example: https://www.example.com (implied port is 443 for HTTPS, 80 for HTTP)
+        
+        Same Origin:
+            https://www.example.com/app1 & https://www.example.com/app2
 
+        Different Origins:
+            https://www.example.com & https://www.other.example.com
+        
+        In AWS S3, the CORS is similar about the next example:
+            A web browser does a get request to bucket, with website static, and that bucket return a link from other bucket
+            So, if the second bucket has configured with CORS, the first bucket will can get that image specified.
+            At other bucket do u have to configure the policy to received request from that specifed bucket
+                And into principal bucket, do you have to configure the permissions to bucket can does request with CORS
+
+    S3 MFA Delete
+        To use MFA Delete, versioning must be enabled on the bucket
+        Only the bucket owner (root account) can enable/disable MFA Delete
+        It is a MFA Authenticator, and is required to:
+            Permanently delete an object version
+            Suspend versioning on the bucket
+
+        Won't required to:
+            Enable versioning
+            List deleted versions
+        
+    S3 Access Log
+        For audit purpose, you may want to log all access to S3 buckets
+        Any request made to S3, from any account, authorized or denied, will be logged into another S3 bucket
+        That data can be analyzed using data analysis tools
+        The target logging bucket must be in the same AWS Region
+    
+        S3 Access Logs: Warning
+            Don't set your logging bucket to be the monitored bucket
+            It will create a logging loop, and your bucket will grow exponentially
+
+    S3 Pre-Signed URLs
+        Generate pre-signed URLs using the S3 Console, AWS CLI or SDK
+        URL Expiration:
+            S3 Console - 1 min up to 720 mins (12 hours)
+            AWS CLI - Configure expiration with --expires-in parameter in seconds (default 3600 secs, max. 604800 secs - 168 hours)
+        Users given a pore-signed URL inherit the permissions of the user that generated the URL for GET/PUT
+
+    S3 Access Points
+         We have some users from specifed market.
+         For ex, user from finance, sales and analytics
+         So, the Users from Finance, has a policy to read and write alone that finance prefix
+            It's the same rule to others users from differents markets
+          
+        Access Points simplify security management for S3 buckets
+        Each Access Point has:
+            - its own DNS name (Internet Origin or VPC Origin)
+            - an access point policy (similar to bucket policy) - manage security at scale
+
+        S3 - Access Points - VPC Origin
+            We can define the access point to be accessible only from within the VPC
+            You must crate a VPC endpoint to access the Access Point (Gateway or Interface Endpoint)
+            The VPC endpoint policy must allow access to the target bucket and Access Point
+    
+    S3 Object Lambda
+        Use AWS Lambda Functions to change the object before it is retrieved by the caller application
+        Only one S# bucket is needed, on top of wich we create S# Access Point and S3 Object Lambda Access Points.
+        
 CloudFront (CDN)
     Contém pontos de presença a fim de guardar cache de uma instância, site estático, objetos no S3, etc...
     Ao receber uma solicitação HTTP, caso o ponto de presença não contenha aquela informação no cache, buscará no destino.
