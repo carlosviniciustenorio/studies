@@ -246,6 +246,12 @@ AWS Fundamentals: ELB + ASG
             Predictive Scaling
                 Usa os padrões de tráfego da máquina para prever o que acontecerá com base nos padrões anteriores
 
+        Instance Refresh
+            Goal: Update launch template and then re-vreating all EC2 instances
+            For thiw we can use the native feature of Instance Refresh
+            Setting of minimum healthy percentage
+            Specify warm-up time (how long until the instance is ready to use)
+
 AWS Fundamentals: RDS + Aurora + ElastiCache
 
     RDS
@@ -349,6 +355,19 @@ AWS Fundamentals: RDS + Aurora + ElastiCache
                 Audit Logs
                     Pode ser habilitado e enviar logs para o CloudWatch Logs para Auditoria   
 
+            RDS Proxy
+                Fully managed database proxy for RDS
+                Allows apps to pool and share DB Connections established with the database
+                Improving database efficiency by reducing the stress on database resources (e.g., CPU, RAM) and minimize open connections (and timeouts)
+                Serveless, autoscaling, highly available (Multi-AZ)          
+                Reduce RDS & Aurora failover time by up 66%      
+                Support RDS(MySQL, PostgreSQL, MariaDB, MS SQL Server) and Aurora (MySQL, PostgresSQL)
+                Enforce IAM Authentication for DB, and securely store credentials in AWS Secrets Manager
+                RDS Proxy is never publicly accessible (must be accessed from VPC)
+                
+                Ao invés de conectar com o banco diretamente e tratar o failover, as aplicações se conectarão ao proxy RDS
+                    E o próprio RDS tratará do failover da instância do banco de dados, melhorando assim seu tempo de failover
+
     ElastiCache
         Da mesma forma que o RDS tem banco de dados relacionais gerenciados, o ElastiCache vai ajudá-lo a obter
             Redis ou Memcached, que são tecnologias de cache.
@@ -389,6 +408,14 @@ AWS Fundamentals: RDS + Aurora + ElastiCache
             Não é um cache persistente
             Não há backup
             A restauração é multi-encadeada, portanto, contém várias instâncias trabalhando juntas no cache com alguma fragmentação
+
+        Amazon MemoryDB For Redis
+        Redis-compatible, durable, in-memory database Service
+        Is a database with a API to access Redis
+        Ultra-fast performance with over 160 millions requests/second
+        Durable in-memory data storage with Multi-AZ transactional log
+        Scale seamlessly from 10s GBs to 100s TBs of storage
+        Use cases: web and mobile apps, online gaming, media streaming,...
 
     Elasticache Strategies
         
@@ -508,6 +535,13 @@ Route 53
             É realmente útil quando necessário transportar usuário de uma região para outra, aumentando o viés
             Há a possibilidade de definir qual região o usuário irá acessar
 
+        Política baseada em IP
+            Roteamento baseado nos IP's dos clientes
+            Você define uma lista de CIDRs que são IP's para seus clientes, e baseado no CIDR, dirá qual local o trágego deve ser enviado
+
+            Casos de uso:
+                Performance, redução de custos, redução de custos de rede
+
         Multi-Value
             Utilizado para rotear o tráfego para vários recursos e rotas, consequentemente retorna vários valores e recursos
             Contém apenas 8 registros de health-checks para cada registro
@@ -613,12 +647,13 @@ VPC Fundamentals
 
 Amazon S3
 
-    É Global, mas ao criar um Bucket, você deve selecionar uma AZ.
-    Pode ser utilizado para qualquer tipo de armazenamento.
-    Alguns serviços da AWS utilizam o S3 para fazer armazenamento, como por exemplo o Snapshot do EC2, ele grava seu backup no EC3.
-    Normalmente, o S3 é utilizado para guardar arquivos
-    Qualquer tipo de arquivo no S3 é considerado um objeto
-    O S3 trabalha com buckets, podendo ter subpastas. Porém, cada arquivo é considerado um objeto, sendo ignorado qualquer tipo de subpastas.
+    Definição: 
+        É Global, mas ao criar um Bucket, você deve selecionar uma AZ.
+        Pode ser utilizado para qualquer tipo de armazenamento.
+        Alguns serviços da AWS utilizam o S3 para fazer armazenamento, como por exemplo o Snapshot do EC2, ele grava seu backup no EC3.
+        Normalmente, o S3 é utilizado para guardar arquivos
+        Qualquer tipo de arquivo no S3 é considerado um objeto
+        O S3 trabalha com buckets, podendo ter subpastas. Porém, cada arquivo é considerado um objeto, sendo ignorado qualquer tipo de subpastas.
     
     Website
         Pode ser utilizado para sites estáticos, basta configurar o bucket.
@@ -851,6 +886,24 @@ Advanced Amazon S3
         
         Rules pode ser criado para um objeto com tag
             Ex: Department:Finance
+
+    S3 Object Tags & Metadata
+        
+        S3 User-defined Object Metadata
+
+            When uploading an object, you can also assign metadata
+            Name-value (key-value) pairs
+            User-defined metadata names must begin with "x-amz-meta-"
+            Amazon S3 stores user-defined metadata keys in lowercase
+            Metadata can be retrieved while retrieving the object
+
+        S3 Object Tags
+            Key-value pairs for objects in Amazon S3
+            Useful for fine-grained permissions (only access specific objects with specific tags)
+            Useful for analytics purposes (using S3 Analytics to group by tags)
+
+        You cannot search the object metadata or object tags
+        Intead, you must use an External DB as a search index such as DynamoDB
 
     S3 Event Notifications
         Serviço que possibilita invocar alguns serviços da Amazon, como por Ex: SNS, SQS e Lambda.
@@ -1126,3 +1179,97 @@ ECS, ECR & Fargate
                     Amazon EFS (Works with Fargate)
                     Amazon FSx for Lustre
                     Amazon FSx for NetApp ONTAP
+
+Elastic Beanstalk
+
+    Deploying applications in AWS safely and predictably
+    Focado em aplicações web
+    É uma visão centrada no desenvolvedor
+    É voltado somente para o código, PaaS e não IaaS
+    Tem suporte para várias linguagens de programação
+    Com ele você cria tudo o que criaria com o CloudFormation (Grupo de escalonamento automático, RDS, Load Balancer, EC2, ElastiCache)
+
+    Deployment Options for Updates:
+    
+        All at once (deploy all in one go):
+            Fatest, but instances aren't available to serve traffic for a bit (downtime)
+                Fatest deployment
+                Application has downtime
+                Great for quick iterations in development environment
+        
+        Rolling:
+            Update a few instances at a time (bucket), and then move onto the next bucket once the first bucket is healthy
+                Application is reunning below Capacity
+                Can set the bucket siza   
+                Application is running both versions simultaneously
+                No additional cost
+                Long deployment
+
+        Rolling with additional batchs
+            Like rolling, but spins up new instances to move the batch (so tath the old application is still available)
+                Application is running at Capacity
+                Can set the bucket size
+                Application is running both versions simultaneously
+                Small additional cost
+                Additional batch is removed at the end of the deployment
+                Longer deployment
+                Good for prod
+                
+        Immutable:
+            Spins up new instances in a new ASG, deploys version to these instances, and then swaps all the instances when everything is healthy
+                Zero downtime
+                New code is deployed to new instances on a temporary ASG
+                High cost, double Capacity
+                Longest deployment
+                Quick rollback in case of failures (just terminate new ASG)
+                Great for prod
+        
+        Blue Green:
+            Create a new environment and switch over when ready
+                Not a "direct feature" of Elastic Beanstalk
+                Zero downtime and release facility
+                Create a new "stage" environment and deploy v2 there
+                The new environment (green) can be validated indenpendently and roll back if issues
+                Route 53 can be setup usng weighted policies to redirect a little bit of traffic to the stage environment
+                Usign Beanstalk, "swap URLs" when done with the environment test
+
+                (Tem que desligar o environment apos ele ser testado, no Beanstalk eh bem manual)
+
+        Traffic Splitting:
+            Canary testing - send a small % of traffic to new deployment
+                New application version is deployed to a temporary ASG with the same Capacity
+                A small % of traffic is sent to the temporary ASG for a configurable amount of time
+                Deployment health is monitored
+                If there's a deployment failure, this triggers an automated rollback (very quick)
+                No application downtime
+                New instances are migrated from the temporary to the original ASG
+                Old application version is then terminated
+
+    Elastic Beanstalk CLI
+
+        We can install an additional CLI called the "EB cli" which makes working with Beanstalk from the CLI easier
+        Basic commands are:
+            eb create
+            eb status
+            eb health
+            eb events
+            eb open
+            eb logs
+            eb deploy
+            eb config
+            eb terminate
+
+        It's helpful for your automated deployment pipelines    
+
+    Lifecycle Policy Overview + Hands On
+        Can store at most 1000 aplcations versions
+        If you don't remove old versions, you won't be able to deploy anymore
+        To phase out old application versions, use a lifecycle policy
+            Based on time (old versions are removed)
+            Based on space (When you have too many versions)
+        Versions that are currently used won't be deleted
+        Option not to delete the source bundle in S3 to prevent data loss
+
+    Extensions
+        A zip file contains our code must be deployed to Elastic Beanstalk
+        

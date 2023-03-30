@@ -10,27 +10,29 @@ namespace studies
     {
         static void Main(string[] args)
         {
-            var testClass = new Test();
-            
-            var type = testClass.GetType();
-            var property = type.GetProperty("iTest").GetType();
-            var method = property.GetMethod("GetForeingString");
-            method.Invoke(null, null);
+            var result = Test.FrequencyCount(new List<string>() { "1", "1", "1", "1", "1", "1" });
+
+            Console.WriteLine(Test.TestMethod("1"));
         }
     }
 
-    public class Test
+    public static class Test
     {
-        public ITest iTest { get; set; }
-    }
-
-    public interface ITest
-    {
-        string GetForeingString();
-    }
-
-    public class Testing
-    {
-        public string GetForeingString() => "foreing string returned";
+        public static Dictionary<T, int> FrequencyCount<T>(IEnumerable<T> data)
+        {
+            var result = new Dictionary<T, int>();
+            foreach (var item in data)
+            {
+                if (result.ContainsKey(item))
+                {
+                    result[item] = result[item] + 1;
+                }
+                else
+                {
+                    result[item] = 1;
+                }
+            }
+            return result;
+        }
     }
 }
