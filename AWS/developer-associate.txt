@@ -1272,4 +1272,69 @@ Elastic Beanstalk
 
     Extensions
         A zip file contains our code must be deployed to Elastic Beanstalk
+        All the parameters set in the UI can be configured with code usign files
+        Requirements
+            In the .ebextensions/ directory in the root of source code
+            YAML / JSON format
+            .config extensions (example: logging.config)
+            Able to modify some default settings using: option_settings
+            Ability to add resources such as RDS, ElastiCache, DynamoDB, etc...
         
+        Resources managed by .ebextensions get deleted if the environment goes away
+
+    Elastic Beanstalk Under the Hood
+
+        Under the hood, EBS relies on CloudFormation
+        Use case: you can defne CloudFormation resources in your .ebextensions to provision ElastiCache, an S3 bucket, anything you want
+
+    Elastic Beanstalk Cloning
+
+        Clone an environment with the exact same configuration
+        Useful for deploying a "test" version of your application
+
+        All resources and configuration are preserved
+            Load Balancer type and configuration
+            RDS database type (but the data is not preserved)
+            Environment Variables
+        
+        After cloning an environment, you can change settings
+
+    Elastic Beanstalk Migration
+
+        Load Balancer:
+            After creating an EBS environment, you cannot change the ELB type (only the configuration)
+            To migrate:
+                - Create a new environment with the same configuration except LB (can't clone)
+                - Deploy your application onto the new environment
+                - Perform a CNAME swap or Route 53 Update
+        
+        RDS with EBS
+            RDS can be provisioned with Beanstalk, wich is great for dev / test
+            This is not great for prod as the database lifecycle is tied to the Beanstalk environment lifecycle
+            The best for prod is to separately create an RDS database and provide our EB application with the connection string
+
+            Decouple RDS:
+                Create a Snapshot of RDS DB (as a Safeguard)
+                Go to the RDS console and protect the RDS database from deletion
+                Create a new Elastic Beanstalk environment, without RDS, point your application to existing RDS
+                Perform a CNAME swap (blue,green) or Route 53 update, confirm working
+                Terminate the old environment (RDS won't be deleted)
+                Delete CloudFormation stack (in DELETE_FAILED state)
+    
+    Elastic Beanstalk with Docker
+
+        Dockerrun.aws.json (v1): Descibre where *already build* Docker image is
+            - Image, Ports, Volumes, Logging, Etc...
+        
+        Single Docker Container:
+            EBS use EC2 and not ECS.
+        
+        Multi Docker Container:
+            This will create for you:
+                ECS Cluster, EC2 instances, configured to use the ECS Cluster
+                Load Balancer (in high availability mode)
+                Task definitions and execution
+
+            Requires a config Dockerrun.aws.json (v2) at the root of source code
+            Dockerrun.aws.json is used to generate the ECS task definition
+            Your docker images must be pre-built and stored in ECR for example
