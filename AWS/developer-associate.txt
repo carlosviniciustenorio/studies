@@ -1180,6 +1180,17 @@ ECS, ECR & Fargate
                     Amazon FSx for Lustre
                     Amazon FSx for NetApp ONTAP
 
+    AWS Copilot
+        CLI tool to build, release, and operate production-ready containerized apps
+        Run your apps on AppRunner, ECS, and Fargate
+        Helps you focus on building apps rather than setting up infrastructure
+        Provisions all required infrastructure for containerized apps (ECS, VPC, ELB, ECR...)
+        Automated deployments with one command using CodePipeline
+        Deploy to multiple environments
+        Troubleshooting, logs, health status...
+
+        Microservices Architecture (CLI or YAML) > AWS Copilot (Well-architected, deploymenty pipeline, effective operations and Troubleshooting) > (ECS, Fargate, App Runner)
+
 Elastic Beanstalk
 
     Deploying applications in AWS safely and predictably
@@ -1338,3 +1349,31 @@ Elastic Beanstalk
             Requires a config Dockerrun.aws.json (v2) at the root of source code
             Dockerrun.aws.json is used to generate the ECS task definition
             Your docker images must be pre-built and stored in ECR for example
+
+CI/CD (CodeCommit, CodePipeline, CodeBuild, CodeDeploy)
+
+    CodeCommit - storing our code
+    CodePipeline - automating our pipeline from code to Elastic Beanstalk
+    CodeBuild - building and testing our code
+    CodeDeploy - deploying the code to EC2 instances (not Elastic Beanstalk)
+    CodeStar - manage software development activities in one place
+    CodeArtifact - store, publish, and share software packages
+    CodeGuru - automated code reviews using Mahcine Learning
+
+    Continuous Integration (CI)
+        Develoopers push the code to a code repository often (Github, CodeCommit, Bitbucket)
+        A testing / building server checks the code as soon as it's pushed (CodeBuild, Jenkins CI, ...)
+        The developer gets feedback about the tests and checks that have passed / failed
+
+            Find bugs early, then fix bugs
+            Deliver faster as the code is tested
+            Deploy often
+            Happier developers, as they're unblocked
+
+    Continuous Delivery (CD)
+        Ensures that the software can be released reliably whenever needed
+        Ensures deployments happen often and are quick
+        Shift away from "one release every 3 months" to "5 releases a day"
+        That usually means automated deployment (e.g, CodeDeploy, Jenkins CD, Spinnaker,...)
+
+        
