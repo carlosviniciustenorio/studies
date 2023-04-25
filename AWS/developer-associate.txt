@@ -1376,4 +1376,27 @@ CI/CD (CodeCommit, CodePipeline, CodeBuild, CodeDeploy)
         Shift away from "one release every 3 months" to "5 releases a day"
         That usually means automated deployment (e.g, CodeDeploy, Jenkins CD, Spinnaker,...)
 
-        
+     CodeStar
+        An integrated solution that groups: Github, CodCommit, CodeBuild, CodeDeploy, CloudFormation, CodePipeline, CloudWatch
+        Quickly create "CICD-ready" projects for EC2, Lambda, Elastic Beanstalk
+        Supported languages: C#, Go, HTML 5, Java, Node.js, PHP, Python, Ruby
+        Issue tracking integration with Jira/Github issues
+        Ability to integrate with Cloud9 to obtain a web IDE (not all regions)
+        One dashboard to view all your components
+        Free service, pay only for the underlying usage of other services
+        Limited Customization
+
+    CodeArtifact
+        Software packages depend on each other to be built (also called code dependencies), and new ones are created
+        Storing and retrieving these dependencies is called artifact management
+        Traditionally you need to setup your own artifact management systems
+        CodeArtifact is a secure, scalable, and cost-effective artifact management for software development
+        Works with common dependency management tools such as Maven, Gradle, npm, yarn, pip, and NuGet
+        Developers and CodeBuild can then retrieve dependencies straight from CodeArtifact
+
+    CodeGuru
+        An ML-powered service for automated code reviews and application performance recommendations
+        Provides two functionalities
+            CodeGuru reviewer: Automated code reviews for static dode analysis (development)
+    
+    
