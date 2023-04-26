@@ -1399,4 +1399,54 @@ CI/CD (CodeCommit, CodePipeline, CodeBuild, CodeDeploy)
         Provides two functionalities
             CodeGuru reviewer: Automated code reviews for static dode analysis (development)
     
+API Gateway
+    - Support for the WebSocket Protocol
+    - Handle API versioning (v1,v2...)
+    - Handle different environments (dev, test, prod...)
+    - Handle security (Authentication and Authorization)
+    - Create API keys, handle request throttling
+    - Swagger / OpenAPI import to quickly define APIs
+    - Transform and validate requests and responses
+    - Generate SDK and API specifications
+    - Cache API responses
     
+    API Gateway - Integrations High Level
+
+        Lambda Functions
+            Invoke lambda function
+            Easy way to expose REST API backed by AWS Lambda
+        
+        HTTP
+            Expose HTTP endpoints in the backend
+            Example: internal HTTP API on premise, Application Load Balancer
+            Why? Add rate limiting, caching, user authentications, API keys, etc...
+
+        AWS Service
+            Expose any AWS API through the API Gateway?
+            Example: start an AWS Step Function workflow, post a message to SQS
+            Why? Add authentication, deploy, publicly, rate control...
+
+    API Gateway - Endpoints Types
+            - Edge-Optimized (default)
+                Requests are routed through the CloudFront Edge locations (improves latency)
+                The API gateway still lives in only one region
+            
+            - Regional
+                For clients within the same region
+                Could manually combine with CloudFront (more control over the cachng strategies and distribution)
+
+            - Private
+                Can only be accessed from your VPC using an interface VPC endpoint (ENI)
+
+    API Gateway - Security
+
+        User Authentication Through
+            IAM Roles (useful for intenal applications)
+            Cognito (identity for external users - example mobile users)
+            Custom Authorizer (your own logic)
+
+        Custom Domain Name HTTPS security through integration with AWS
+            Certificate Manager (ACM)
+                If using Edge-Optimized endpoint, then the certificate must be in us-east-1
+                If using Regional endpoint, the certifcate must be in the API Gateway region
+                Must setup CNAME or A-alias record in Route 53
