@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Security.Cryptography;
-using System.Text;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using Newtonsoft.Json;
 
 namespace studies
 {
@@ -10,29 +9,32 @@ namespace studies
     {
         static void Main(string[] args)
         {
-            var result = Test.FrequencyCount(new List<string>() { "1", "1", "1", "1", "1", "1" });
-
-            Console.WriteLine(Test.TestMethod("1"));
+            Console.WriteLine("### Usando BenchmarkDotNet  ###\n");
+            Console.WriteLine("Pressione algo para iniciar\n");
+            Console.ReadLine();
+            var resultado = BenchmarkRunner.Run<BenchMarkDemo>();
         }
+
+        
     }
 
-    public static class Test
+    [MemoryDiagnoser]
+    public class BenchMarkDemo
     {
-        public static Dictionary<T, int> FrequencyCount<T>(IEnumerable<T> data)
+        [Benchmark]
+        public string SerializeWithTextJson() => System.Text.Json.JsonSerializer.Serialize(new
         {
-            var result = new Dictionary<T, int>();
-            foreach (var item in data)
-            {
-                if (result.ContainsKey(item))
-                {
-                    result[item] = result[item] + 1;
-                }
-                else
-                {
-                    result[item] = 1;
-                }
-            }
-            return result;
-        }
+            Name = "John",
+            Age = 19,
+            Role = "Engineer"
+        });
+
+        [Benchmark]
+        public string SerializeWithNewtonSoftJson() => JsonConvert.SerializeObject(new
+        {
+            Name = "John",
+            Age = 19,
+            Role = "Engineer"
+        });
     }
 }

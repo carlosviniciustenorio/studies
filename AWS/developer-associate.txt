@@ -275,7 +275,7 @@ AWS Fundamentals: RDS + Aurora + ElastiCache
             Réplicas de Leitua
                 Caso o fluxo de leitura do banco seja grande, réplicas do BD para leituras são criadas a fim de não sobrecarregar o BD.
                 Sendo assim, as réplicas serão utilizadas para leitura e o BD para persistência.
-                Há um limite de 5 réplicas de leitura
+                Há um limite de 15 réplicas de leitura
             
             Multi-AZ
                 A persistência e leitura serão feitas sempre no BD Master, porém as réplicas serão atualizadas a fim de estartem prontas para o uso caso a Master falhe
@@ -410,12 +410,12 @@ AWS Fundamentals: RDS + Aurora + ElastiCache
             A restauração é multi-encadeada, portanto, contém várias instâncias trabalhando juntas no cache com alguma fragmentação
 
         Amazon MemoryDB For Redis
-        Redis-compatible, durable, in-memory database Service
-        Is a database with a API to access Redis
-        Ultra-fast performance with over 160 millions requests/second
-        Durable in-memory data storage with Multi-AZ transactional log
-        Scale seamlessly from 10s GBs to 100s TBs of storage
-        Use cases: web and mobile apps, online gaming, media streaming,...
+            Redis-compatible, durable, in-memory database Service
+            Is a database with a API to access Redis
+            Ultra-fast performance with over 160 millions requests/second
+            Durable in-memory data storage with Multi-AZ transactional log
+            Scale seamlessly from 10s GBs to 100s TBs of storage
+            Use cases: web and mobile apps, online gaming, media streaming,...
 
     Elasticache Strategies
         
@@ -510,28 +510,28 @@ Route 53
         
     Routing Policy
         
-        Política de Roteamento simples
+        Política de Roteamento simples (Simple)
             Não possui health checks
             O browser faz uma requisição e o DNS chega no Route53 e retorna o ip correto
             Caso tenha múltiplos valores no mesmo record, todos serão retornados mas um será escolhido aleatoriamente.
             Quando Alias é habilitado, só é possível ter um record
         
-        Política de roteamento ponderado
+        Política de roteamento ponderado (Weighted)
             Permite distribuir o tráfego em várias instâncias EC2 com base em % do peso
             Só pode conter records com o mesmo nome e tipo
 
-        Política de roteamento de Latência
+        Política de roteamento de Latência (Latency)
             Havendo uma aplicação global (Com no mínimo duas instâncias), o Route53 encaminhará o usuário para o servidor mais próximo a fim de diminuir a latência
 
-        Política de Roteamento de Failover
+        Política de Roteamento de Failover (Failover)
             Havendo uma requisição, o Route53 validará a saúde da instância primária, caso não esteja ok, redirecionará a requisição para a instância de Failover.
 
-        Política de roteamentoto de geolocalização
+        Política de roteamentoto de geolocalização (Geolocation)
             Diferente de roteamento de Latência
             O roteamento é baseado na localização do usuário
             Deve ser criado um registro padrão para caso não haja match no local
         
-        Política de roteamentoto de geoproximidade
+        Política de roteamentoto de geoproximidade (Geoproximity)
             É realmente útil quando necessário transportar usuário de uma região para outra, aumentando o viés
             Há a possibilidade de definir qual região o usuário irá acessar
 
@@ -1450,3 +1450,12 @@ API Gateway
                 If using Edge-Optimized endpoint, then the certificate must be in us-east-1
                 If using Regional endpoint, the certifcate must be in the API Gateway region
                 Must setup CNAME or A-alias record in Route 53
+
+SQS, SNS & Kinesis
+
+    SQS Queue Access Policy
+        We put policy into queue, to make available the get, put, etc...
+        Ex: We can make a json policy into SQS queue to give access into EC2 to receive message
+
+    SQS Message Visibility Timeout
+        After a message is polled by a cosumer, it becomes invisible to others consumers
