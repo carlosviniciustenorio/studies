@@ -1,40 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using Newtonsoft.Json;
+using studies.Arrays;
+using studies.HackerHank;
 
 namespace studies
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("### Usando BenchmarkDotNet  ###\n");
-            Console.WriteLine("Pressione algo para iniciar\n");
-            Console.ReadLine();
-            var resultado = BenchmarkRunner.Run<BenchMarkDemo>();
+            // new ArrayTwoD().GetTwoDArray();
+            // new MultiDimensionalArray().GetMultiDimensionalArray();
+            // Console.WriteLine(Tests.GetDiagonalDifference());
+            // SomeTests.timeConversion("07:05:45PM");
+            SomeTests.MinMaxValues(new(){2,1,3,4,5});
         }
-
-        
     }
 
-    [MemoryDiagnoser]
-    public class BenchMarkDemo
-    {
-        [Benchmark]
-        public string SerializeWithTextJson() => System.Text.Json.JsonSerializer.Serialize(new
-        {
-            Name = "John",
-            Age = 19,
-            Role = "Engineer"
-        });
+    // [MemoryDiagnoser]
+    // public class BenchMarkDemo
+    // {
+    //     [Benchmark]
+    //     public string SerializeWithTextJson() => System.Text.Json.JsonSerializer.Serialize(new
+    //     {
+    //         Name = "Carlos Tenorio",
+    //         Age = 25,
+    //         Role = "Software Engineer"
+    //     });
 
-        [Benchmark]
-        public string SerializeWithNewtonSoftJson() => JsonConvert.SerializeObject(new
-        {
-            Name = "John",
-            Age = 19,
-            Role = "Engineer"
-        });
-    }
+    //     [Benchmark]
+    //     public string SerializeWithNewtonSoftJson() => JsonConvert.SerializeObject(new
+    //     {
+    //         Name = "Carlos Tenorio",
+    //         Age = 25,
+    //         Role = "Software Engineer"
+    //     });
+    // }
 }
