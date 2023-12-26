@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gee.External.Capstone.PowerPc;
 
 namespace studies.Arrays
 {
@@ -32,7 +33,7 @@ namespace studies.Arrays
                 primaryDiagonalSum += arr[i, i];
                 secondaryDiagonalSum += arr[i, n - 1 - i];
             }
-            
+
             return Math.Abs(primaryDiagonalSum - secondaryDiagonalSum);
         }
 
@@ -51,5 +52,20 @@ namespace studies.Arrays
 
             return Math.Abs(primaryDiagonalSum - secondaryDiagonalSum);
         }
+
+        public static int Coins(int n)
+        {
+            var count = 0;
+
+            for(var candidate = 1; candidate <= Math.Sqrt(n); candidate ++){
+                if(candidate * candidate == n){
+                count ++;
+                }else if(n % candidate == 0)
+                    count += 2;
+            }
+            return count;
+        }
     }
+
+    
 }
