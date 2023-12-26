@@ -1,1 +1,1 @@
-![Logo do Markdown](img/markdown.png)
+![Logo do Markdown](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F55788210-56bb-4177-a1f2-9326f1353128%2FUntitled.png?table=block&id=1d35d8ef-2aef-41de-b290-e92d7d6aaee6&spaceId=dd848e26-4f20-4f2e-a78e-207b51a97fe3&width=1550&userId=be3fff78-64e5-4bc3-9cfa-9e9cedfd6fe3&cache=v2)
