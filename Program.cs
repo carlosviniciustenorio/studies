@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using studies.Strings;
 
 namespace studies
@@ -7,10 +9,15 @@ namespace studies
     {
         static void Main()
         {
-            if(Palindromo.IsPalindromo("TRURT"))
-                Console.WriteLine("true");
-            else
-                Console.WriteLine("false");
+            Console.WriteLine(birthdayCakeCandles(new List<int>() {2, 3, 3, 1}));
+        }
+
+        public static int birthdayCakeCandles(List<int> candles)
+        {
+            var maxCandle = candles.Max();
+            var maxCandleCount = candles.Count(d => d == maxCandle);
+
+            return maxCandleCount;
         }
     }
 }

@@ -1,1 +1,19 @@
-![Logo do Markdown](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F55788210-56bb-4177-a1f2-9326f1353128%2FUntitled.png?table=block&id=1d35d8ef-2aef-41de-b290-e92d7d6aaee6&spaceId=dd848e26-4f20-4f2e-a78e-207b51a97fe3&width=1550&userId=be3fff78-64e5-4bc3-9cfa-9e9cedfd6fe3&cache=v2)
+![EC2 (Elastic Compute Cloud)](imgs/amazonec2supportservicesinPunePCMCIndia300x211.jpg)
+
+- Máquina virtual em nuvem e de forma elástica, redimensionável, para provisionamento de máquinas.
+- Baixo custo, configurações diversas, Windows / Linux, tamanhos variados. Cobrado por hora.
+
+# Tópicos
+
+ ## EBS - Elastic Block Store EBS
+    
+    Disco da máquina virtual / instância EC2. Pode existir um ou mais ,geralmente utiliza um disco para o sistema operacional, e outro disco para os dados.
+
+    **Tamanho e Tipo de Disco EBS**:
+        - **SSD (gp2):** Uso geral. Exemplo: WebServer.
+        - **SSD Prov IOPS (io1):** Permite definir taxa de leitura e gravação de disco. Exemplo: Banco de Dados.
+        - **Throughput Optimized HDD (st1):** Disco magnético alta taxa de transferência. Exemplo: BigData.
+        - **Cold HDD (sc1):** Arquivo. Exemplo: archive.
+
+    **Armazenamento Objeto x Armazenamento em Bloco**
+    ![Armazenamento](imgs/pasted%20image%200.png)
